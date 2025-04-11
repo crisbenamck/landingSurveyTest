@@ -1,0 +1,422 @@
+[
+  {
+    "id": "q1",
+    "text": "¿Qué es el hoisting en JavaScript?",
+    "category": "javascript",
+    "difficulty": "medium",
+    "possibleAnswers": [
+      {
+        "text": "Es el comportamiento por el cual las declaraciones de variables y funciones son movidas al comienzo de su scope antes de la ejecución del código.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "Es una técnica para optimizar el rendimiento de JavaScript en el navegador.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Es la forma en que JavaScript carga módulos externos dentro de un archivo.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "Es un método para ocultar variables en un scope local.",
+        "score": 1,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q2",
+    "text": "¿Cuál es la diferencia entre == y === en JavaScript?",
+    "category": "javascript",
+    "difficulty": "easy",
+    "possibleAnswers": [
+      {
+        "text": "No existe diferencia, ambos operadores funcionan exactamente igual.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "== compara solo valor, mientras que === compara valor y tipo de datos.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "=== es una sintaxis antigua de JS mientras que == es la forma moderna.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "== es para comparar números y === es para comparar strings.",
+        "score": 0,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q3",
+    "text": "¿Qué es el Virtual DOM en React?",
+    "category": "react",
+    "difficulty": "medium",
+    "possibleAnswers": [
+      {
+        "text": "Una copia virtual del DOM real que React mantiene para mejorar el rendimiento de las actualizaciones de UI.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "Una técnica para crear animaciones en React.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Un método para conectarse a APIs externas.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Un navegador especial para testing de aplicaciones React.",
+        "score": 0,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q4",
+    "text": "¿Qué son los hooks en React?",
+    "category": "react",
+    "difficulty": "medium",
+    "possibleAnswers": [
+      {
+        "text": "Funciones que permiten usar estado y otras características de React sin escribir una clase.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "Componentes utilizados para manejar rutas en React.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "Eventos especiales que se activan cuando el usuario interactúa con la aplicación.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "Una manera de llamar a APIs externas desde componentes React.",
+        "score": 1,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q5",
+    "text": "¿Qué significa el término 'Single Page Application'?",
+    "category": "general",
+    "difficulty": "easy",
+    "possibleAnswers": [
+      {
+        "text": "Una aplicación web que carga múltiples páginas HTML para cada vista.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Una aplicación web que interactúa con el usuario recargando páginas completas desde el servidor.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Una aplicación web que consiste en una sola página HTML donde el contenido se actualiza dinámicamente sin recargar la página.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "Una aplicación web que solamente permite visualizar una página a la vez.",
+        "score": 2,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q6",
+    "text": "¿Qué es la programación asíncrona en JavaScript?",
+    "category": "javascript",
+    "difficulty": "hard",
+    "possibleAnswers": [
+      {
+        "text": "Un estilo de programación donde todas las operaciones se ejecutan en paralelo.",
+        "score": 3,
+        "isCorrect": false
+      },
+      {
+        "text": "Un estilo de programación que permite ejecutar operaciones sin bloquear el hilo principal, permitiendo que el resto del código se ejecute mientras espera resultados.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "Un tipo de programación que solo se utiliza para comunicarse con bases de datos.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Una técnica para ejecutar código solo después de que todo el HTML ha cargado.",
+        "score": 2,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q7",
+    "text": "¿Qué significa el concepto de 'props' en React?",
+    "category": "react",
+    "difficulty": "easy",
+    "possibleAnswers": [
+      {
+        "text": "Propiedades internas de un componente para almacenar su estado.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "Métodos especiales para conectarse a APIs externas.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Valores que un componente padre pasa a un componente hijo.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "Elementos visuales predefinidos en React.",
+        "score": 0,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q8",
+    "text": "¿Qué es el 'closure' en JavaScript?",
+    "category": "javascript",
+    "difficulty": "hard",
+    "possibleAnswers": [
+      {
+        "text": "Un objeto especial para encapsular variables privadas.",
+        "score": 3,
+        "isCorrect": false
+      },
+      {
+        "text": "Una combinación de una función y el ámbito léxico en el que fue declarada, permitiendo acceder a variables externas desde la función interna.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "Un método para cerrar conexiones a bases de datos.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Una técnica de optimización para reducir el tamaño del código.",
+        "score": 1,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q9",
+    "text": "¿Qué es el patrón de diseño Flux utilizado en aplicaciones React?",
+    "category": "react",
+    "difficulty": "hard",
+    "possibleAnswers": [
+      {
+        "text": "Un patrón para estructurar el CSS en aplicaciones React.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Un patrón arquitectónico que utiliza un flujo de datos unidireccional para gestionar el estado de la aplicación.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "Un método para mejorar la velocidad de renderizado de los componentes.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "Una técnica para escribir pruebas unitarias en React.",
+        "score": 0,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q10",
+    "text": "¿Qué es una API RESTful?",
+    "category": "general",
+    "difficulty": "medium",
+    "possibleAnswers": [
+      {
+        "text": "Un tipo de base de datos NoSQL.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Una interfaz de programación que utiliza HTTP y sigue principios REST para crear servicios web.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "Un formato de intercambio de datos que reemplazó a JSON.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Una librería JavaScript para manejar peticiones al servidor.",
+        "score": 2,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q11",
+    "text": "¿Qué son las promesas en JavaScript?",
+    "category": "javascript",
+    "difficulty": "medium",
+    "possibleAnswers": [
+      {
+        "text": "Objetos que representan una eventual finalización (o falla) de una operación asíncrona y su valor resultante.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "Una característica de ES6 para declarar variables con scope de bloque.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Una forma de crear funciones en JavaScript.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Un tipo especial de array en JavaScript.",
+        "score": 0,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q12",
+    "text": "¿Qué es el estado (state) en React?",
+    "category": "react",
+    "difficulty": "medium",
+    "possibleAnswers": [
+      {
+        "text": "Los valores que un componente recibe de su componente padre.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "Un objeto que contiene datos propios del componente que pueden cambiar durante su ciclo de vida.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "Una característica para comunicarse con APIs externas.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "El sistema de enrutamiento interno de React.",
+        "score": 0,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q13",
+    "text": "¿Qué es SQL Injection y cómo prevenirlo?",
+    "category": "general",
+    "difficulty": "hard",
+    "possibleAnswers": [
+      {
+        "text": "Un tipo de base de datos y no se puede prevenir.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Es un ataque donde se inserta código malicioso en consultas SQL y se previene utilizando declaraciones preparadas y validación de entradas.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "Un método para optimizar consultas SQL y se previene usando índices.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "Un error común al escribir SQL y se previene con buenas prácticas de programación.",
+        "score": 3,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q14",
+    "text": "¿Qué es el Event Loop en JavaScript?",
+    "category": "javascript",
+    "difficulty": "hard",
+    "possibleAnswers": [
+      {
+        "text": "Un tipo especial de bucle for para iterar sobre eventos.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Un mecanismo que ejecuta múltiples hilos en JavaScript.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "El mecanismo que permite a JavaScript manejar operaciones asíncronas con un solo hilo, gestionando la cola de eventos y callbacks.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "Una API para manejar eventos de usuario como clics y pulsaciones de teclas.",
+        "score": 2,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q15",
+    "text": "¿Qué ventajas ofrece TypeScript sobre JavaScript?",
+    "category": "general",
+    "difficulty": "medium",
+    "possibleAnswers": [
+      {
+        "text": "TypeScript es más rápido en ejecución que JavaScript.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "TypeScript agrega tipado estático, interfaces y otras características que ayudan a detectar errores en tiempo de compilación.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "TypeScript permite ejecutar código en cualquier navegador sin necesidad de transpilación.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "TypeScript tiene un mejor soporte para programación orientada a objetos que JavaScript.",
+        "score": 3,
+        "isCorrect": false
+      }
+    ]
+  }
+]

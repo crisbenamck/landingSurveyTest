@@ -1,0 +1,437 @@
+[
+  {
+    "id": "cs1",
+    "language": "javascript",
+    "title": "Manejo de eventos en React",
+    "description": "Este código implementa un contador simple en React. Encuentra y corrige los problemas.",
+    "code": "import React, { useState } from 'react';\n\nconst Counter = () => {\n  const [count, setCount] = useState(0);\n  \n  function handleIncrement() {\n    count++; // Error: modificación directa del estado\n  }\n  \n  function handleReset() {\n    count = 0; // Error: modificación directa del estado\n  }\n  \n  return (\n    <div>\n      <h2>Contador: {count}</h2>\n      <button onclick={handleIncrement}>Incrementar</button> {/* Error: debería ser onClick */}\n      <button onClick={handleReset}>Reiniciar</button>\n    </div>\n  );\n}\n\nexport default Counter;",
+    "issues": [
+      {
+        "line": 7,
+        "description": "Modificación directa del estado en lugar de usar la función actualizadora",
+        "possibleFixes": [
+          {
+            "text": "count++; // Seguir con modificación directa",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "setCount(count + 1); // Usar la función actualizadora para incrementar",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "this.setState({ count: count + 1 }); // Usar this.setState",
+            "score": 2,
+            "isCorrect": false
+          },
+          {
+            "text": "count.setValue(count + 1); // Usar método incorrecto",
+            "score": 0,
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "line": 11,
+        "description": "Modificación directa del estado en lugar de usar la función actualizadora",
+        "possibleFixes": [
+          {
+            "text": "count = 0; // Seguir con modificación directa",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "setCount(0); // Usar la función actualizadora para resetear",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "this.setState({ count: 0 }); // Usar this.setState",
+            "score": 2,
+            "isCorrect": false
+          },
+          {
+            "text": "resetCount(); // Usar función inexistente",
+            "score": 0,
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "line": 16,
+        "description": "Nombre de evento incorrecto en React",
+        "possibleFixes": [
+          {
+            "text": "onclick={handleIncrement}",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "onClick={handleIncrement}",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "onPress={handleIncrement}",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "onClick={() => handleIncrement()}",
+            "score": 8,
+            "isCorrect": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cs2",
+    "language": "javascript",
+    "title": "Manejo de promesas y async/await",
+    "description": "Este código intenta cargar datos de una API. Encuentra y corrige los problemas.",
+    "code": "// Función para cargar datos de usuarios de una API\nconst fetchUsers = () => {\n  fetch('https://api.example.com/users')\n    .then((response) => {\n      return response.json();\n    })\n    .then(data => {\n      console.log(data);\n      return data;\n    });\n};\n\n// Función asíncrona para procesar usuarios\nasync function processUsers() {\n  const users = fetchUsers(); // Error: no espera la resolución de la promesa\n  \n  const activeUsers = users.filter(user => user.active); // Error: users no es un array\n  \n  try {\n    await saveToDatabase(activeUsers);\n  } catch {\n    // Error: no se maneja el error correctamente\n  }\n}\n\n// Simulación de función para guardar en la base de datos\nfunction saveToDatabase(data) {\n  return new Promise((resolve, reject) => {\n    // Simulación de operación asíncrona\n    setTimeout(() => {\n      if (data && data.length > 0) {\n        resolve('Datos guardados correctamente');\n      } else {\n        reject(new Error('Error al guardar los datos'));\n      }\n    }, 1000);\n  });\n}",
+    "issues": [
+      {
+        "line": 10,
+        "description": "La función fetchUsers no retorna la promesa",
+        "possibleFixes": [
+          {
+            "text": "};",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "return data;\n  });",
+            "score": 2,
+            "isCorrect": false
+          },
+          {
+            "text": "});\n  // No hay return en la función principal",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "});\n};\n\n// Corrección: Añadir return para devolver la promesa\nconst fetchUsers = () => {\n  return fetch('https://api.example.com/users')\n    .then((response) => {\n      return response.json();\n    })\n    .then(data => {\n      console.log(data);\n      return data;\n    });\n};",
+            "score": 10,
+            "isCorrect": true
+          }
+        ]
+      },
+      {
+        "line": 15,
+        "description": "No se espera la resolución de la promesa antes de usar el resultado",
+        "possibleFixes": [
+          {
+            "text": "const users = fetchUsers();",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "const users = await fetchUsers(); // Esperar la resolución de la promesa",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "const users = fetchUsers().resolve();",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "fetchUsers().then(users => { /* Manejar usuarios aquí */ });",
+            "score": 6,
+            "isCorrect": true
+          }
+        ]
+      },
+      {
+        "line": 22,
+        "description": "El bloque catch no maneja el error correctamente",
+        "possibleFixes": [
+          {
+            "text": "} catch {",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "} catch (error) {\n    console.error('Error al guardar en la base de datos:', error.message);",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "} catch (e) {",
+            "score": 2,
+            "isCorrect": false
+          },
+          {
+            "text": "} finally {",
+            "score": 0,
+            "isCorrect": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cs3",
+    "language": "javascript",
+    "title": "Manipulación del DOM con JavaScript",
+    "description": "Este código intenta manipular el DOM para crear una lista dinámica. Encuentra y corrige los problemas.",
+    "code": "// Función para crear una lista dinámica\nfunction createDynamicList(items) {\n  // Obtener el contenedor\n  const container = document.getElementById('list-container');\n  \n  // Error: no verifica si el contenedor existe\n  \n  // Crear la lista\n  const list = document.createElement('ul');\n  list.className = 'dynamic-list';\n  \n  // Añadir elementos\n  items.forEach(item => {\n    const listItem = document.createElement('li');\n    // Error: Asigna valor directamente a innerHTML\n    listItem.innerHTML = item;\n    \n    // Añadir evento de clic\n    // Error: Añade evento incorrecto\n    listItem.onclick = function() {\n      listItem.style.textDecoration = 'line-through';\n    };\n    \n    // Error: Añadir elemento a la lista antes de configurarlo por completo\n    list.appendChild(listItem);\n  });\n  \n  // Añadir la lista al contenedor\n  container.appendChild(list);\n}\n\n// Ejemplo de uso\ndocument.addEventListener('DOMContentLoaded', function() {\n  const items = ['Tarea 1', 'Tarea 2', 'Tarea 3'];\n  createDynamicList(items);\n});",
+    "issues": [
+      {
+        "line": 6,
+        "description": "No verifica si el contenedor existe antes de usarlo",
+        "possibleFixes": [
+          {
+            "text": "// Error: no verifica si el contenedor existe",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "// Verificar si el contenedor existe\nif (!container) {\n  console.error('El contenedor no existe');\n  return;\n}",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "// Crear contenedor si no existe\nif (!container) {\n  container = document.createElement('div');\n  document.body.appendChild(container);\n}",
+            "score": 5,
+            "isCorrect": false
+          },
+          {
+            "text": "// Ignorar verificación",
+            "score": 0,
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "line": 15,
+        "description": "Uso inseguro de innerHTML que puede permitir ataques XSS",
+        "possibleFixes": [
+          {
+            "text": "listItem.innerHTML = item;",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "listItem.textContent = item; // Uso seguro de textContent para evitar XSS",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "listItem.innerText = item;",
+            "score": 7,
+            "isCorrect": true
+          },
+          {
+            "text": "listItem.appendChild(document.createTextNode(item));",
+            "score": 10,
+            "isCorrect": true
+          }
+        ]
+      },
+      {
+        "line": 19,
+        "description": "Uso de onclick en lugar de addEventListener para mejor práctica",
+        "possibleFixes": [
+          {
+            "text": "listItem.onclick = function() {",
+            "score": 2,
+            "isCorrect": false
+          },
+          {
+            "text": "listItem.addEventListener('click', function() {",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "listItem.onmousedown = function() {",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "$(listItem).click(function() {",
+            "score": 1,
+            "isCorrect": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cs4",
+    "language": "javascript",
+    "title": "Manejo de estados en componentes de React",
+    "description": "Este componente React muestra un formulario de registro. Encuentra y corrige los problemas.",
+    "code": "import React, { useState } from 'react';\n\nfunction RegistrationForm() {\n  const [email, setEmail] = useState('');\n  const [password, setPassword] = useState('');\n  const [name, setName] = useState('');\n  \n  // Error: Creación de un estado para un valor derivado\n  const [isFormValid, setIsFormValid] = useState(false);\n  \n  // Error: Actualización del estado en el cuerpo del componente\n  if (email && password && name) {\n    setIsFormValid(true); // Esto causará un bucle infinito\n  } else {\n    setIsFormValid(false);\n  }\n  \n  const handleSubmit = (e) => {\n    e.preventDefault();\n    \n    // Error: No valida los datos antes de enviarlos\n    console.log('Datos enviados:', { email, password, name });\n  };\n  \n  return (\n    <form onSubmit={handleSubmit}>\n      <div>\n        <label htmlFor=\"name\">Nombre:</label>\n        <input \n          type=\"text\" \n          id=\"name\" \n          value={name} \n          onChange={(e) => setName(e.target.value)} \n          // Error: No hay indicador de campo obligatorio\n        />\n      </div>\n      \n      <div>\n        <label htmlFor=\"email\">Email:</label>\n        <input \n          type=\"email\" \n          id=\"email\" \n          value={email} \n          onChange={(e) => setEmail(e.target.value)} \n        />\n      </div>\n      \n      <div>\n        <label htmlFor=\"password\">Contraseña:</label>\n        <input \n          type=\"password\" \n          id=\"password\" \n          value={password} \n          onChange={(e) => setPassword(e.target.value)} \n        />\n      </div>\n      \n      <button type=\"submit\" disabled={!isFormValid}>\n        Registrarse\n      </button>\n    </form>\n  );\n}\n\nexport default RegistrationForm;",
+    "issues": [
+      {
+        "line": 12,
+        "description": "Actualización de estado en el cuerpo del componente que causa un bucle infinito",
+        "possibleFixes": [
+          {
+            "text": "if (email && password && name) {\n    setIsFormValid(true); // Esto causará un bucle infinito\n  } else {\n    setIsFormValid(false);\n  }",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "// Usar useEffect para actualizar el estado derivado\nReact.useEffect(() => {\n  setIsFormValid(email !== '' && password !== '' && name !== '');\n}, [email, password, name]);",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "// Eliminar este código y usar un cálculo directo en lugar de un estado\n// La validez del formulario puede calcularse directamente en el JSX",
+            "score": 8,
+            "isCorrect": true
+          },
+          {
+            "text": "setTimeout(() => {\n  setIsFormValid(email && password && name);\n}, 0);",
+            "score": 2,
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "line": 20,
+        "description": "El formulario no valida los datos antes de enviarlos",
+        "possibleFixes": [
+          {
+            "text": "console.log('Datos enviados:', { email, password, name });",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "// Validar datos antes de enviar\nif (!email.includes('@') || password.length < 6 || !name) {\n  alert('Por favor, verifique los datos ingresados');\n  return;\n}\n    \nconsole.log('Datos enviados:', { email, password, name });",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "// Usar una librería de validación\nimport { validate } from 'validator';\nif (!validate(email, password, name)) {\n  return;\n}\nconsole.log('Datos enviados:', { email, password, name });",
+            "score": 5,
+            "isCorrect": false
+          },
+          {
+            "text": "try {\n  console.log('Datos enviados:', { email, password, name });\n} catch (error) {\n  console.error(error);\n}",
+            "score": 2,
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "line": 33,
+        "description": "No hay indicador de campo obligatorio en los inputs",
+        "possibleFixes": [
+          {
+            "text": "// Error: No hay indicador de campo obligatorio",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "required // Añadir atributo required para indicar campo obligatorio",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "aria-required=\"true\" // Añadir atributo de accesibilidad",
+            "score": 8,
+            "isCorrect": true
+          },
+          {
+            "text": "placeholder=\"Campo obligatorio\"",
+            "score": 3,
+            "isCorrect": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cs5",
+    "language": "javascript",
+    "title": "Optimización de rendimiento en React",
+    "description": "Este componente muestra una lista de elementos con búsqueda. Encuentra y corrige los problemas de rendimiento.",
+    "code": "import React, { useState, useEffect } from 'react';\n\nfunction ItemList({ items }) {\n  const [search, setSearch] = useState('');\n  const [filteredItems, setFilteredItems] = useState([]);\n  \n  // Error: Recreación de función en cada renderizado\n  const handleSearchChange = (e) => {\n    setSearch(e.target.value);\n  };\n  \n  // Error: Cálculo costoso en cada render sin memoización\n  useEffect(() => {\n    console.log('Filtrando items...');\n    const filtered = items.filter(item => \n      item.name.toLowerCase().includes(search.toLowerCase())\n    );\n    setFilteredItems(filtered);\n  }, [search, items]); // Se ejecuta cuando cambia search o items\n  \n  // Error: Crear una función flecha dentro del renderizado para cada elemento\n  return (\n    <div>\n      <input \n        type=\"text\" \n        placeholder=\"Buscar...\" \n        value={search} \n        onChange={handleSearchChange} \n      />\n      \n      <ul>\n        {filteredItems.map(item => (\n          <li \n            key={item.id} \n            onClick={() => {\n              // Error: Función flecha definida en render\n              console.log('Item seleccionado:', item.name);\n              // Esta función se recreará en cada renderizado\n            }}\n          >\n            {item.name} - ${item.price}\n          </li>\n        ))}\n      </ul>\n    </div>\n  );\n}\n\nexport default ItemList;",
+    "issues": [
+      {
+        "line": 8,
+        "description": "Función del manejador de eventos se recrea en cada renderizado",
+        "possibleFixes": [
+          {
+            "text": "const handleSearchChange = (e) => {\n    setSearch(e.target.value);\n  };",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "// Usar useCallback para memorizar la función\nconst handleSearchChange = React.useCallback((e) => {\n  setSearch(e.target.value);\n}, []); // Sin dependencias porque no usa valores externos",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "// Definir la función fuera del componente\nfunction handleSearchChangeStatic(e, setter) {\n  setter(e.target.value);\n}\n\nfunction ItemList({ items }) {\n  // ... resto del componente\n  // Y usar como: onChange={(e) => handleSearchChangeStatic(e, setSearch)}",
+            "score": 4,
+            "isCorrect": false
+          },
+          {
+            "text": "// No es necesario cambiar esta función ya que es simple",
+            "score": 3,
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "line": 13,
+        "description": "Cálculo costoso para filtrar items sin memoización",
+        "possibleFixes": [
+          {
+            "text": "useEffect(() => {\n    console.log('Filtrando items...');\n    const filtered = items.filter(item => \n      item.name.toLowerCase().includes(search.toLowerCase())\n    );\n    setFilteredItems(filtered);\n  }, [search, items]);",
+            "score": 2,
+            "isCorrect": false
+          },
+          {
+            "text": "// Usar useMemo para memorizar el cálculo costoso\nconst filteredItems = React.useMemo(() => {\n  console.log('Filtrando items...');\n  return items.filter(item => \n    item.name.toLowerCase().includes(search.toLowerCase())\n  );\n}, [search, items]); // Se recalcula cuando cambia search o items\n\n// Eliminar el estado filteredItems y el useEffect",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "// Optimizar dentro del useEffect\nuseEffect(() => {\n  console.log('Filtrando items...');\n  if (search === '') {\n    setFilteredItems(items);\n    return;\n  }\n  const searchLower = search.toLowerCase();\n  const filtered = items.filter(item => \n    item.name.toLowerCase().includes(searchLower)\n  );\n  setFilteredItems(filtered);\n}, [search, items]);",
+            "score": 7,
+            "isCorrect": true
+          },
+          {
+            "text": "// Usar debounce para evitar demasiadas actualizaciones\nimport { debounce } from 'lodash';\n// Implementar debounce en la función de filtrado",
+            "score": 5,
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "line": 34,
+        "description": "Función flecha definida dentro del renderizado para cada elemento",
+        "possibleFixes": [
+          {
+            "text": "onClick={() => {\n              console.log('Item seleccionado:', item.name);\n            }}",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "// Usar useCallback para crear una función memorizada que tome el item como argumento\nconst handleItemClick = React.useCallback((item) => {\n  console.log('Item seleccionado:', item.name);\n}, []);\n\n// Y luego en el JSX:\nonClick={() => handleItemClick(item)}",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "// Pasar el ID en lugar del objeto completo\nonClick={() => handleItemClick(item.id)}",
+            "score": 7,
+            "isCorrect": true
+          },
+          {
+            "text": "// Usar un evento delegado en el contenedor\n// Agregar manejador en el <ul> en lugar de cada <li>",
+            "score": 6,
+            "isCorrect": true
+          }
+        ]
+      }
+    ]
+  }
+]
