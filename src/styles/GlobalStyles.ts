@@ -1,6 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
+
   * {
     margin: 0;
     padding: 0;
@@ -8,10 +10,12 @@ export const GlobalStyles = createGlobalStyle`
   }
   
   html, body {
-    font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
     background-color: #ffffff;
     color: #333333;
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
   body {
@@ -21,6 +25,7 @@ export const GlobalStyles = createGlobalStyle`
   h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
     margin-bottom: 1rem;
+    letter-spacing: -0.01em;
   }
   
   p {
@@ -39,5 +44,6 @@ export const GlobalStyles = createGlobalStyle`
   
   button {
     cursor: pointer;
+    font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
   }
 `;
