@@ -22,19 +22,19 @@ const Title = styled.h1`
   font-weight: 500;
 `;
 
-const Timer = styled.div<{ timeRunningOut: boolean }>`
-  background-color: ${({ theme, timeRunningOut }) => 
-    timeRunningOut ? theme.colors.error.light : theme.colors.grey[100]};
-  color: ${({ theme, timeRunningOut }) => 
-    timeRunningOut ? theme.colors.text.light : theme.colors.text.primary};
+const Timer = styled.div<{ $timeRunningOut: boolean }>`
+  background-color: ${({ theme, $timeRunningOut }) => 
+    $timeRunningOut ? theme.colors.error.light : theme.colors.grey[100]};
+  color: ${({ theme, $timeRunningOut }) => 
+    $timeRunningOut ? theme.colors.text.light : theme.colors.text.primary};
   padding: 0.5rem 1rem;
   font-weight: 600;
   font-size: 1.125rem;
   transition: all 0.3s ease;
-  border-left: 3px solid ${({ theme, timeRunningOut }) => 
-    timeRunningOut ? theme.colors.error.main : theme.colors.grey[400]};
-  animation: ${({ timeRunningOut }) => 
-    timeRunningOut ? 'pulse 1s infinite' : 'none'};
+  border-left: 3px solid ${({ theme, $timeRunningOut }) => 
+    $timeRunningOut ? theme.colors.error.main : theme.colors.grey[400]};
+  animation: ${({ $timeRunningOut }) => 
+    $timeRunningOut ? 'pulse 1s infinite' : 'none'};
   
   @keyframes pulse {
     0% {
@@ -155,9 +155,9 @@ const CodeContent = styled.pre`
   }
 `;
 
-const CodeLine = styled.code<{ isError?: boolean }>`
-  background-color: ${({ isError, theme }) => 
-    isError ? theme.colors.error.main + '30' : 'transparent'};
+const CodeLine = styled.code<{ $isError?: boolean }>`
+  background-color: ${({ $isError, theme }) => 
+    $isError ? theme.colors.error.main + '30' : 'transparent'};
 `;
 
 const IssuesContainer = styled.div`
@@ -212,16 +212,16 @@ const FixOptionsLabel = styled.h5`
   font-size: 1rem;
 `;
 
-const FixOption = styled.div<{ isSelected: boolean }>`
-  border: 1px solid ${({ theme, isSelected }) => 
-    isSelected ? theme.colors.primary.main : theme.colors.grey[300]};
-  border-left: 4px solid ${({ theme, isSelected }) => 
-    isSelected ? theme.colors.primary.main : theme.colors.grey[300]};
+const FixOption = styled.div<{ $isSelected: boolean }>`
+  border: 1px solid ${({ theme, $isSelected }) => 
+    $isSelected ? theme.colors.primary.main : theme.colors.grey[300]};
+  border-left: 4px solid ${({ theme, $isSelected }) => 
+    $isSelected ? theme.colors.primary.main : theme.colors.grey[300]};
   padding: 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  background-color: ${({ theme, isSelected }) => 
-    isSelected ? theme.colors.primary.light + '10' : 'white'};
+  background-color: ${({ theme, $isSelected }) => 
+    $isSelected ? theme.colors.primary.light + '10' : 'white'};
   
   &:hover {
     border-color: ${({ theme }) => theme.colors.primary.light};
@@ -327,20 +327,23 @@ const CodeCorrectionPage: React.FC = () => {
   
   // Handle fix selection
   const handleSelectFix = (issueIndex: number, fixIndex: number) => {
+    // First, save the answer to the context if we have a current snippet
+    if (currentCodeSnippet) {
+      answerCodeIssue(currentCodeSnippet.id, issueIndex, fixIndex);
+    }
+    
+    // Then update local state with the new selection
     setSelectedFixes(prev => {
       const newFixes = { ...prev, [issueIndex]: fixIndex };
       
-      // Save to context
-      if (currentCodeSnippet) {
-        answerCodeIssue(currentCodeSnippet.id, issueIndex, fixIndex);
-      }
-      
-      // Check if all issues are now fixed
-      const allFixed = currentCodeSnippet?.issues.every(
-        (_, index) => index in newFixes
-      ) || false;
-      
-      setAllIssuesFixed(allFixed);
+      // Update the "all fixed" state in the next tick to avoid nested setState calls
+      setTimeout(() => {
+        const allFixed = currentCodeSnippet?.issues.every(
+          (_, index) => index in newFixes
+        ) || false;
+        
+        setAllIssuesFixed(allFixed);
+      }, 0);
       
       return newFixes;
     });
@@ -374,7 +377,7 @@ const CodeCorrectionPage: React.FC = () => {
     <PageContainer>
       <Header>
         <Title>Code Correction</Title>
-        <Timer timeRunningOut={isTimeRunningOut}>
+        <Timer $timeRunningOut={isTimeRunningOut}>
           {formatTime(timeRemaining)}
         </Timer>
       </Header>
@@ -412,7 +415,7 @@ const CodeCorrectionPage: React.FC = () => {
             {codeLines.map((line, index) => (
               <CodeLine 
                 key={index}
-                isError={errorLines.includes(index + 1)} // +1 because line numbers are 1-based
+                $isError={errorLines.includes(index + 1)} // +1 because line numbers are 1-based
               >
                 {line}
               </CodeLine>
@@ -437,7 +440,7 @@ const CodeCorrectionPage: React.FC = () => {
                 {issue.possibleFixes.map((fix, fixIndex) => (
                   <FixOption
                     key={fixIndex}
-                    isSelected={selectedFixes[issueIndex] === fixIndex}
+                    $isSelected={selectedFixes[issueIndex] === fixIndex}
                     onClick={() => handleSelectFix(issueIndex, fixIndex)}
                   >
                     <FixCode>{fix.text}</FixCode>

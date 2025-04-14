@@ -22,19 +22,19 @@ const Title = styled.h1`
   font-weight: 500;
 `;
 
-const Timer = styled.div<{ timeRunningOut: boolean }>`
-  background-color: ${({ theme, timeRunningOut }) => 
-    timeRunningOut ? theme.colors.error.light : theme.colors.grey[100]};
-  color: ${({ theme, timeRunningOut }) => 
-    timeRunningOut ? theme.colors.text.light : theme.colors.text.primary};
+const Timer = styled.div<{ $timeRunningOut: boolean }>`
+  background-color: ${({ theme, $timeRunningOut }) => 
+    $timeRunningOut ? theme.colors.error.light : theme.colors.grey[100]};
+  color: ${({ theme, $timeRunningOut }) => 
+    $timeRunningOut ? theme.colors.text.light : theme.colors.text.primary};
   padding: 0.5rem 1rem;
   font-weight: 600;
   font-size: 1.125rem;
   transition: all 0.3s ease;
-  border-left: 3px solid ${({ theme, timeRunningOut }) => 
-    timeRunningOut ? theme.colors.error.main : theme.colors.grey[400]};
-  animation: ${({ timeRunningOut }) => 
-    timeRunningOut ? 'pulse 1s infinite' : 'none'};
+  border-left: 3px solid ${({ theme, $timeRunningOut }) => 
+    $timeRunningOut ? theme.colors.error.main : theme.colors.grey[400]};
+  animation: ${({ $timeRunningOut }) => 
+    $timeRunningOut ? 'pulse 1s infinite' : 'none'};
   
   @keyframes pulse {
     0% {
@@ -109,16 +109,16 @@ const AnswersList = styled.div`
   margin-top: 2rem;
 `;
 
-const AnswerOption = styled.div<{ isSelected: boolean }>`
-  border: 1px solid ${({ theme, isSelected }) => 
-    isSelected ? theme.colors.primary.main : theme.colors.grey[300]};
-  border-left: 4px solid ${({ theme, isSelected }) => 
-    isSelected ? theme.colors.primary.main : theme.colors.grey[300]};
+const AnswerOption = styled.div<{ $isSelected: boolean }>`
+  border: 1px solid ${({ theme, $isSelected }) => 
+    $isSelected ? theme.colors.primary.main : theme.colors.grey[300]};
+  border-left: 4px solid ${({ theme, $isSelected }) => 
+    $isSelected ? theme.colors.primary.main : theme.colors.grey[300]};
   padding: 1rem 1.5rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  background-color: ${({ theme, isSelected }) => 
-    isSelected ? theme.colors.primary.light + '10' : 'transparent'};
+  background-color: ${({ theme, $isSelected }) => 
+    $isSelected ? theme.colors.primary.light + '10' : 'transparent'};
   
   &:hover {
     border-color: ${({ theme }) => theme.colors.primary.light};
@@ -241,7 +241,7 @@ const QuestionsPage: React.FC = () => {
     <PageContainer>
       <Header>
         <Title>Technical Questions</Title>
-        <Timer timeRunningOut={isTimeRunningOut}>
+        <Timer $timeRunningOut={isTimeRunningOut}>
           {formatTime(timeRemaining)}
         </Timer>
       </Header>
@@ -278,7 +278,7 @@ const QuestionsPage: React.FC = () => {
           {currentQuestion.possibleAnswers.map((answer, index) => (
             <AnswerOption
               key={index}
-              isSelected={effectiveSelectedAnswer === index}
+              $isSelected={effectiveSelectedAnswer === index}
               onClick={() => handleAnswerSelect(index)}
             >
               {answer.text}

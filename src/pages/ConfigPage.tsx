@@ -183,8 +183,8 @@ const ConfigPage: React.FC = () => {
             type="number"
             min="1"
             max="15"
-            value={settings.questionCount}
-            onChange={(e) => updateSettings({ questionCount: parseInt(e.target.value) })}
+            value={isNaN(settings.questionCount) ? '' : settings.questionCount}
+            onChange={(e) => updateSettings({ questionCount: parseInt(e.target.value) || 0 })}
           />
         </FormGroup>
         
@@ -196,8 +196,8 @@ const ConfigPage: React.FC = () => {
               type="number"
               min="1"
               max="5"
-              value={settings.codeSnippetCount}
-              onChange={(e) => updateSettings({ codeSnippetCount: parseInt(e.target.value) })}
+              value={isNaN(settings.codeSnippetCount) ? '' : settings.codeSnippetCount}
+              onChange={(e) => updateSettings({ codeSnippetCount: parseInt(e.target.value) || 0 })}
             />
           </FormGroup>
         )}
@@ -209,8 +209,8 @@ const ConfigPage: React.FC = () => {
             type="number"
             min="5"
             max="120"
-            value={settings.timeLimit}
-            onChange={(e) => updateSettings({ timeLimit: parseInt(e.target.value) })}
+            value={isNaN(settings.timeLimit) ? '' : settings.timeLimit}
+            onChange={(e) => updateSettings({ timeLimit: parseInt(e.target.value) || 0 })}
           />
         </FormGroup>
         
