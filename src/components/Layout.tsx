@@ -28,7 +28,7 @@ const HeaderContent = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
-  height: 70px;
+  height: 84px; /* Aumentado en 20% de 70px */
 
   @media (max-width: 768px) {
     padding: 0 1rem;
@@ -42,8 +42,16 @@ const Logo = styled.div`
 `;
 
 const LogoImg = styled.img`
-  height: 30px;
+  height: 48px; /* Aumentado a 48px como solicitado */
   width: auto;
+`;
+
+const LogoText = styled.span`
+  color: #002373; /* McKinsey blue */
+  font-weight: 600;
+  font-size: 1.25rem;
+  letter-spacing: 0.5px;
+  font-family: 'Bower', 'Times New Roman', Times, serif;
 `;
 
 const HamburgerButton = styled.button`
@@ -118,9 +126,9 @@ const Sidebar = styled.div<{ $isOpen: boolean }>`
   
   @media (max-width: 768px) {
     position: fixed;
-    top: 70px;
+    top: 84px; /* Actualizado para coincidir con el nuevo header height */
     left: 0;
-    height: calc(100vh - 70px);
+    height: calc(100vh - 84px); /* Actualizado para coincidir con el nuevo header height */
     transform: ${({ $isOpen }) => ($isOpen ? 'translateX(0)' : 'translateX(-100%)')};
     transition: transform 0.3s ease-in-out;
     box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
@@ -134,23 +142,13 @@ const Nav = styled.nav`
   gap: 1.5rem;
 `;
 
-const PageTitle = styled.div`
-  color: #002373; /* McKinsey blue */
-  font-weight: 600;
-  font-size: 1.5rem;
-  letter-spacing: 0.5px;
-  font-family: 'Bower', 'Times New Roman', Times, serif;
-  margin-bottom: 2rem;
-  text-align: center;
-`;
-
 const MobileMenuOverlay = styled.div<{ $isOpen: boolean }>`
   display: none;
   
   @media (max-width: 768px) {
     display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
     position: fixed;
-    top: 70px;
+    top: 84px; /* Actualizado para coincidir con el nuevo header height */
     left: 0;
     right: 0;
     bottom: 0;
@@ -255,6 +253,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <HeaderContent>
           <Logo>
             <LogoImg src={mcKinseyLogo} alt="McKinsey Logo" />
+            <LogoText>Technical Interview</LogoText>
           </Logo>
           
           <HamburgerButton onClick={toggleMenu}>
@@ -270,7 +269,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       
       <MainContainer>
         <Sidebar $isOpen={isMenuOpen}>
-          <PageTitle>Technical Interview</PageTitle>
           <Nav>
             <NavLink to="/" active={location.pathname === '/'} onClick={toggleMenu}>
               Home
