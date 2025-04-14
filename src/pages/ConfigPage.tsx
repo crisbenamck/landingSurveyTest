@@ -84,7 +84,7 @@ const Separator = styled.div`
 
 const StartButton = styled.button`
   padding: 1rem 2rem;
-  background-color: ${({ theme }) => theme.colors.primary.main};
+  background-color: #2251ff;
   color: white;
   border: none;
   border-radius: 0;
@@ -96,7 +96,7 @@ const StartButton = styled.button`
   align-self: flex-start;
   
   &:hover {
-    background-color: ${({ theme }) => theme.colors.primary.dark};
+    background-color: #1a41cc;
   }
   
   &:focus {

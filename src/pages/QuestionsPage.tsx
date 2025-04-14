@@ -154,7 +154,7 @@ const ButtonsContainer = styled.div`
 const Button = styled.button<{ $variant?: 'primary' | 'secondary' }>`
   padding: 0.75rem 1.5rem;
   background-color: ${({ theme, $variant }) => 
-    $variant === 'secondary' ? 'transparent' : theme.colors.primary.main};
+    $variant === 'secondary' ? 'transparent' : '#2251ff'};
   color: ${({ theme, $variant }) => 
     $variant === 'secondary' ? theme.colors.text.primary : 'white'};
   border: ${({ theme, $variant }) => 
@@ -166,7 +166,7 @@ const Button = styled.button<{ $variant?: 'primary' | 'secondary' }>`
   
   &:hover {
     background-color: ${({ theme, $variant }) => 
-      $variant === 'secondary' ? theme.colors.grey[200] : theme.colors.primary.dark};
+      $variant === 'secondary' ? theme.colors.grey[200] : '#1a41cc'};
   }
   
   &:focus {
