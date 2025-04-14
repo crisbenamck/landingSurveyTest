@@ -70,7 +70,7 @@ const defaultSettings: InterviewSettings = {
   candidateName: '',
   questionCount: 5,
   codeSnippetCount: 3,
-  selectedCategories: ['javascript', 'react', 'general'],
+  selectedCategories: ['ampscript', 'ssjs', 'marketing_cloud'],
   difficultyLevel: 'mixed',
   timeLimit: 30, // 30 minutes by default
 };
