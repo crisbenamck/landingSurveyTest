@@ -269,19 +269,29 @@ export function InterviewProvider({ children }: { children: ReactNode }) {
     setStartTime(new Date());
     setTimeRemaining(settings.timeLimit * 60); // Convert minutes to seconds
     
+    // Clear any existing timer to prevent multiple instances
+    if (window.interviewTimer) {
+      clearInterval(window.interviewTimer);
+    }
+    
     // Set up a timer to update timeRemaining
-    const timer = setInterval(() => {
+    window.interviewTimer = setInterval(() => {
       setTimeRemaining(prev => {
         if (prev <= 0) {
-          clearInterval(timer);
+          clearInterval(window.interviewTimer);
           finishInterview();
           return 0;
         }
         return prev - 1;
       });
-    }, 1000);
+    }, 1000); // Actualizar cada segundo (1000ms)
     
-    return () => clearInterval(timer);
+    // Clean up the timer when the component unmounts
+    return () => {
+      if (window.interviewTimer) {
+        clearInterval(window.interviewTimer);
+      }
+    };
   };
   
   // Answer a question
