@@ -90,12 +90,29 @@ const TagsContainer = styled.div`
 `;
 
 const Tag = styled.span`
-  background-color: ${({ theme, color }: { theme: any; color: string }) => theme.colors[color].light};
-  color: ${({ theme, color }: { theme: any; color: string }) => theme.colors[color].dark};
+  background-color: ${({ theme, color }: { theme: any; color: string }) => {
+    // Fondo más claro pero con suficiente contraste
+    if (color === 'primary') return '#cfe2ff'; // Azul claro 
+    if (color === 'secondary') return '#e2e3e5'; // Gris claro 
+    if (color === 'error') return '#f8d7da'; // Rojo claro
+    if (color === 'success') return '#d1e7dd'; // Verde claro
+    if (color === 'warning') return '#fff3cd'; // Amarillo claro
+    return theme.colors[color].light;
+  }};
+  color: ${({ theme, color }: { theme: any; color: string }) => {
+    // Texto oscuro para garantizar legibilidad
+    if (color === 'primary') return '#084298'; // Azul oscuro
+    if (color === 'secondary') return '#41464b'; // Gris oscuro
+    if (color === 'error') return '#842029'; // Rojo oscuro
+    if (color === 'success') return '#0f5132'; // Verde oscuro
+    if (color === 'warning') return '#664d03'; // Amarillo oscuro
+    return theme.colors[color].dark;
+  }};
   padding: 0.25rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 500;
   border-left: 3px solid ${({ theme, color }: { theme: any; color: string }) => theme.colors[color].main};
+  border-radius: 2px; // Bordes ligeramente redondeados para mejorar apariencia
 `;
 
 const CodeTitle = styled.h2`
