@@ -46,53 +46,6 @@ const LogoImg = styled.img`
   width: auto;
 `;
 
-const LogoText = styled.span`
-  color: #002373; /* McKinsey blue */
-  font-weight: 600;
-  font-size: 1.25rem;
-  letter-spacing: 0.5px;
-  font-family: 'Bower', 'Times New Roman', Times, serif;
-`;
-
-const Nav = styled.nav<{ $isOpen: boolean }>`
-  display: flex;
-  align-items: center;
-  gap: 2.5rem;
-
-  @media (max-width: 768px) {
-    position: fixed;
-    top: 70px;
-    right: 0;
-    background-color: white;
-    width: 250px;
-    height: calc(100vh - 70px);
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 2rem;
-    gap: 1.5rem;
-    transform: ${({ $isOpen }) => ($isOpen ? 'translateX(0)' : 'translateX(100%)')};
-    transition: transform 0.3s ease-in-out;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-    z-index: 999;
-  }
-`;
-
-const MobileMenuOverlay = styled.div<{ $isOpen: boolean }>`
-  display: none;
-  
-  @media (max-width: 768px) {
-    display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
-    position: fixed;
-    top: 70px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 998;
-  }
-`;
-
 const HamburgerButton = styled.button`
   display: none;
   background: none;
@@ -148,43 +101,78 @@ const HamburgerIcon = styled.div<{ $isOpen: boolean }>`
   }
 `;
 
+// Nueva estructura principal con diseño de columnas
+const MainContainer = styled.div`
+  display: flex;
+  flex: 1;
+  background-color: #ffffff;
+`;
+
+// Barra lateral izquierda para el menú
+const Sidebar = styled.div<{ $isOpen: boolean }>`
+  width: 250px;
+  background-color: #f8f9fa;
+  border-right: 1px solid #e0e0e0;
+  padding: 2rem 1rem;
+  flex-shrink: 0;
+  
+  @media (max-width: 768px) {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    height: calc(100vh - 70px);
+    transform: ${({ $isOpen }) => ($isOpen ? 'translateX(0)' : 'translateX(-100%)')};
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+  }
+`;
+
+const Nav = styled.nav`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+`;
+
+const PageTitle = styled.div`
+  color: #002373; /* McKinsey blue */
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+  font-family: 'Bower', 'Times New Roman', Times, serif;
+  margin-bottom: 2rem;
+  text-align: center;
+`;
+
+const MobileMenuOverlay = styled.div<{ $isOpen: boolean }>`
+  display: none;
+  
+  @media (max-width: 768px) {
+    display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+  }
+`;
+
 // Componente styled para el estilo utilizando un data-attribute para el estado activo
 const StyledNavLink = styled.div<{ $active: boolean }>`
   position: relative;
-  padding: 0.75rem 0;
+  padding: 0.75rem 1rem;
   color: ${({ $active }) => ($active ? '#2251ff' : '#333')};
   font-weight: ${({ $active }) => ($active ? 600 : 400)};
   text-decoration: none;
   font-size: 1rem;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: #2251ff; /* Actualizado al color McKinsey */
-    transform: ${({ $active }) => ($active ? 'scaleX(1)' : 'scaleX(0)')};
-    transform-origin: left;
-    transition: transform 0.3s ease;
-  }
+  border-radius: 4px;
+  background-color: ${({ $active }) => ($active ? 'rgba(34, 81, 255, 0.1)' : 'transparent')};
   
   &:hover {
     color: #2251ff;
-    
-    &::after {
-      transform: scaleX(1);
-    }
-  }
-  
-  @media (max-width: 768px) {
-    width: 100%;
-    padding: 0.5rem 0;
-    
-    &::after {
-      bottom: -5px;
-    }
+    background-color: rgba(34, 81, 255, 0.05);
   }
 `;
 
@@ -208,7 +196,6 @@ const NavLink: React.FC<NavLinkProps> = ({ to, active, children, onClick }) => {
 const Main = styled.main`
   flex: 1;
   padding: 0;
-  background-color: ${({ theme }) => theme.colors.background.default};
 `;
 
 const ContentWrapper = styled.div`
@@ -226,9 +213,9 @@ const Footer = styled.footer`
   background-color: #f5f5f5;
   padding: 2rem;
   text-align: center;
-  color: ${({ theme }) => theme.colors.text.secondary};
+  color: #555555;
   font-size: 0.875rem;
-  border-top: 1px solid ${({ theme }) => theme.colors.grey[200]};
+  border-top: 1px solid #e9ecef;
 `;
 
 interface LayoutProps {
@@ -268,7 +255,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <HeaderContent>
           <Logo>
             <LogoImg src={mcKinseyLogo} alt="McKinsey Logo" />
-            <LogoText>Technical Interview</LogoText>
           </Logo>
           
           <HamburgerButton onClick={toggleMenu}>
@@ -278,8 +264,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <span></span>
             </HamburgerIcon>
           </HamburgerButton>
-          
-          <Nav $isOpen={isMenuOpen}>
+        </HeaderContent>
+        <MobileMenuOverlay $isOpen={isMenuOpen} onClick={toggleMenu} />
+      </Header>
+      
+      <MainContainer>
+        <Sidebar $isOpen={isMenuOpen}>
+          <PageTitle>Technical Interview</PageTitle>
+          <Nav>
             <NavLink to="/" active={location.pathname === '/'} onClick={toggleMenu}>
               Home
             </NavLink>
@@ -301,15 +293,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               </NavLink>
             )}
           </Nav>
-        </HeaderContent>
-        <MobileMenuOverlay $isOpen={isMenuOpen} onClick={toggleMenu} />
-      </Header>
-      
-      <Main>
-        <ContentWrapper>
-          {children}
-        </ContentWrapper>
-      </Main>
+        </Sidebar>
+        
+        <Main>
+          <ContentWrapper>
+            {children}
+          </ContentWrapper>
+        </Main>
+      </MainContainer>
       
       <Footer>
         © {new Date().getFullYear()} Technical Interview - Evaluation System for Developers
