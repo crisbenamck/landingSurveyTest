@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Workspace file (keep local but not in repo)
+landingSurveyTest.code-workspace
