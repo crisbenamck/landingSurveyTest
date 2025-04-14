@@ -22,6 +22,14 @@ const Title = styled.h1`
 const Subtitle = styled.p`
   color: ${({ theme }) => theme.colors.text.secondary};
   font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+`;
+
+const Description = styled.p`
+  color: ${({ theme }) => theme.colors.text.secondary};
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
 `;
 
 const Form = styled.form`
@@ -131,6 +139,7 @@ const ConfigPage: React.FC = () => {
   return (
     <PageContainer>
       <PageHeader>
+        <Description>This tool assists interviewers during the selection process for Marketing Cloud roles in GToS. It provides a structured framework to evaluate candidate skills and knowledge across key Marketing Cloud technologies and practices.</Description>
         <Title>Interview Configuration</Title>
         <Subtitle>Complete the following information to start a technical assessment</Subtitle>
       </PageHeader>
