@@ -64,6 +64,7 @@ export const theme = {
   },
   typography: {
     fontFamily: "'Poppins', 'Helvetica Neue', Arial, sans-serif", // McKinsey suele usar fuentes sans-serif limpias
+    headingFontFamily: "'Times New Roman', Times, serif", // Font for headings to match McKinsey style
     fontSizes: {
       xs: '0.75rem',
       sm: '0.875rem',
