@@ -26,7 +26,7 @@ const HeaderContent = styled.div`
   margin: 0 auto;
   display: flex;
   align-items: center;
-  padding: 0;
+  padding: 0 2rem; /* Añadido padding horizontal para dar espacio en escritorio */
   height: 84px;
   justify-content: flex-start;
   gap: 2rem; /* Incrementado el espacio entre elementos */
@@ -39,8 +39,14 @@ const HeaderContent = styled.div`
 const Logo = styled.div`
   display: flex;
   align-items: center;
-  gap: 1.25rem;
-  padding-left: 0;
+  justify-content: flex-start; /* Cambiado de center a flex-start */
+  width: 250px; /* Coincide con el ancho del menú de navegación */
+  padding-left: 2rem; /* Añadido padding izquierdo para ajustar la posición */
+  
+  @media (max-width: 768px) {
+    width: auto; /* En móvil vuelve a su ancho automático */
+    padding-left: 0;
+  }
 `;
 
 const LogoImg = styled.img`
@@ -54,10 +60,11 @@ const LogoText = styled.span`
   font-size: 1.875rem; /* Aumentado en un 50% de 1.25rem a 1.875rem */
   letter-spacing: 0.5px;
   font-family: 'Bower', 'Times New Roman', Times, serif;
-  margin-left: 1rem;
+  margin-left: 3rem; /* Aumentado a 3rem (48px) para un mejor espaciado visual */
   
   @media (max-width: 768px) {
     font-size: 1.5rem;
+    margin-left: 1rem; /* Mantener el espaciado original en móvil */
   }
 `;
 
