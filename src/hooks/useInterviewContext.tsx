@@ -61,6 +61,7 @@ interface InterviewContextType {
   nextQuestion: () => void;
   nextCodeSnippet: () => void;
   finishInterview: () => void;
+  resetInterview: () => void; // Nueva función para resetear la entrevista
   interviewInProgress: boolean;
   questionIndex: number;
   codeSnippetIndex: number;
@@ -392,6 +393,38 @@ export function InterviewProvider({ children }: { children: ReactNode }) {
     setQuestionIndex(-1);
     setCodeSnippetIndex(-1);
   };
+
+  // Reset the interview
+  const resetInterview = () => {
+    // Limpiar el timer si existe
+    if (window.interviewTimer) {
+      clearInterval(window.interviewTimer);
+      window.interviewTimer = undefined;
+    }
+    
+    // Resetear todos los estados relacionados con la entrevista
+    setQuestions([]);
+    setCodeSnippets([]);
+    setQuestionIndex(-1);
+    setCodeSnippetIndex(-1);
+    setAnswers({});
+    setCodeAnswers({});
+    setResults({
+      totalScore: 0,
+      questionScores: [],
+      codeScores: [],
+      timeSpent: 0,
+    });
+    setInterviewInProgress(false);
+    setStartTime(null);
+    setTimeRemaining(0);
+    
+    // Resetear solo el nombre del candidato, manteniendo el resto de la configuración
+    setSettings(prev => ({
+      ...prev,
+      candidateName: ''
+    }));
+  };
   
   return (
     <InterviewContext.Provider
@@ -409,6 +442,7 @@ export function InterviewProvider({ children }: { children: ReactNode }) {
         nextQuestion,
         nextCodeSnippet,
         finishInterview,
+        resetInterview,
         interviewInProgress,
         questionIndex,
         codeSnippetIndex,

@@ -201,7 +201,8 @@ const QuestionsPage: React.FC = () => {
     answerQuestion,
     nextQuestion,
     timeRemaining,
-    settings
+    settings,
+    resetInterview
   } = useInterviewContext();
   
   // Format time remaining
@@ -328,7 +329,13 @@ const QuestionsPage: React.FC = () => {
       <ButtonsContainer>
         <Button 
           $variant="cancel"
-          onClick={() => navigate('/')}
+          onClick={() => {
+            resetInterview();
+            // Usar setTimeout para asegurar que el reseteo se complete antes de navegar
+            setTimeout(() => {
+              navigate('/');
+            }, 0);
+          }}
         >
           Cancel Interview
         </Button>

@@ -201,7 +201,7 @@ const Button = styled.button<{ $variant?: 'primary' | 'secondary' | 'cancel' }>`
 
 const ResultsPage: React.FC = () => {
   const navigate = useNavigate();
-  const { results, settings, finishInterview } = useInterviewContext();
+  const { results, settings, finishInterview, resetInterview } = useInterviewContext();
 
   // Make sure the interview is finished
   useEffect(() => {
@@ -291,7 +291,13 @@ const ResultsPage: React.FC = () => {
           <Button $variant="cancel" onClick={() => window.print()}>
             Print Results
           </Button>
-          <Button onClick={() => navigate('/')}>
+          <Button onClick={() => {
+            resetInterview();
+            // Usar setTimeout para asegurar que el reseteo se complete antes de navegar
+            setTimeout(() => {
+              navigate('/');
+            }, 0);
+          }}>
             New Interview
           </Button>
         </ButtonsContainer>

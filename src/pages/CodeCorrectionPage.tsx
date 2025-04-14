@@ -316,6 +316,7 @@ const CodeCorrectionPage: React.FC = () => {
     codeAnswers,
     answerCodeIssue,
     nextCodeSnippet,
+    resetInterview,
   } = useInterviewContext();
   
   // Format time remaining
@@ -495,7 +496,13 @@ const CodeCorrectionPage: React.FC = () => {
       <ButtonsContainer>
         <Button 
           $variant="cancel"
-          onClick={() => navigate('/')}
+          onClick={() => {
+            resetInterview();
+            // Usar setTimeout para asegurar que el reseteo se complete antes de navegar
+            setTimeout(() => {
+              navigate('/');
+            }, 0);
+          }}
         >
           Cancel Interview
         </Button>
