@@ -5,7 +5,7 @@ interface Question {
   id: string;
   text: string;
   category: string;
-  difficulty: 'easy' | 'medium' | 'hard';
+  difficulty: 'easy' | 'medium' | 'hard' | 'expert';
   possibleAnswers: {
     text: string;
     score: number;
@@ -33,7 +33,7 @@ interface CodeSnippet {
 interface InterviewSettings {
   candidateName: string;
   role: 'developer' | 'consultant';
-  seniority: 'junior' | 'semi-senior' | 'senior'; // Reemplazado difficultyLevel por seniority
+  seniority: 'Junior' | 'Advanced' | 'Senior' | 'Specialist'; // Nuevos niveles de seniority
   questionCount: number;
   codeSnippetCount: number;
   selectedCategories: string[];
@@ -70,7 +70,7 @@ interface InterviewContextType {
 const defaultSettings: InterviewSettings = {
   candidateName: '',
   role: 'developer', // Default role
-  seniority: 'junior', // Default seniority
+  seniority: 'Junior', // Default seniority
   questionCount: 5,
   codeSnippetCount: 3,
   selectedCategories: ['ampscript', 'ssjs', 'marketing_cloud'],
@@ -103,6 +103,7 @@ export function InterviewProvider({ children }: { children: ReactNode }) {
     import('@data/questions.json').then((data) => {
       // Filter based on settings
       let filteredQuestions = data.default as Question[];
+      let originalQuestions = [...filteredQuestions]; // Keep a copy of all questions
       
       // Filter by categories based on role
       if (settings.selectedCategories.length > 0) {
@@ -113,41 +114,87 @@ export function InterviewProvider({ children }: { children: ReactNode }) {
       
       // Filter by difficulty based on seniority
       const allowedDifficulties: Record<string, string[]> = {
-        'junior': ['easy'],
-        'semi-senior': ['easy', 'medium'],
-        'senior': ['easy', 'medium', 'hard']
+        'Junior': ['easy'],
+        'Advanced': ['easy', 'medium'],
+        'Senior': ['easy', 'medium', 'hard'],
+        'Specialist': ['medium', 'hard', 'expert'] // Specialist ahora puede ver preguntas expert
       };
       
       // Safety check: ensure seniority is a valid value
-      const seniority = settings.seniority || 'junior';
-      const validSeniority = ['junior', 'semi-senior', 'senior'].includes(seniority) 
+      const seniority = settings.seniority || 'Junior';
+      const validSeniority = ['Junior', 'Advanced', 'Senior', 'Specialist'].includes(seniority) 
         ? seniority 
-        : 'junior';
+        : 'Junior';
       
       filteredQuestions = filteredQuestions.filter(q => 
         allowedDifficulties[validSeniority].includes(q.difficulty)
       );
       
       // Shuffle and limit based on questionCount
-      const shuffled = [...filteredQuestions].sort(() => 0.5 - Math.random());
+      let shuffled = [...filteredQuestions].sort(() => 0.5 - Math.random());
+      
+      // If we don't have enough questions after filtering, use questions from the original list to fill the gap
+      if (shuffled.length < settings.questionCount) {
+        console.log(`Warning: Only ${shuffled.length} questions match the current filters. Adding additional questions to reach the requested count of ${settings.questionCount}.`);
+        
+        // Get questions that weren't already selected
+        const remainingQuestions = originalQuestions.filter(
+          q => !shuffled.some(sq => sq.id === q.id)
+        );
+        
+        // Sort remaining questions by closest difficulty level to what was requested
+        const sortedRemaining = [...remainingQuestions].sort((a, b) => {
+          // Calculate difficulty priority (lower is better)
+          const difficultyPriority: Record<string, number> = {
+            'easy': 0,
+            'medium': 1,
+            'hard': 2,
+            'expert': 3
+          };
+          
+          // First prioritize by category match
+          const aCategoryMatch = settings.selectedCategories.includes(a.category) ? 0 : 1;
+          const bCategoryMatch = settings.selectedCategories.includes(b.category) ? 0 : 1;
+          
+          if (aCategoryMatch !== bCategoryMatch) {
+            return aCategoryMatch - bCategoryMatch;
+          }
+          
+          // Then by difficulty appropriate for the level
+          const aDiffIdx = difficultyPriority[a.difficulty];
+          const bDiffIdx = difficultyPriority[b.difficulty];
+          
+          return aDiffIdx - bDiffIdx;
+        });
+        
+        // Add needed questions to reach the count
+        const additionalNeeded = settings.questionCount - shuffled.length;
+        const additionalQuestions = sortedRemaining.slice(0, additionalNeeded);
+        
+        shuffled = [...shuffled, ...additionalQuestions];
+      }
+      
+      // Ensure we only take the exact count requested
       setQuestions(shuffled.slice(0, settings.questionCount));
     });
     
     import('@data/codeSnippets.json').then((data) => {
       let filteredSnippets = data.default as CodeSnippet[];
+      let originalSnippets = [...filteredSnippets]; // Keep a copy of all snippets
       
       // Filter by difficulty based on seniority
       const allowedDifficulties: Record<string, string[]> = {
-        'junior': ['easy'],
-        'semi-senior': ['easy', 'medium'],
-        'senior': ['easy', 'medium', 'hard']
+        'Junior': ['easy'],
+        'Advanced': ['easy', 'medium'],
+        'Senior': ['easy', 'medium', 'hard'],
+        'Specialist': ['medium', 'hard', 'expert'] // Specialist ahora puede ver preguntas expert
       };
       
       // Safety check: ensure seniority is a valid value
-      const seniority = settings.seniority || 'junior';
-      const validSeniority = ['junior', 'semi-senior', 'senior'].includes(seniority) 
+      const seniority = settings.seniority || 'Junior';
+      const validSeniority = ['Junior', 'Advanced', 'Senior', 'Specialist'].includes(seniority) 
         ? seniority 
-        : 'junior';
+        : 'Junior';
       
       // Assuming code snippets also have a difficulty property
       filteredSnippets = filteredSnippets.filter(snippet => {
@@ -159,7 +206,46 @@ export function InterviewProvider({ children }: { children: ReactNode }) {
         return true;
       });
       
-      const shuffled = [...filteredSnippets].sort(() => 0.5 - Math.random());
+      let shuffled = [...filteredSnippets].sort(() => 0.5 - Math.random());
+      
+      // If we don't have enough code snippets after filtering, use snippets from the original list to fill the gap
+      if (shuffled.length < settings.codeSnippetCount) {
+        console.log(`Warning: Only ${shuffled.length} code snippets match the current filters. Adding additional snippets to reach the requested count of ${settings.codeSnippetCount}.`);
+        
+        // Get snippets that weren't already selected
+        const remainingSnippets = originalSnippets.filter(
+          s => !shuffled.some(ss => ss.id === s.id)
+        );
+        
+        // Sort remaining snippets by closest difficulty level to what was requested (if applicable)
+        const sortedRemaining = [...remainingSnippets].sort((a, b) => {
+          // If snippets have difficulty property, sort by that
+          if ('difficulty' in a && 'difficulty' in b) {
+            const difficultyPriority: Record<string, number> = {
+              'easy': 0,
+              'medium': 1,
+              'hard': 2,
+              'expert': 3
+            };
+            
+            const aDiffIdx = difficultyPriority[(a as any).difficulty] || 0;
+            const bDiffIdx = difficultyPriority[(b as any).difficulty] || 0;
+            
+            return aDiffIdx - bDiffIdx;
+          }
+          
+          // Otherwise don't change order
+          return 0;
+        });
+        
+        // Add needed snippets to reach the count
+        const additionalNeeded = settings.codeSnippetCount - shuffled.length;
+        const additionalSnippets = sortedRemaining.slice(0, additionalNeeded);
+        
+        shuffled = [...shuffled, ...additionalSnippets];
+      }
+      
+      // Ensure we only take the exact count requested
       setCodeSnippets(shuffled.slice(0, settings.codeSnippetCount));
     });
   };
