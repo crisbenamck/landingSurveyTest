@@ -55,6 +55,11 @@ const Input = styled.input`
   border: 1px solid ${({ theme }) => theme.colors.grey[300]};
   border-radius: 0;
   font-size: 1rem;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    border-color: #2251ff;
+  }
   
   &:focus {
     outline: none;
@@ -68,6 +73,11 @@ const Select = styled.select`
   border: 1px solid ${({ theme }) => theme.colors.grey[300]};
   border-radius: 0;
   font-size: 1rem;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    border-color: #2251ff;
+  }
   
   &:focus {
     outline: none;
