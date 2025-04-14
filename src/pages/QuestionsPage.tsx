@@ -203,18 +203,26 @@ const QuestionsPage: React.FC = () => {
     setSelectedAnswer(null);
     nextQuestion();
     
-    // If we've moved beyond questions, go to code snippets
+    // If we've moved beyond questions, go to code snippets or results depending on role
     if (questionIndex === -1) {
-      navigate('/code-correction');
+      if (settings.role === 'consultant') {
+        navigate('/results');
+      } else {
+        navigate('/code-correction');
+      }
     }
   };
   
   // If no current question, redirect to the proper page
   React.useEffect(() => {
     if (questionIndex === -1) {
-      navigate('/code-correction');
+      if (settings.role === 'consultant') {
+        navigate('/results');
+      } else {
+        navigate('/code-correction');
+      }
     }
-  }, [questionIndex, navigate]);
+  }, [questionIndex, navigate, settings.role]);
   
   if (!currentQuestion) {
     return null;
@@ -291,7 +299,9 @@ const QuestionsPage: React.FC = () => {
           onClick={handleNextQuestion}
           disabled={effectiveSelectedAnswer === null}
         >
-          {questionIndex === settings.questionCount - 1 ? 'Go to Code Exercises' : 'Next Question'}
+          {questionIndex === settings.questionCount - 1 
+            ? (settings.role === 'consultant' ? 'View Results' : 'Go to Code Exercises') 
+            : 'Next Question'}
         </Button>
       </ButtonsContainer>
     </PageContainer>

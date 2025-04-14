@@ -32,6 +32,7 @@ interface CodeSnippet {
 
 interface InterviewSettings {
   candidateName: string;
+  role: 'developer' | 'consultant';  // Nuevo campo para el rol
   questionCount: number;
   codeSnippetCount: number;
   selectedCategories: string[];
@@ -68,6 +69,7 @@ interface InterviewContextType {
 
 const defaultSettings: InterviewSettings = {
   candidateName: '',
+  role: 'developer', // Default role
   questionCount: 5,
   codeSnippetCount: 3,
   selectedCategories: ['ampscript', 'ssjs', 'marketing_cloud'],
@@ -222,20 +224,22 @@ export function InterviewProvider({ children }: { children: ReactNode }) {
       return { questionId: question.id, score };
     });
     
-    // Calculate code snippet scores
-    const codeScores = codeSnippets.map(snippet => {
-      const snippetAnswers = codeAnswers[snippet.id] || [];
-      let snippetScore = 0;
-      
-      snippet.issues.forEach((issue, issueIndex) => {
-        const answer = snippetAnswers.find(a => a.issueId === issueIndex);
-        if (answer) {
-          snippetScore += issue.possibleFixes[answer.fixId].score;
-        }
-      });
-      
-      return { snippetId: snippet.id, score: snippetScore };
-    });
+    // Calculate code snippet scores - only applicable for developer role
+    const codeScores = settings.role === 'developer' 
+      ? codeSnippets.map(snippet => {
+          const snippetAnswers = codeAnswers[snippet.id] || [];
+          let snippetScore = 0;
+          
+          snippet.issues.forEach((issue, issueIndex) => {
+            const answer = snippetAnswers.find(a => a.issueId === issueIndex);
+            if (answer) {
+              snippetScore += issue.possibleFixes[answer.fixId].score;
+            }
+          });
+          
+          return { snippetId: snippet.id, score: snippetScore };
+        })
+      : []; // Empty array for consultants
     
     // Calculate total score
     const totalScore = [

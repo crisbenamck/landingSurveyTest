@@ -165,6 +165,11 @@ const ConfigPage: React.FC = () => {
       return;
     }
     
+    // If role is consultant, set codeSnippetCount to 0
+    if (settings.role === 'consultant') {
+      updateSettings({ codeSnippetCount: 0 });
+    }
+    
     // Start the interview and navigate to questions page
     startInterview();
     navigate('/questions');
@@ -187,6 +192,18 @@ const ConfigPage: React.FC = () => {
             onChange={(e) => updateSettings({ candidateName: e.target.value })}
             placeholder="Enter candidate name"
           />
+        </FormGroup>
+        
+        <FormGroup>
+          <Label htmlFor="role">Role</Label>
+          <Select
+            id="role"
+            value={settings.role}
+            onChange={(e) => updateSettings({ role: e.target.value as 'developer' | 'consultant' })}
+          >
+            <option value="developer">Developer</option>
+            <option value="consultant">Consultant</option>
+          </Select>
         </FormGroup>
         
         <Separator />
@@ -234,17 +251,19 @@ const ConfigPage: React.FC = () => {
           />
         </FormGroup>
         
-        <FormGroup>
-          <Label htmlFor="codeSnippetCount">Number of Code Exercises</Label>
-          <Input
-            id="codeSnippetCount"
-            type="number"
-            min="1"
-            max="5"
-            value={settings.codeSnippetCount}
-            onChange={(e) => updateSettings({ codeSnippetCount: parseInt(e.target.value) })}
-          />
-        </FormGroup>
+        {settings.role === 'developer' && (
+          <FormGroup>
+            <Label htmlFor="codeSnippetCount">Number of Code Exercises</Label>
+            <Input
+              id="codeSnippetCount"
+              type="number"
+              min="1"
+              max="5"
+              value={settings.codeSnippetCount}
+              onChange={(e) => updateSettings({ codeSnippetCount: parseInt(e.target.value) })}
+            />
+          </FormGroup>
+        )}
         
         <FormGroup>
           <Label htmlFor="timeLimit">Time Limit (minutes)</Label>

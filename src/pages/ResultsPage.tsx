@@ -248,15 +248,19 @@ const ResultsPage: React.FC = () => {
           ))}
         </ScoreBreakdown>
 
-        <SectionTitle>Code Exercises Details</SectionTitle>
-        <ScoreBreakdown>
-          {results.codeScores.map((score, index) => (
-            <ScoreItem key={index} score={score.score}>
-              <ScoreItemTitle>Exercise {index + 1}</ScoreItemTitle>
-              <ScoreValue score={score.score}>{score.score} points</ScoreValue>
-            </ScoreItem>
-          ))}
-        </ScoreBreakdown>
+        {settings.role === 'developer' && results.codeScores.length > 0 && (
+          <>
+            <SectionTitle>Code Exercises Details</SectionTitle>
+            <ScoreBreakdown>
+              {results.codeScores.map((score, index) => (
+                <ScoreItem key={index} score={score.score}>
+                  <ScoreItemTitle>Exercise {index + 1}</ScoreItemTitle>
+                  <ScoreValue score={score.score}>{score.score} points</ScoreValue>
+                </ScoreItem>
+              ))}
+            </ScoreBreakdown>
+          </>
+        )}
 
         <SummarySection>
           <SummaryTitle>Final Evaluation</SummaryTitle>

@@ -87,7 +87,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
-  const { interviewInProgress } = useInterviewContext();
+  const { interviewInProgress, settings } = useInterviewContext();
   
   return (
     <LayoutContainer>
@@ -107,9 +107,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <NavLink to="/questions" active={location.pathname === '/questions'}>
                   Questions
                 </NavLink>
-                <NavLink to="/code-correction" active={location.pathname === '/code-correction'}>
-                  Code Correction
-                </NavLink>
+                {settings.role === 'developer' && (
+                  <NavLink to="/code-correction" active={location.pathname === '/code-correction'}>
+                    Code Correction
+                  </NavLink>
+                )}
               </>
             )}
             {location.pathname === '/results' && (
