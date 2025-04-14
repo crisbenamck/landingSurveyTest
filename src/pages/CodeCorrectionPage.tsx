@@ -317,6 +317,7 @@ const CodeCorrectionPage: React.FC = () => {
     answerCodeIssue,
     nextCodeSnippet,
     resetInterview,
+    interviewInProgress,
   } = useInterviewContext();
   
   // Format time remaining
@@ -392,10 +393,19 @@ const CodeCorrectionPage: React.FC = () => {
   
   // If no current code snippet, redirect to the proper page
   React.useEffect(() => {
-    if (codeSnippetIndex === -1) {
+    // Solo navegar a resultados si:
+    // 1. El índice es -1 (no hay fragmento de código actual)
+    // 2. La cantidad de fragmentos de código está configurada (no es 0)
+    // 3. La entrevista está en progreso
+    // 4. Ya hemos cargado los fragmentos de código (los arrays no están vacíos)
+    if (codeSnippetIndex === -1 && 
+        settings.codeSnippetCount > 0 && 
+        interviewInProgress && 
+        codeAnswers && 
+        Object.keys(codeAnswers).length > 0) {
       navigate('/results');
     }
-  }, [codeSnippetIndex, navigate]);
+  }, [codeSnippetIndex, navigate, settings.codeSnippetCount, interviewInProgress, codeAnswers]);
   
   if (!currentCodeSnippet) {
     return null;
