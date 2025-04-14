@@ -183,7 +183,7 @@ const StyledNavLink = styled.div<{ $active: boolean }>`
   
   &:hover {
     color: #00a9f4;
-    background-color: rgba(255, 255, 255, 0.05); /* Agregar un fondo sutil al hover */
+    background-color: transparent; /* Eliminado el fondo en hover */
   }
 `;
 
