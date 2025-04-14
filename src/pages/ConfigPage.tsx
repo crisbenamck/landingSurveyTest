@@ -67,37 +67,6 @@ const Select = styled.select`
   }
 `;
 
-const CheckboxGroup = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-`;
-
-const CheckboxLabel = styled.label`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  padding: 0.5rem 1rem;
-  background-color: ${({ theme, checked }: { theme: any; checked: boolean }) =>
-    checked ? theme.colors.primary.main : theme.colors.grey[200]};
-  color: ${({ theme, checked }: { theme: any; checked: boolean }) =>
-    checked ? '#ffffff' : theme.colors.text.primary};
-  transition: all 0.2s ease;
-  
-  &:hover {
-    background-color: ${({ theme, checked }: { theme: any; checked: boolean }) =>
-      checked ? theme.colors.primary.dark : theme.colors.grey[300]};
-  }
-`;
-
-const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-`;
-
 const Separator = styled.div`
   height: 1px;
   width: 100%;
@@ -131,26 +100,6 @@ const ConfigPage: React.FC = () => {
   const navigate = useNavigate();
   const { settings, updateSettings, startInterview } = useInterviewContext();
   
-  const categories = [
-    { id: 'ampscript', label: 'AMPscript' },
-    { id: 'ssjs', label: 'Server-Side JavaScript' },
-    { id: 'marketing_cloud', label: 'Marketing Cloud' },
-  ];
-  
-  const handleCategoryToggle = (categoryId: string) => {
-    const selectedCategories = [...settings.selectedCategories];
-    
-    if (selectedCategories.includes(categoryId)) {
-      updateSettings({
-        selectedCategories: selectedCategories.filter(id => id !== categoryId)
-      });
-    } else {
-      updateSettings({
-        selectedCategories: [...selectedCategories, categoryId]
-      });
-    }
-  };
-  
   const handleStartInterview = (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -160,14 +109,18 @@ const ConfigPage: React.FC = () => {
       return;
     }
     
-    if (settings.selectedCategories.length === 0) {
-      alert('Please select at least one category');
-      return;
-    }
-    
-    // If role is consultant, set codeSnippetCount to 0
+    // Set appropriate categories based on role
     if (settings.role === 'consultant') {
-      updateSettings({ codeSnippetCount: 0 });
+      // Consultants only get marketing_cloud category
+      updateSettings({ 
+        codeSnippetCount: 0,
+        selectedCategories: ['marketing_cloud']
+      });
+    } else {
+      // Developers get all categories
+      updateSettings({ 
+        selectedCategories: ['ampscript', 'ssjs', 'marketing_cloud']
+      });
     }
     
     // Start the interview and navigate to questions page
@@ -207,21 +160,6 @@ const ConfigPage: React.FC = () => {
         </FormGroup>
         
         <Separator />
-        
-        <FormGroup>
-          <Label>Categories</Label>
-          <CheckboxGroup>
-            {categories.map((category) => (
-              <CheckboxLabel key={category.id} checked={settings.selectedCategories.includes(category.id)}>
-                <HiddenCheckbox
-                  checked={settings.selectedCategories.includes(category.id)}
-                  onChange={() => handleCategoryToggle(category.id)}
-                />
-                {category.label}
-              </CheckboxLabel>
-            ))}
-          </CheckboxGroup>
-        </FormGroup>
         
         <FormGroup>
           <Label htmlFor="difficulty">Difficulty Level</Label>
