@@ -175,11 +175,12 @@ const ConfigPage: React.FC = () => {
           <Select
             id="seniority"
             value={settings.seniority}
-            onChange={(e) => updateSettings({ seniority: e.target.value as 'junior' | 'semi-senior' | 'senior' })}
+            onChange={(e) => updateSettings({ seniority: e.target.value as 'Junior' | 'Advanced' | 'Senior' | 'Specialist' })}
           >
-            <option value="junior">Junior</option>
-            <option value="semi-senior">Semi-Senior</option>
-            <option value="senior">Senior</option>
+            <option value="Junior">Junior</option>
+            <option value="Advanced">Advanced</option>
+            <option value="Senior">Senior</option>
+            <option value="Specialist">Specialist</option>
           </Select>
         </FormGroup>
         
