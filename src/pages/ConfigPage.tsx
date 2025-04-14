@@ -97,7 +97,7 @@ const StartButton = styled.button`
   padding: 1rem 2rem;
   background-color: #2251ff;
   color: white;
-  border: none;
+  border: 1px solid transparent;
   border-radius: 0;
   font-size: 1.125rem;
   font-weight: 500;
@@ -107,7 +107,9 @@ const StartButton = styled.button`
   align-self: flex-start;
   
   &:hover {
-    background-color: #1a41cc;
+    background-color: white;
+    color: #2251ff;
+    border-color: #2251ff;
   }
   
   &:focus {
