@@ -373,7 +373,7 @@ const CodeCorrectionPage: React.FC = () => {
   return (
     <PageContainer>
       <Header>
-        <Title>Corrección de Código</Title>
+        <Title>Code Correction</Title>
         <Timer timeRunningOut={isTimeRunningOut}>
           {formatTime(timeRemaining)}
         </Timer>
@@ -381,8 +381,8 @@ const CodeCorrectionPage: React.FC = () => {
       
       <ProgressContainer>
         <ProgressLabel>
-          <span>Ejercicio {codeSnippetIndex + 1} de {settings.codeSnippetCount}</span>
-          <span>{Math.round(progressPercent)}% Completado</span>
+          <span>Exercise {codeSnippetIndex + 1} of {settings.codeSnippetCount}</span>
+          <span>{Math.round(progressPercent)}% Complete</span>
         </ProgressLabel>
         <ProgressBar>
           <Progress percent={progressPercent} />
@@ -393,7 +393,7 @@ const CodeCorrectionPage: React.FC = () => {
         <ExerciseHeader>
           <TagsContainer>
             <Tag color="primary">
-              Ejercicio {codeSnippetIndex + 1} de {settings.codeSnippetCount}
+              Exercise {codeSnippetIndex + 1} of {settings.codeSnippetCount}
             </Tag>
             <Tag color="secondary">{currentCodeSnippet.language}</Tag>
           </TagsContainer>
@@ -421,19 +421,19 @@ const CodeCorrectionPage: React.FC = () => {
         </CodeContainer>
         
         <IssuesContainer>
-          <IssueSection>Problemas a corregir</IssueSection>
+          <IssueSection>Issues to Fix</IssueSection>
           
           {currentCodeSnippet.issues.map((issue, issueIndex) => (
             <IssueItem key={issueIndex}>
               <IssueHeader>
-                <IssueTitle>Problema en línea {issue.line}</IssueTitle>
-                <Tag color="error">Por corregir</Tag>
+                <IssueTitle>Issue at line {issue.line}</IssueTitle>
+                <Tag color="error">Needs fixing</Tag>
               </IssueHeader>
               
               <IssueDescription>{issue.description}</IssueDescription>
               
               <FixOptions>
-                <FixOptionsLabel>Selecciona la corrección adecuada:</FixOptionsLabel>
+                <FixOptionsLabel>Select the appropriate fix:</FixOptionsLabel>
                 {issue.possibleFixes.map((fix, fixIndex) => (
                   <FixOption
                     key={fixIndex}
@@ -454,14 +454,14 @@ const CodeCorrectionPage: React.FC = () => {
           variant="secondary"
           onClick={() => navigate('/')}
         >
-          Cancelar Entrevista
+          Cancel Interview
         </Button>
         
         <Button
           onClick={handleNext}
           disabled={!allIssuesFixed}
         >
-          {codeSnippetIndex === settings.codeSnippetCount - 1 ? 'Ver Resultados' : 'Siguiente Ejercicio'}
+          {codeSnippetIndex === settings.codeSnippetCount - 1 ? 'View Results' : 'Next Exercise'}
         </Button>
       </ButtonsContainer>
     </PageContainer>
