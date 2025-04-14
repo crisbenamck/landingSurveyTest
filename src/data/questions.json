@@ -1,27 +1,27 @@
 [
   {
     "id": "q1",
-    "text": "¿Qué es el hoisting en JavaScript?",
-    "category": "javascript",
+    "text": "¿Qué es AMPscript en Salesforce Marketing Cloud?",
+    "category": "ampscript",
     "difficulty": "medium",
     "possibleAnswers": [
       {
-        "text": "Es el comportamiento por el cual las declaraciones de variables y funciones son movidas al comienzo de su scope antes de la ejecución del código.",
+        "text": "Un lenguaje de scripting propietario de Salesforce que se utiliza para personalizar contenido en emails, páginas web y SMS dentro de Marketing Cloud.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Es una técnica para optimizar el rendimiento de JavaScript en el navegador.",
+        "text": "Una herramienta para automatizar campañas de email en cualquier plataforma de marketing.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Es la forma en que JavaScript carga módulos externos dentro de un archivo.",
+        "text": "Un módulo específico para gestionar la analítica en Marketing Cloud.",
         "score": 2,
         "isCorrect": false
       },
       {
-        "text": "Es un método para ocultar variables en un scope local.",
+        "text": "El lenguaje estándar para crear landing pages en cualquier CRM.",
         "score": 1,
         "isCorrect": false
       }
@@ -29,27 +29,27 @@
   },
   {
     "id": "q2",
-    "text": "¿Cuál es la diferencia entre == y === en JavaScript?",
-    "category": "javascript",
+    "text": "¿Cuál es la diferencia entre AMPscript y SSJS en Marketing Cloud?",
+    "category": "marketing_cloud",
     "difficulty": "easy",
     "possibleAnswers": [
       {
-        "text": "No existe diferencia, ambos operadores funcionan exactamente igual.",
+        "text": "No hay diferencia, son dos nombres para el mismo lenguaje.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "== compara solo valor, mientras que === compara valor y tipo de datos.",
+        "text": "AMPscript es un lenguaje proprietario de Salesforce y se procesa en tiempo real, mientras que SSJS es una implementación de JavaScript que se procesa en el servidor antes de enviar el contenido.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "=== es una sintaxis antigua de JS mientras que == es la forma moderna.",
+        "text": "SSJS solo funciona en emails y AMPscript en páginas web.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "== es para comparar números y === es para comparar strings.",
+        "text": "AMPscript es para desarrolladores junior y SSJS para expertos.",
         "score": 0,
         "isCorrect": false
       }
@@ -57,27 +57,27 @@
   },
   {
     "id": "q3",
-    "text": "¿Qué es el Virtual DOM en React?",
-    "category": "react",
+    "text": "¿Qué son los Data Extensions en Marketing Cloud?",
+    "category": "marketing_cloud",
     "difficulty": "medium",
     "possibleAnswers": [
       {
-        "text": "Una copia virtual del DOM real que React mantiene para mejorar el rendimiento de las actualizaciones de UI.",
+        "text": "Tablas relacionales similares a tablas SQL que almacenan datos para su uso en Marketing Cloud.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Una técnica para crear animaciones en React.",
+        "text": "Funciones avanzadas de AMPscript para extender datos.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Un método para conectarse a APIs externas.",
-        "score": 0,
+        "text": "Un método para conectar Marketing Cloud con bases de datos externas.",
+        "score": 2,
         "isCorrect": false
       },
       {
-        "text": "Un navegador especial para testing de aplicaciones React.",
+        "text": "Reportes personalizados sobre la actividad de los suscriptores.",
         "score": 0,
         "isCorrect": false
       }
@@ -85,27 +85,27 @@
   },
   {
     "id": "q4",
-    "text": "¿Qué son los hooks en React?",
-    "category": "react",
+    "text": "¿Cuál es la función del tag %%[ ]%% en AMPscript?",
+    "category": "ampscript",
     "difficulty": "medium",
     "possibleAnswers": [
       {
-        "text": "Funciones que permiten usar estado y otras características de React sin escribir una clase.",
+        "text": "Delimitar bloques de código AMPscript en emails y páginas web para su procesamiento.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Componentes utilizados para manejar rutas en React.",
+        "text": "Indicar al sistema que ignore ese contenido durante el envío.",
         "score": 1,
         "isCorrect": false
       },
       {
-        "text": "Eventos especiales que se activan cuando el usuario interactúa con la aplicación.",
+        "text": "Insertar imágenes dinámicamente en los correos electrónicos.",
         "score": 2,
         "isCorrect": false
       },
       {
-        "text": "Una manera de llamar a APIs externas desde componentes React.",
+        "text": "Crear variables globales utilizables en toda la plataforma.",
         "score": 1,
         "isCorrect": false
       }
@@ -113,27 +113,27 @@
   },
   {
     "id": "q5",
-    "text": "¿Qué significa el término 'Single Page Application'?",
-    "category": "general",
+    "text": "¿Qué es Journey Builder en Salesforce Marketing Cloud?",
+    "category": "marketing_cloud",
     "difficulty": "easy",
     "possibleAnswers": [
       {
-        "text": "Una aplicación web que carga múltiples páginas HTML para cada vista.",
+        "text": "Una herramienta para diseñar plantillas de email.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Una aplicación web que interactúa con el usuario recargando páginas completas desde el servidor.",
+        "text": "Un sistema para gestionar listas de suscriptores.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Una aplicación web que consiste en una sola página HTML donde el contenido se actualiza dinámicamente sin recargar la página.",
+        "text": "Una herramienta visual que permite crear experiencias de cliente multicanal automatizadas basadas en eventos y datos.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Una aplicación web que solamente permite visualizar una página a la vez.",
+        "text": "Un sistema para visualizar el recorrido histórico de los clientes.",
         "score": 2,
         "isCorrect": false
       }
@@ -141,27 +141,27 @@
   },
   {
     "id": "q6",
-    "text": "¿Qué es la programación asíncrona en JavaScript?",
-    "category": "javascript",
+    "text": "¿Cómo se accede a datos de una Data Extension usando AMPscript?",
+    "category": "ampscript",
     "difficulty": "hard",
     "possibleAnswers": [
       {
-        "text": "Un estilo de programación donde todas las operaciones se ejecutan en paralelo.",
+        "text": "Utilizando únicamente la función DataExtension().",
         "score": 3,
         "isCorrect": false
       },
       {
-        "text": "Un estilo de programación que permite ejecutar operaciones sin bloquear el hilo principal, permitiendo que el resto del código se ejecute mientras espera resultados.",
+        "text": "Con funciones como Lookup(), LookupRows(), LookupOrderedRows() o LookupRowsCS().",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Un tipo de programación que solo se utiliza para comunicarse con bases de datos.",
+        "text": "Solo a través de la interfaz de usuario de Content Builder.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Una técnica para ejecutar código solo después de que todo el HTML ha cargado.",
+        "text": "Utilizando exclusivamente SQL Query Activity.",
         "score": 2,
         "isCorrect": false
       }
@@ -169,27 +169,27 @@
   },
   {
     "id": "q7",
-    "text": "¿Qué significa el concepto de 'props' en React?",
-    "category": "react",
+    "text": "¿Qué es Content Builder en Marketing Cloud?",
+    "category": "marketing_cloud",
     "difficulty": "easy",
     "possibleAnswers": [
       {
-        "text": "Propiedades internas de un componente para almacenar su estado.",
+        "text": "Una herramienta para gestionar integraciones con CRM.",
         "score": 2,
         "isCorrect": false
       },
       {
-        "text": "Métodos especiales para conectarse a APIs externas.",
+        "text": "Un sistema de análisis de campañas de email.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Valores que un componente padre pasa a un componente hijo.",
+        "text": "Una herramienta centralizada para crear, gestionar y entregar contenido en Marketing Cloud.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Elementos visuales predefinidos en React.",
+        "text": "Un editor exclusivo para código HTML.",
         "score": 0,
         "isCorrect": false
       }
@@ -197,27 +197,27 @@
   },
   {
     "id": "q8",
-    "text": "¿Qué es el 'closure' en JavaScript?",
-    "category": "javascript",
+    "text": "¿Cómo se manejan las variables en AMPscript?",
+    "category": "ampscript",
     "difficulty": "hard",
     "possibleAnswers": [
       {
-        "text": "Un objeto especial para encapsular variables privadas.",
+        "text": "Utilizando el signo $ como prefijo para todas las variables.",
         "score": 3,
         "isCorrect": false
       },
       {
-        "text": "Una combinación de una función y el ámbito léxico en el que fue declarada, permitiendo acceder a variables externas desde la función interna.",
+        "text": "Se declaran con SET @nombreVariable = valor y se accede a ellas utilizando la @ como prefijo.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Un método para cerrar conexiones a bases de datos.",
+        "text": "No se pueden crear variables en AMPscript, solo usar datos existentes.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Una técnica de optimización para reducir el tamaño del código.",
+        "text": "Utilizando let o var como en JavaScript estándar.",
         "score": 1,
         "isCorrect": false
       }
@@ -225,27 +225,27 @@
   },
   {
     "id": "q9",
-    "text": "¿Qué es el patrón de diseño Flux utilizado en aplicaciones React?",
-    "category": "react",
+    "text": "¿Qué es Automation Studio en Marketing Cloud?",
+    "category": "marketing_cloud",
     "difficulty": "hard",
     "possibleAnswers": [
       {
-        "text": "Un patrón para estructurar el CSS en aplicaciones React.",
+        "text": "Una herramienta para crear plantillas de diseño responsivo.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Un patrón arquitectónico que utiliza un flujo de datos unidireccional para gestionar el estado de la aplicación.",
+        "text": "Una herramienta para crear, gestionar y ejecutar actividades de marketing automatizadas que pueden incluir importaciones de datos, segmentaciones, envíos y más.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Un método para mejorar la velocidad de renderizado de los componentes.",
+        "text": "Un editor avanzado exclusivo para AMPscript.",
         "score": 2,
         "isCorrect": false
       },
       {
-        "text": "Una técnica para escribir pruebas unitarias en React.",
+        "text": "Un sistema para programar envíos de correos electrónicos únicamente.",
         "score": 0,
         "isCorrect": false
       }
@@ -253,27 +253,27 @@
   },
   {
     "id": "q10",
-    "text": "¿Qué es una API RESTful?",
-    "category": "general",
+    "text": "¿Qué es la función ContentBlockByID() en AMPscript?",
+    "category": "ampscript",
     "difficulty": "medium",
     "possibleAnswers": [
       {
-        "text": "Un tipo de base de datos NoSQL.",
+        "text": "Una función que solo permite mostrar imágenes guardadas en Content Builder.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Una interfaz de programación que utiliza HTTP y sigue principios REST para crear servicios web.",
+        "text": "Una función que permite insertar contenido de un Content Block específico utilizando su ID como referencia.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Un formato de intercambio de datos que reemplazó a JSON.",
+        "text": "Una función para crear nuevos bloques de contenido dinámicamente.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Una librería JavaScript para manejar peticiones al servidor.",
+        "text": "Una herramienta para actualizar contenido existente en la base de datos.",
         "score": 2,
         "isCorrect": false
       }
@@ -281,27 +281,27 @@
   },
   {
     "id": "q11",
-    "text": "¿Qué son las promesas en JavaScript?",
-    "category": "javascript",
+    "text": "¿Cuál es la principal diferencia entre Script.Util.HttpRequest en SSJS y el uso de HTTPGet() en AMPscript?",
+    "category": "ssjs",
     "difficulty": "medium",
     "possibleAnswers": [
       {
-        "text": "Objetos que representan una eventual finalización (o falla) de una operación asíncrona y su valor resultante.",
+        "text": "Script.Util.HttpRequest en SSJS ofrece más opciones de configuración y mayor flexibilidad para llamadas API complejas, mientras que HTTPGet() en AMPscript es más sencillo pero limitado.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Una característica de ES6 para declarar variables con scope de bloque.",
+        "text": "No hay diferencia funcional entre ambos.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Una forma de crear funciones en JavaScript.",
+        "text": "HTTPGet() es más rápido y siempre preferible.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Un tipo especial de array en JavaScript.",
+        "text": "Script.Util.HttpRequest solo funciona en CloudPages.",
         "score": 0,
         "isCorrect": false
       }
@@ -309,27 +309,27 @@
   },
   {
     "id": "q12",
-    "text": "¿Qué es el estado (state) en React?",
-    "category": "react",
+    "text": "¿Qué son las CloudPages en Marketing Cloud?",
+    "category": "marketing_cloud",
     "difficulty": "medium",
     "possibleAnswers": [
       {
-        "text": "Los valores que un componente recibe de su componente padre.",
+        "text": "Páginas de informes de campañas para clientes.",
         "score": 1,
         "isCorrect": false
       },
       {
-        "text": "Un objeto que contiene datos propios del componente que pueden cambiar durante su ciclo de vida.",
+        "text": "Páginas web alojadas en Marketing Cloud que pueden utilizar AMPscript, SSJS y otras funcionalidades de la plataforma.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Una característica para comunicarse con APIs externas.",
+        "text": "Un sistema exclusivo para almacenar imágenes en la nube.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "El sistema de enrutamiento interno de React.",
+        "text": "El nombre antiguo de Content Builder.",
         "score": 0,
         "isCorrect": false
       }
@@ -337,27 +337,27 @@
   },
   {
     "id": "q13",
-    "text": "¿Qué es SQL Injection y cómo prevenirlo?",
-    "category": "general",
+    "text": "¿Qué son los Salesforce Data Extensions y cómo se relacionan con Marketing Cloud?",
+    "category": "marketing_cloud",
     "difficulty": "hard",
     "possibleAnswers": [
       {
-        "text": "Un tipo de base de datos y no se puede prevenir.",
+        "text": "Son tablas de datos genéricas sin relación con Salesforce CRM.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Es un ataque donde se inserta código malicioso en consultas SQL y se previene utilizando declaraciones preparadas y validación de entradas.",
+        "text": "Son Data Extensions especiales que sincronizan automáticamente datos entre Salesforce CRM y Marketing Cloud mediante Marketing Cloud Connect.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Un método para optimizar consultas SQL y se previene usando índices.",
+        "text": "Son plantillas predefinidas para campañas de email.",
         "score": 1,
         "isCorrect": false
       },
       {
-        "text": "Un error común al escribir SQL y se previene con buenas prácticas de programación.",
+        "text": "Son extensiones de código para personalizar la interfaz de usuario.",
         "score": 3,
         "isCorrect": false
       }
@@ -365,27 +365,27 @@
   },
   {
     "id": "q14",
-    "text": "¿Qué es el Event Loop en JavaScript?",
-    "category": "javascript",
+    "text": "¿Cómo se utiliza la estructura try-catch en SSJS?",
+    "category": "ssjs",
     "difficulty": "hard",
     "possibleAnswers": [
       {
-        "text": "Un tipo especial de bucle for para iterar sobre eventos.",
+        "text": "SSJS no soporta manejo de excepciones try-catch.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Un mecanismo que ejecuta múltiples hilos en JavaScript.",
+        "text": "Solo funciona con errores de base de datos.",
         "score": 1,
         "isCorrect": false
       },
       {
-        "text": "El mecanismo que permite a JavaScript manejar operaciones asíncronas con un solo hilo, gestionando la cola de eventos y callbacks.",
+        "text": "Se utiliza como en JavaScript estándar: try { código que puede fallar } catch(error) { manejo del error }, permitiendo capturar y gestionar errores de forma elegante.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Una API para manejar eventos de usuario como clics y pulsaciones de teclas.",
+        "text": "Requiere una licencia especial para su uso en Marketing Cloud.",
         "score": 2,
         "isCorrect": false
       }
@@ -393,27 +393,27 @@
   },
   {
     "id": "q15",
-    "text": "¿Qué ventajas ofrece TypeScript sobre JavaScript?",
-    "category": "general",
+    "text": "¿Qué ventajas ofrece el uso de SSJS sobre AMPscript en Marketing Cloud?",
+    "category": "ssjs",
     "difficulty": "medium",
     "possibleAnswers": [
       {
-        "text": "TypeScript es más rápido en ejecución que JavaScript.",
+        "text": "SSJS siempre se ejecuta más rápido que AMPscript.",
         "score": 1,
         "isCorrect": false
       },
       {
-        "text": "TypeScript agrega tipado estático, interfaces y otras características que ayudan a detectar errores en tiempo de compilación.",
+        "text": "SSJS ofrece una sintaxis familiar para quienes conocen JavaScript, soporte para arrays y objetos complejos, y acceso a APIs adicionales como Platform y Core para interactuar con componentes de Marketing Cloud.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "TypeScript permite ejecutar código en cualquier navegador sin necesidad de transpilación.",
+        "text": "SSJS es compatible con todos los navegadores sin limitaciones.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "TypeScript tiene un mejor soporte para programación orientada a objetos que JavaScript.",
+        "text": "SSJS permite enviar emails sin necesidad de Journey Builder.",
         "score": 3,
         "isCorrect": false
       }
