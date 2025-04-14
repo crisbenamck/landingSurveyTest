@@ -42,9 +42,9 @@ const ScoreSummary = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 2rem 0;
-  border-left: 4px solid ${({ theme, score }: { theme: any; score: number }) => 
-    score >= 80 ? theme.colors.success.main :
-    score >= 60 ? theme.colors.warning.main :
+  border-left: 4px solid ${({ theme, $score }: { theme: any; $score: number }) => 
+    $score >= 80 ? theme.colors.success.main :
+    $score >= 60 ? theme.colors.warning.main :
     theme.colors.error.main
   };
   padding: 1.5rem;
@@ -62,23 +62,23 @@ const ScoreLabel = styled.div`
   font-weight: 500;
 `;
 
-const ScoreBadge = styled.div<{ score: number }>`
+const ScoreBadge = styled.div<{ $score: number }>`
   padding: 0.75rem 1.5rem;
   font-size: 1.5rem;
   font-weight: 600;
-  color: ${({ theme, score }) => 
-    score >= 80 ? '#0f5132' :  // Verde oscuro para mejor contraste
-    score >= 60 ? '#664d03' :  // Amarillo oscuro para mejor contraste
+  color: ${({ theme, $score }) => 
+    $score >= 80 ? '#0f5132' :  // Verde oscuro para mejor contraste
+    $score >= 60 ? '#664d03' :  // Amarillo oscuro para mejor contraste
     '#842029'                  // Rojo oscuro para mejor contraste
   };
-  border-left: 4px solid ${({ theme, score }) => 
-    score >= 80 ? theme.colors.success.main :
-    score >= 60 ? theme.colors.warning.main :
+  border-left: 4px solid ${({ theme, $score }) => 
+    $score >= 80 ? theme.colors.success.main :
+    $score >= 60 ? theme.colors.warning.main :
     theme.colors.error.main
   };
-  background-color: ${({ theme, score }) => 
-    score >= 80 ? '#d1e7dd' :  // Verde claro para mejor contraste
-    score >= 60 ? '#fff3cd' :  // Amarillo claro para mejor contraste
+  background-color: ${({ theme, $score }) => 
+    $score >= 80 ? '#d1e7dd' :  // Verde claro para mejor contraste
+    $score >= 60 ? '#fff3cd' :  // Amarillo claro para mejor contraste
     '#f8d7da'                  // Rojo claro para mejor contraste
   };
   border-radius: 2px;
@@ -105,9 +105,9 @@ const ScoreBreakdown = styled.div`
 `;
 
 const ScoreItem = styled.div`
-  border-left: 4px solid ${({ theme, score }: { theme: any; score: number }) => 
-    score >= 8 ? theme.colors.success.main :
-    score >= 5 ? theme.colors.warning.main :
+  border-left: 4px solid ${({ theme, $score }: { theme: any; $score: number }) => 
+    $score >= 8 ? theme.colors.success.main :
+    $score >= 5 ? theme.colors.warning.main :
     theme.colors.error.main
   };
   padding: 1rem 1.5rem;
@@ -121,19 +121,19 @@ const ScoreItemTitle = styled.h4`
   font-weight: 500;
 `;
 
-const ScoreValue = styled.div<{ score: number }>`
+const ScoreValue = styled.div<{ $score: number }>`
   font-weight: 600;
   font-size: 1.125rem;
-  color: ${({ score }) => 
-    score >= 8 ? '#0f5132' :  // Verde oscuro para mejor contraste
-    score >= 5 ? '#664d03' :  // Amarillo oscuro para mejor contraste
+  color: ${({ $score }) => 
+    $score >= 8 ? '#0f5132' :  // Verde oscuro para mejor contraste
+    $score >= 5 ? '#664d03' :  // Amarillo oscuro para mejor contraste
     '#842029'                  // Rojo oscuro para mejor contraste
   };
   padding: 0.25rem 0.5rem;
   display: inline-block;
-  background-color: ${({ score }) => 
-    score >= 8 ? '#d1e7dd' :  // Verde claro para mejor contraste
-    score >= 5 ? '#fff3cd' :  // Amarillo claro para mejor contraste
+  background-color: ${({ $score }) => 
+    $score >= 8 ? '#d1e7dd' :  // Verde claro para mejor contraste
+    $score >= 5 ? '#fff3cd' :  // Amarillo claro para mejor contraste
     '#f8d7da'                  // Rojo claro para mejor contraste
   };
   border-radius: 2px;
@@ -165,22 +165,22 @@ const ButtonsContainer = styled.div`
   margin-top: 3rem;
 `;
 
-const Button = styled.button<{ variant?: 'primary' | 'secondary' }>`
+const Button = styled.button<{ $variant?: 'primary' | 'secondary' }>`
   padding: 0.75rem 1.5rem;
-  background-color: ${({ theme, variant }) => 
-    variant === 'secondary' ? 'transparent' : theme.colors.primary.main};
-  color: ${({ theme, variant }) => 
-    variant === 'secondary' ? theme.colors.text.primary : 'white'};
-  border: ${({ theme, variant }) => 
-    variant === 'secondary' ? `1px solid ${theme.colors.grey[300]}` : 'none'};
+  background-color: ${({ theme, $variant }) => 
+    $variant === 'secondary' ? 'transparent' : theme.colors.primary.main};
+  color: ${({ theme, $variant }) => 
+    $variant === 'secondary' ? theme.colors.text.primary : 'white'};
+  border: ${({ theme, $variant }) => 
+    $variant === 'secondary' ? `1px solid ${theme.colors.grey[300]}` : 'none'};
   border-radius: 0;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
   
   &:hover {
-    background-color: ${({ theme, variant }) => 
-      variant === 'secondary' ? theme.colors.grey[200] : theme.colors.primary.dark};
+    background-color: ${({ theme, $variant }) => 
+      $variant === 'secondary' ? theme.colors.grey[200] : theme.colors.primary.dark};
   }
   
   &:focus {
@@ -233,7 +233,7 @@ const ResultsPage: React.FC = () => {
       <ResultsContainer>
         <SectionTitle>Results Summary</SectionTitle>
         
-        <ScoreSummary score={totalPercentage}>
+        <ScoreSummary $score={totalPercentage}>
           <ScoreText>
             <ScoreLabel>Overall Score</ScoreLabel>
             <TimeDisplay>
@@ -244,15 +244,15 @@ const ResultsPage: React.FC = () => {
               Time used: {formatTime(results.timeSpent)}
             </TimeDisplay>
           </ScoreText>
-          <ScoreBadge score={totalPercentage}>{totalPercentage}%</ScoreBadge>
+          <ScoreBadge $score={totalPercentage}>{totalPercentage}%</ScoreBadge>
         </ScoreSummary>
 
         <SectionTitle>Technical Questions Details</SectionTitle>
         <ScoreBreakdown>
           {results.questionScores.map((score, index) => (
-            <ScoreItem key={index} score={score.score}>
+            <ScoreItem key={index} $score={score.score}>
               <ScoreItemTitle>Question {index + 1}</ScoreItemTitle>
-              <ScoreValue score={score.score}>{score.score} points</ScoreValue>
+              <ScoreValue $score={score.score}>{score.score} points</ScoreValue>
             </ScoreItem>
           ))}
         </ScoreBreakdown>
@@ -262,9 +262,9 @@ const ResultsPage: React.FC = () => {
             <SectionTitle>Code Exercises Details</SectionTitle>
             <ScoreBreakdown>
               {results.codeScores.map((score, index) => (
-                <ScoreItem key={index} score={score.score}>
+                <ScoreItem key={index} $score={score.score}>
                   <ScoreItemTitle>Exercise {index + 1}</ScoreItemTitle>
-                  <ScoreValue score={score.score}>{score.score} points</ScoreValue>
+                  <ScoreValue $score={score.score}>{score.score} points</ScoreValue>
                 </ScoreItem>
               ))}
             </ScoreBreakdown>
@@ -277,7 +277,7 @@ const ResultsPage: React.FC = () => {
         </SummarySection>
 
         <ButtonsContainer>
-          <Button variant="secondary" onClick={() => window.print()}>
+          <Button $variant="secondary" onClick={() => window.print()}>
             Print Results
           </Button>
           <Button onClick={() => navigate('/')}>
