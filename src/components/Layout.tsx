@@ -16,17 +16,20 @@ const LayoutContainer = styled.div`
 // Estilo global que se aplicará cuando el menú esté abierto
 const GlobalStyleMenuOpen = createGlobalStyle<{ $menuOpen: boolean }>`
   ${({ $menuOpen }) => $menuOpen && `
-    body, html {
-      overflow: hidden !important;
-    }
-    
-    form {
-      overflow: hidden !important;
-    }
-    
-    /* Evitar scroll en todos los contenedores con scroll */
-    .scroll-container, div[style*="overflow"] {
-      overflow: hidden !important;
+    /* Solo aplicar overflow hidden en dispositivos móviles */
+    @media (max-width: 768px) {
+      body, html {
+        overflow: hidden !important;
+      }
+      
+      form {
+        overflow: hidden !important;
+      }
+      
+      /* Evitar scroll en todos los contenedores con scroll */
+      .scroll-container, div[style*="overflow"] {
+        overflow: hidden !important;
+      }
     }
   `}
 `;
