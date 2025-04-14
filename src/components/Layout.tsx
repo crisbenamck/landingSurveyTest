@@ -29,7 +29,7 @@ const HeaderContent = styled.div`
 const Logo = styled.div`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 2rem; /* Aumentado a 2rem para mayor separación */
   color: ${({ theme }) => theme.colors.primary.main};
   font-weight: 600;
   font-size: 1.5rem;
@@ -38,6 +38,14 @@ const Logo = styled.div`
 const LogoImg = styled.img`
   height: 40px;
   width: auto;
+  /* Añadir una ligera línea divisoria a la derecha */
+  border-right: 1px solid ${({ theme }) => theme.colors.grey[200]};
+  padding-right: 0.5rem;
+`;
+
+const LogoText = styled.span`
+  /* Estilo para el texto del título */
+  letter-spacing: 0.5px; /* Mejora la legibilidad */
 `;
 
 const Nav = styled.nav`
@@ -113,7 +121,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <HeaderContent>
           <Logo>
             <LogoImg src={mcKinseyLogo} alt="McKinsey Logo" />
-            Technical Interview
+            <LogoText>Technical Interview</LogoText>
           </Logo>
           
           <Nav>
