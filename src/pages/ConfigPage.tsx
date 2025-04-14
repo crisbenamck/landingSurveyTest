@@ -162,16 +162,15 @@ const ConfigPage: React.FC = () => {
         <Separator />
         
         <FormGroup>
-          <Label htmlFor="difficulty">Difficulty Level</Label>
+          <Label htmlFor="seniority">Seniority</Label>
           <Select
-            id="difficulty"
-            value={settings.difficultyLevel}
-            onChange={(e) => updateSettings({ difficultyLevel: e.target.value as any })}
+            id="seniority"
+            value={settings.seniority}
+            onChange={(e) => updateSettings({ seniority: e.target.value as 'junior' | 'semi-senior' | 'senior' })}
           >
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
-            <option value="mixed">Mixed</option>
+            <option value="junior">Junior</option>
+            <option value="semi-senior">Semi-Senior</option>
+            <option value="senior">Senior</option>
           </Select>
         </FormGroup>
         

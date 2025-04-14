@@ -32,11 +32,11 @@ interface CodeSnippet {
 
 interface InterviewSettings {
   candidateName: string;
-  role: 'developer' | 'consultant';  // Nuevo campo para el rol
+  role: 'developer' | 'consultant';
+  seniority: 'junior' | 'semi-senior' | 'senior'; // Reemplazado difficultyLevel por seniority
   questionCount: number;
   codeSnippetCount: number;
   selectedCategories: string[];
-  difficultyLevel: 'easy' | 'medium' | 'hard' | 'mixed';
   timeLimit: number; // in minutes
 }
 
@@ -70,10 +70,10 @@ interface InterviewContextType {
 const defaultSettings: InterviewSettings = {
   candidateName: '',
   role: 'developer', // Default role
+  seniority: 'junior', // Default seniority
   questionCount: 5,
   codeSnippetCount: 3,
   selectedCategories: ['ampscript', 'ssjs', 'marketing_cloud'],
-  difficultyLevel: 'mixed',
   timeLimit: 30, // 30 minutes by default
 };
 
@@ -104,17 +104,29 @@ export function InterviewProvider({ children }: { children: ReactNode }) {
       // Filter based on settings
       let filteredQuestions = data.default as Question[];
       
+      // Filter by categories based on role
       if (settings.selectedCategories.length > 0) {
         filteredQuestions = filteredQuestions.filter(q => 
           settings.selectedCategories.includes(q.category)
         );
       }
       
-      if (settings.difficultyLevel !== 'mixed') {
-        filteredQuestions = filteredQuestions.filter(q => 
-          q.difficulty === settings.difficultyLevel
-        );
-      }
+      // Filter by difficulty based on seniority
+      const allowedDifficulties: Record<string, string[]> = {
+        'junior': ['easy'],
+        'semi-senior': ['easy', 'medium'],
+        'senior': ['easy', 'medium', 'hard']
+      };
+      
+      // Safety check: ensure seniority is a valid value
+      const seniority = settings.seniority || 'junior';
+      const validSeniority = ['junior', 'semi-senior', 'senior'].includes(seniority) 
+        ? seniority 
+        : 'junior';
+      
+      filteredQuestions = filteredQuestions.filter(q => 
+        allowedDifficulties[validSeniority].includes(q.difficulty)
+      );
       
       // Shuffle and limit based on questionCount
       const shuffled = [...filteredQuestions].sort(() => 0.5 - Math.random());
@@ -122,7 +134,32 @@ export function InterviewProvider({ children }: { children: ReactNode }) {
     });
     
     import('@data/codeSnippets.json').then((data) => {
-      const shuffled = [...(data.default as CodeSnippet[])].sort(() => 0.5 - Math.random());
+      let filteredSnippets = data.default as CodeSnippet[];
+      
+      // Filter by difficulty based on seniority
+      const allowedDifficulties: Record<string, string[]> = {
+        'junior': ['easy'],
+        'semi-senior': ['easy', 'medium'],
+        'senior': ['easy', 'medium', 'hard']
+      };
+      
+      // Safety check: ensure seniority is a valid value
+      const seniority = settings.seniority || 'junior';
+      const validSeniority = ['junior', 'semi-senior', 'senior'].includes(seniority) 
+        ? seniority 
+        : 'junior';
+      
+      // Assuming code snippets also have a difficulty property
+      filteredSnippets = filteredSnippets.filter(snippet => {
+        // If snippet has a difficulty property, filter by that
+        if ('difficulty' in snippet) {
+          return allowedDifficulties[validSeniority].includes((snippet as any).difficulty);
+        }
+        // Otherwise include all snippets
+        return true;
+      });
+      
+      const shuffled = [...filteredSnippets].sort(() => 0.5 - Math.random());
       setCodeSnippets(shuffled.slice(0, settings.codeSnippetCount));
     });
   };
