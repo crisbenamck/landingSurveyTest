@@ -20,7 +20,7 @@ const Title = styled.h1`
   color: ${({ theme }) => theme.colors.primary.main};
   margin: 0;
   font-weight: 500;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Bower', 'Times New Roman', Times, serif;
 `;
 
 const Timer = styled.div<{ $timeRunningOut: boolean }>`

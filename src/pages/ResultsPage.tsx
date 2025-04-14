@@ -18,7 +18,7 @@ const Title = styled.h1`
   color: ${({ theme }) => theme.colors.primary.main};
   margin-bottom: 0.5rem;
   font-weight: 500;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Bower', 'Times New Roman', Times, serif;
 `;
 
 const Subtitle = styled.h2`

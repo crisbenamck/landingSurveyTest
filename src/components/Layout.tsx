@@ -51,6 +51,7 @@ const LogoText = styled.span`
   font-weight: 600;
   font-size: 1.25rem;
   letter-spacing: 0.5px;
+  font-family: 'Bower', 'Times New Roman', Times, serif;
 `;
 
 const Nav = styled.nav<{ $isOpen: boolean }>`
