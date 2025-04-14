@@ -42,16 +42,17 @@ const Logo = styled.div`
 `;
 
 const LogoImg = styled.img`
-  height: 48px; /* Aumentado a 48px como solicitado */
+  height: 48px;
   width: auto;
 `;
 
 const LogoText = styled.span`
   color: #002373; /* McKinsey blue */
   font-weight: 600;
-  font-size: 1.25rem;
+  font-size: 1.875rem; /* Aumentado en un 50% de 1.25rem a 1.875rem */
   letter-spacing: 0.5px;
   font-family: 'Bower', 'Times New Roman', Times, serif;
+  margin-left: 4rem;
 `;
 
 const HamburgerButton = styled.button`
