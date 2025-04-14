@@ -60,11 +60,19 @@ const LogoText = styled.span`
   font-size: 1.875rem; /* Aumentado en un 50% de 1.25rem a 1.875rem */
   letter-spacing: 0.5px;
   font-family: 'Bower', 'Times New Roman', Times, serif;
-  margin-left: 3rem; /* Aumentado a 3rem (48px) para un mejor espaciado visual */
+  position: absolute;
+  left: 284px; /* Posición fija desde el borde izquierdo */
+  
+  @media (max-width: 1024px) {
+    left: 284px; /* Mantiene la misma posición en pantallas medianas */
+    /* Se ha eliminado la reducción de tamaño de fuente para mantener consistencia */
+  }
   
   @media (max-width: 768px) {
     font-size: 1.5rem;
-    margin-left: 1rem; /* Mantener el espaciado original en móvil */
+    position: relative;
+    left: auto;
+    margin-left: 1rem; /* En pantallas pequeñas, usa margin en lugar de position absolute */
   }
 `;
 
