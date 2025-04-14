@@ -45,19 +45,37 @@ const Nav = styled.nav`
   gap: 2rem;
 `;
 
-const NavLink = styled(Link)<{ active: boolean }>`
+// Componente styled para el estilo utilizando un data-attribute para el estado activo
+const StyledNavLink = styled.div<{ $active: boolean }>`
   padding: 0.5rem 0;
-  color: ${({ theme, active }) => 
-    active ? theme.colors.primary.main : theme.colors.text.primary};
-  border-bottom: ${({ theme, active }) => 
-    active ? `2px solid ${theme.colors.primary.main}` : '2px solid transparent'};
-  font-weight: ${({ active }) => active ? 500 : 400};
+  color: ${({ theme, $active }) => 
+    $active ? theme.colors.primary.main : theme.colors.text.primary};
+  border-bottom: ${({ theme, $active }) => 
+    $active ? `2px solid ${theme.colors.primary.main}` : '2px solid transparent'};
+  font-weight: ${({ $active }) => $active ? 500 : 400};
   text-decoration: none;
   
   &:hover {
     color: ${({ theme }) => theme.colors.primary.main};
   }
 `;
+
+// Componente personalizado que combina Link con StyledNavLink
+interface NavLinkProps {
+  to: string;
+  active: boolean;
+  children: React.ReactNode;
+}
+
+const NavLink: React.FC<NavLinkProps> = ({ to, active, children }) => {
+  return (
+    <Link to={to} style={{ textDecoration: 'none' }}>
+      <StyledNavLink $active={active}>
+        {children}
+      </StyledNavLink>
+    </Link>
+  );
+};
 
 const Main = styled.main`
   flex: 1;
