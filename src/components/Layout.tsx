@@ -163,16 +163,34 @@ const MobileMenuOverlay = styled.div<{ $isOpen: boolean }>`
 const StyledNavLink = styled.div<{ $active: boolean }>`
   position: relative;
   padding: 0.75rem 1rem;
-  color: ${({ $active }) => ($active ? '#ffffff' : '#e0e0e0')};
-  font-weight: ${({ $active }) => ($active ? 600 : 400)};
+  color: ${({ $active }) => ($active ? '#00a9f4' : '#ffffff')};
+  font-weight: ${({ $active }) => ($active ? 700 : 500)};
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.125rem;
   border-radius: 4px;
-  background-color: ${({ $active }) => ($active ? 'rgba(255, 255, 255, 0.15)' : 'transparent')};
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   
   &:hover {
-    color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.1);
+    color: #00a9f4;
+    background-color: transparent;
+  }
+`;
+
+const ArrowIcon = styled.div`
+  width: 24px;
+  height: 24px;
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
   }
 `;
 
@@ -187,7 +205,12 @@ const NavLink: React.FC<NavLinkProps> = ({ to, active, children, onClick }) => {
   return (
     <Link to={to} style={{ textDecoration: 'none' }} onClick={onClick}>
       <StyledNavLink $active={active}>
-        {children}
+        <span>{children}</span>
+        <ArrowIcon>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+          </svg>
+        </ArrowIcon>
       </StyledNavLink>
     </Link>
   );
