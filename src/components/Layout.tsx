@@ -212,9 +212,13 @@ const Main = styled.main`
 
 const ContentWrapper = styled.div`
   width: 100%;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 3rem 2rem;
+  
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+  }
 `;
 
 const Footer = styled.footer`

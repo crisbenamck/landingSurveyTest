@@ -7,13 +7,36 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
   
-  html, body {
+  html {
+    /* Forzar la barra de desplazamiento siempre visible para evitar saltos de layout */
+    overflow-y: scroll;
+    scrollbar-width: thin; /* Para Firefox */
+    scrollbar-color: #CCC #F4F4F4; /* Para Firefox */
     font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
     background-color: #ffffff;
     color: #333333;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Estilo de la barra de desplazamiento para navegadores webkit (Chrome, Safari) */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #F4F4F4; 
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #CCC;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #999;
   }
   
   body {

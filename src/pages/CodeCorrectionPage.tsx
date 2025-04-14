@@ -5,7 +5,7 @@ import { useInterviewContext } from '@hooks/useInterviewContext';
 
 // Styled components
 const PageContainer = styled.div`
-  max-width: 1000px;
+  max-width: 900px;
   margin: 0 auto;
 `;
 
