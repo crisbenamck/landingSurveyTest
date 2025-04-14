@@ -121,8 +121,8 @@ const MainContainer = styled.div`
 // Barra lateral izquierda para el menú
 const Sidebar = styled.div<{ $isOpen: boolean }>`
   width: 250px;
-  background-color: #f8f9fa;
-  border-right: 1px solid #e0e0e0;
+  background-color: #051c2c;
+  border-right: 1px solid #0a2e45;
   padding: 2rem 1rem;
   flex-shrink: 0;
   
@@ -163,16 +163,16 @@ const MobileMenuOverlay = styled.div<{ $isOpen: boolean }>`
 const StyledNavLink = styled.div<{ $active: boolean }>`
   position: relative;
   padding: 0.75rem 1rem;
-  color: ${({ $active }) => ($active ? '#2251ff' : '#333')};
+  color: ${({ $active }) => ($active ? '#ffffff' : '#e0e0e0')};
   font-weight: ${({ $active }) => ($active ? 600 : 400)};
   text-decoration: none;
   font-size: 1rem;
   border-radius: 4px;
-  background-color: ${({ $active }) => ($active ? 'rgba(34, 81, 255, 0.1)' : 'transparent')};
+  background-color: ${({ $active }) => ($active ? 'rgba(255, 255, 255, 0.15)' : 'transparent')};
   
   &:hover {
-    color: #2251ff;
-    background-color: rgba(34, 81, 255, 0.05);
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
   }
 `;
 
