@@ -220,6 +220,9 @@ const QuestionsPage: React.FC = () => {
     setSelectedAnswer(null);
     nextQuestion();
     
+    // Scroll to top of the page when changing questions
+    window.scrollTo(0, 0);
+    
     // If we've moved beyond questions, go to code snippets or results depending on role
     if (questionIndex === -1) {
       if (settings.role === 'consultant') {

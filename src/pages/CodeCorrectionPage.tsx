@@ -373,6 +373,9 @@ const CodeCorrectionPage: React.FC = () => {
     // Reset local state
     setSelectedFixes({});
     setAllIssuesFixed(false);
+    
+    // Scroll to top of the page when changing questions
+    window.scrollTo(0, 0);
   };
   
   // If no current code snippet, redirect to the proper page
