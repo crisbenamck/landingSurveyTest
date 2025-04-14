@@ -112,9 +112,9 @@ const ProgressBar = styled.div`
   overflow: hidden;
 `;
 
-const Progress = styled.div<{ percent: number }>`
+const Progress = styled.div<{ $percent: number }>`
   height: 100%;
-  width: ${({ percent }) => `${percent}%`};
+  width: ${({ $percent }) => `${$percent}%`};
   background-color: ${({ theme }) => theme.colors.primary.main};
   transition: width 0.3s ease;
 `;
@@ -151,22 +151,22 @@ const ButtonsContainer = styled.div`
   padding-top: 2rem;
 `;
 
-const Button = styled.button<{ variant?: 'primary' | 'secondary' }>`
+const Button = styled.button<{ $variant?: 'primary' | 'secondary' }>`
   padding: 0.75rem 1.5rem;
-  background-color: ${({ theme, variant }) => 
-    variant === 'secondary' ? 'transparent' : theme.colors.primary.main};
-  color: ${({ theme, variant }) => 
-    variant === 'secondary' ? theme.colors.text.primary : 'white'};
-  border: ${({ theme, variant }) => 
-    variant === 'secondary' ? `1px solid ${theme.colors.grey[300]}` : 'none'};
+  background-color: ${({ theme, $variant }) => 
+    $variant === 'secondary' ? 'transparent' : theme.colors.primary.main};
+  color: ${({ theme, $variant }) => 
+    $variant === 'secondary' ? theme.colors.text.primary : 'white'};
+  border: ${({ theme, $variant }) => 
+    $variant === 'secondary' ? `1px solid ${theme.colors.grey[300]}` : 'none'};
   border-radius: 0;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
   
   &:hover {
-    background-color: ${({ theme, variant }) => 
-      variant === 'secondary' ? theme.colors.grey[200] : theme.colors.primary.dark};
+    background-color: ${({ theme, $variant }) => 
+      $variant === 'secondary' ? theme.colors.grey[200] : theme.colors.primary.dark};
   }
   
   &:focus {
@@ -269,7 +269,7 @@ const QuestionsPage: React.FC = () => {
           <span>{Math.round(progressPercent)}% Complete</span>
         </ProgressLabel>
         <ProgressBar>
-          <Progress percent={progressPercent} />
+          <Progress $percent={progressPercent} />
         </ProgressBar>
       </ProgressContainer>
       
@@ -308,7 +308,7 @@ const QuestionsPage: React.FC = () => {
       
       <ButtonsContainer>
         <Button 
-          variant="secondary"
+          $variant="secondary"
           onClick={() => navigate('/')}
         >
           Cancel Interview
