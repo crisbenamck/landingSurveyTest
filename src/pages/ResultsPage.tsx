@@ -67,9 +67,9 @@ const ScoreBadge = styled.div<{ score: number }>`
   font-size: 1.5rem;
   font-weight: 600;
   color: ${({ theme, score }) => 
-    score >= 80 ? theme.colors.success.dark :
-    score >= 60 ? theme.colors.warning.dark :
-    theme.colors.error.dark
+    score >= 80 ? '#0f5132' :  // Verde oscuro para mejor contraste
+    score >= 60 ? '#664d03' :  // Amarillo oscuro para mejor contraste
+    '#842029'                  // Rojo oscuro para mejor contraste
   };
   border-left: 4px solid ${({ theme, score }) => 
     score >= 80 ? theme.colors.success.main :
@@ -77,10 +77,11 @@ const ScoreBadge = styled.div<{ score: number }>`
     theme.colors.error.main
   };
   background-color: ${({ theme, score }) => 
-    score >= 80 ? theme.colors.success.light :
-    score >= 60 ? theme.colors.warning.light :
-    theme.colors.error.light
+    score >= 80 ? '#d1e7dd' :  // Verde claro para mejor contraste
+    score >= 60 ? '#fff3cd' :  // Amarillo claro para mejor contraste
+    '#f8d7da'                  // Rojo claro para mejor contraste
   };
+  border-radius: 2px;
 `;
 
 const TimeDisplay = styled.div`
@@ -123,11 +124,19 @@ const ScoreItemTitle = styled.h4`
 const ScoreValue = styled.div<{ score: number }>`
   font-weight: 600;
   font-size: 1.125rem;
-  color: ${({ theme, score }) => 
-    score >= 8 ? theme.colors.success.dark :
-    score >= 5 ? theme.colors.warning.dark :
-    theme.colors.error.dark
+  color: ${({ score }) => 
+    score >= 8 ? '#0f5132' :  // Verde oscuro para mejor contraste
+    score >= 5 ? '#664d03' :  // Amarillo oscuro para mejor contraste
+    '#842029'                  // Rojo oscuro para mejor contraste
   };
+  padding: 0.25rem 0.5rem;
+  display: inline-block;
+  background-color: ${({ score }) => 
+    score >= 8 ? '#d1e7dd' :  // Verde claro para mejor contraste
+    score >= 5 ? '#fff3cd' :  // Amarillo claro para mejor contraste
+    '#f8d7da'                  // Rojo claro para mejor contraste
+  };
+  border-radius: 2px;
 `;
 
 const SummarySection = styled.div`
