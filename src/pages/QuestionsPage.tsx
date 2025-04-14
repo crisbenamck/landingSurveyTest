@@ -22,18 +22,18 @@ const Title = styled.h1`
   font-weight: 500;
 `;
 
-const Timer = styled.div`
-  background-color: ${({ theme, timeRunningOut }: { theme: any; timeRunningOut: boolean }) => 
+const Timer = styled.div<{ timeRunningOut: boolean }>`
+  background-color: ${({ theme, timeRunningOut }) => 
     timeRunningOut ? theme.colors.error.light : theme.colors.grey[100]};
-  color: ${({ theme, timeRunningOut }: { theme: any; timeRunningOut: boolean }) => 
+  color: ${({ theme, timeRunningOut }) => 
     timeRunningOut ? theme.colors.text.light : theme.colors.text.primary};
   padding: 0.5rem 1rem;
   font-weight: 600;
   font-size: 1.125rem;
   transition: all 0.3s ease;
-  border-left: 3px solid ${({ theme, timeRunningOut }: { theme: any; timeRunningOut: boolean }) => 
+  border-left: 3px solid ${({ theme, timeRunningOut }) => 
     timeRunningOut ? theme.colors.error.main : theme.colors.grey[400]};
-  animation: ${({ timeRunningOut }: { timeRunningOut: boolean }) => 
+  animation: ${({ timeRunningOut }) => 
     timeRunningOut ? 'pulse 1s infinite' : 'none'};
   
   @keyframes pulse {
