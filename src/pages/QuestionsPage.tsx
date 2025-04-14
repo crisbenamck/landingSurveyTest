@@ -152,14 +152,17 @@ const ButtonsContainer = styled.div`
   padding-top: 2rem;
 `;
 
-const Button = styled.button<{ $variant?: 'primary' | 'secondary' }>`
+const Button = styled.button<{ $variant?: 'primary' | 'secondary' | 'cancel' }>`
   padding: 0.75rem 1.5rem;
   background-color: ${({ theme, $variant }) => 
-    $variant === 'secondary' ? 'transparent' : '#2251ff'};
+    $variant === 'secondary' ? 'transparent' : 
+    $variant === 'cancel' ? 'white' : '#2251ff'};
   color: ${({ theme, $variant }) => 
-    $variant === 'secondary' ? theme.colors.text.primary : 'white'};
+    $variant === 'secondary' ? theme.colors.text.primary : 
+    $variant === 'cancel' ? '#2251ff' : 'white'};
   border: ${({ theme, $variant }) => 
-    $variant === 'secondary' ? `1px solid ${theme.colors.grey[300]}` : 'none'};
+    $variant === 'secondary' ? `1px solid ${theme.colors.grey[300]}` :
+    $variant === 'cancel' ? '1px solid #2251ff' : 'none'};
   border-radius: 0;
   font-weight: 500;
   cursor: pointer;
@@ -167,7 +170,8 @@ const Button = styled.button<{ $variant?: 'primary' | 'secondary' }>`
   
   &:hover {
     background-color: ${({ theme, $variant }) => 
-      $variant === 'secondary' ? theme.colors.grey[200] : '#1a41cc'};
+      $variant === 'secondary' ? theme.colors.grey[200] : 
+      $variant === 'cancel' ? '#f0f5ff' : '#1a41cc'};
   }
   
   &:focus {
@@ -312,7 +316,7 @@ const QuestionsPage: React.FC = () => {
       
       <ButtonsContainer>
         <Button 
-          $variant="secondary"
+          $variant="cancel"
           onClick={() => navigate('/')}
         >
           Cancel Interview
