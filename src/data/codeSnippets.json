@@ -1,86 +1,86 @@
 [
   {
     "id": "cs1",
-    "language": "javascript",
-    "title": "Manejo de eventos en React",
-    "description": "Este código implementa un contador simple en React. Encuentra y corrige los problemas.",
-    "code": "import React, { useState } from 'react';\n\nconst Counter = () => {\n  const [count, setCount] = useState(0);\n  \n  function handleIncrement() {\n    count++; // Error: modificación directa del estado\n  }\n  \n  function handleReset() {\n    count = 0; // Error: modificación directa del estado\n  }\n  \n  return (\n    <div>\n      <h2>Contador: {count}</h2>\n      <button onclick={handleIncrement}>Incrementar</button> {/* Error: debería ser onClick */}\n      <button onClick={handleReset}>Reiniciar</button>\n    </div>\n  );\n}\n\nexport default Counter;",
+    "language": "ampscript",
+    "title": "Personalización básica con AMPscript",
+    "description": "Este código intenta personalizar un email de bienvenida con AMPscript. Encuentra y corrige los problemas.",
+    "code": "%%[\n/* Inicialización de variables para el email de bienvenida */\nVAR @firstName, @lastName, @fullName, @membershipLevel\n\n/* Error: asignación incorrecta de variables */\nSET @firstName = AttributeValue(\"FirstName\")\nSET @lastName = AttributeValue(\"LastName\")\n\n/* Error: concatenación incorrecta */\nSET @fullName = CONCAT(@firstName, ' ', @lastName)\n\n/* Determinación del nivel de membresía */\nIF AttributeValue(\"LoyaltyPoints\") > 100 THEN\n  SET @membershipLevel = \"Gold\"\nELIF AttributeValue(\"LoyaltyPoints\") > 50 THEN\n  SET @membershipLevel = \"Silver\"\nELSE\n  SET @membershipLevel = \"Bronze\"\nENDIF\n]%%\n\n<h1>Bienvenido, %%=v(@fullName)=%%!</h1>\n<p>Gracias por unirte a nuestro programa de fidelidad.</p>\n<p>Tu nivel actual es: %%=v(@membershipLevel)=%%</p>\n\n%%[\n/* Error: intenta usar una función que no existe */\nIF IsNull(@membershipLevel) THEN\n  /* Código a ejecutar si es nulo */\nENDIF\n]%%",
     "issues": [
       {
-        "line": 7,
-        "description": "Modificación directa del estado en lugar de usar la función actualizadora",
+        "line": 6,
+        "description": "Uso incorrecto del operador de asignación",
         "possibleFixes": [
           {
-            "text": "count++; // Seguir con modificación directa",
+            "text": "@firstName == AttributeValue(\"FirstName\")",
             "score": 0,
             "isCorrect": false
           },
           {
-            "text": "setCount(count + 1); // Usar la función actualizadora para incrementar",
+            "text": "SET @firstName = AttributeValue(\"FirstName\")",
             "score": 10,
             "isCorrect": true
           },
           {
-            "text": "this.setState({ count: count + 1 }); // Usar this.setState",
-            "score": 2,
+            "text": "LET @firstName = AttributeValue(\"FirstName\")",
+            "score": 0,
             "isCorrect": false
           },
           {
-            "text": "count.setValue(count + 1); // Usar método incorrecto",
+            "text": "@firstName := AttributeValue(\"FirstName\")",
             "score": 0,
             "isCorrect": false
           }
         ]
       },
       {
-        "line": 11,
-        "description": "Modificación directa del estado en lugar de usar la función actualizadora",
+        "line": 9,
+        "description": "Concatenación incorrecta de strings en AMPscript",
         "possibleFixes": [
           {
-            "text": "count = 0; // Seguir con modificación directa",
+            "text": "@fullName = @firstName + @lastName",
             "score": 0,
             "isCorrect": false
           },
           {
-            "text": "setCount(0); // Usar la función actualizadora para resetear",
+            "text": "SET @fullName = CONCAT(@firstName, ' ', @lastName)",
             "score": 10,
             "isCorrect": true
           },
           {
-            "text": "this.setState({ count: 0 }); // Usar this.setState",
-            "score": 2,
+            "text": "SET @fullName = @firstName & ' ' & @lastName",
+            "score": 0,
             "isCorrect": false
           },
           {
-            "text": "resetCount(); // Usar función inexistente",
+            "text": "SET @fullName = @firstName || ' ' || @lastName",
             "score": 0,
             "isCorrect": false
           }
         ]
       },
       {
-        "line": 16,
-        "description": "Nombre de evento incorrecto en React",
+        "line": 17,
+        "description": "No cierra la estructura condicional IF-ELSEIF-ELSE",
         "possibleFixes": [
           {
-            "text": "onclick={handleIncrement}",
+            "text": "SET @membershipLevel = \"Bronze\"",
             "score": 0,
             "isCorrect": false
           },
           {
-            "text": "onClick={handleIncrement}",
+            "text": "SET @membershipLevel = \"Bronze\"\nENDIF",
             "score": 10,
             "isCorrect": true
           },
           {
-            "text": "onPress={handleIncrement}",
+            "text": "SET @membershipLevel = \"Bronze\"\nEND",
             "score": 0,
             "isCorrect": false
           },
           {
-            "text": "onClick={() => handleIncrement()}",
-            "score": 8,
-            "isCorrect": true
+            "text": "SET @membershipLevel = \"Bronze\"\n}",
+            "score": 0,
+            "isCorrect": false
           }
         ]
       }
@@ -88,84 +88,84 @@
   },
   {
     "id": "cs2",
-    "language": "javascript",
-    "title": "Manejo de promesas y async/await",
-    "description": "Este código intenta cargar datos de una API. Encuentra y corrige los problemas.",
-    "code": "// Función para cargar datos de usuarios de una API\nconst fetchUsers = () => {\n  fetch('https://api.example.com/users')\n    .then((response) => {\n      return response.json();\n    })\n    .then(data => {\n      console.log(data);\n      return data;\n    });\n};\n\n// Función asíncrona para procesar usuarios\nasync function processUsers() {\n  const users = fetchUsers(); // Error: no espera la resolución de la promesa\n  \n  const activeUsers = users.filter(user => user.active); // Error: users no es un array\n  \n  try {\n    await saveToDatabase(activeUsers);\n  } catch {\n    // Error: no se maneja el error correctamente\n  }\n}\n\n// Simulación de función para guardar en la base de datos\nfunction saveToDatabase(data) {\n  return new Promise((resolve, reject) => {\n    // Simulación de operación asíncrona\n    setTimeout(() => {\n      if (data && data.length > 0) {\n        resolve('Datos guardados correctamente');\n      } else {\n        reject(new Error('Error al guardar los datos'));\n      }\n    }, 1000);\n  });\n}",
+    "language": "ssjs",
+    "title": "Llamadas API con Server-Side JavaScript",
+    "description": "Este código intenta recuperar datos de suscriptores mediante la API REST de Marketing Cloud. Encuentra y corrige los problemas.",
+    "code": "<script runat=\"server\">\n  /* Función para obtener suscriptores de una Data Extension */\n  function getSubscribersFromDE(deKey) {\n    var url = \"https://\" + Request.Host + \"/data/v1/customobjectdata/key/\" + deKey + \"/rowset\";\n    \n    /* Error: No configura headers de autenticación */\n    var request = new Script.Util.HttpRequest(url);\n    request.emptyContentHandling = 0;\n    request.retries = 2;\n    request.continueOnError = true;\n    request.method = \"GET\";\n    \n    /* Error: No maneja la respuesta correctamente */\n    var response = request.send();\n    \n    /* Error: No verifica el estado de la respuesta */\n    var resultObj = Platform.Function.ParseJSON(response.content);\n    return resultObj;\n  }\n  \n  /* Función para procesar suscriptores */\n  function processSubscribers() {\n    try {\n      /* Error: Falta el parámetro en la llamada a la función */\n      var subscribers = getSubscribersFromDE();\n      \n      /* Procesar suscriptores activos */\n      var activeSubscribers = [];\n      \n      /* Error: No verifica si subscribers es nulo o indefinido */\n      for (var i = 0; i < subscribers.items.length; i++) {\n        if (subscribers.items[i].values.Status == \"Active\") {\n          activeSubscribers.push(subscribers.items[i]);\n        }\n      }\n      \n      /* Actualizar otra Data Extension con los suscriptores activos */\n      saveToActiveDE(activeSubscribers);\n      return \"Proceso completado con éxito. Se procesaron \" + activeSubscribers.length + \" suscriptores activos.\";\n    } catch (error) {\n      /* Error: Mensaje de error no específico */\n      return \"Error\";\n    }\n  }\n  \n  /* Función para guardar en otra Data Extension */\n  function saveToActiveDE(subscribers) {\n    /* Implementación de guardado en Data Extension */\n    var de = DataExtension.Init(\"ActiveSubscribers\");\n    \n    for (var i = 0; i < subscribers.length; i++) {\n      var subscriber = subscribers[i].values;\n      de.Rows.Add({\"SubscriberKey\": subscriber.SubscriberKey, \n                   \"EmailAddress\": subscriber.EmailAddress,\n                   \"Status\": \"Active\",\n                   \"ProcessedDate\": Now()});\n    }\n  }\n  \n  /* Ejecutar el proceso principal */\n  var result = processSubscribers();\n  Write(result);\n</script>",
     "issues": [
       {
-        "line": 10,
-        "description": "La función fetchUsers no retorna la promesa",
+        "line": 6,
+        "description": "No configura headers de autenticación necesarios para la API REST",
         "possibleFixes": [
           {
-            "text": "};",
+            "text": "var request = new Script.Util.HttpRequest(url);",
             "score": 0,
             "isCorrect": false
           },
           {
-            "text": "return data;\n  });",
+            "text": "var request = new Script.Util.HttpRequest(url);\n    request.emptyContentHandling = 0;\n    request.retries = 2;\n    request.continueOnError = true;\n    request.method = \"GET\";\n    \n    /* Añadir headers de autenticación */\n    request.setHeader(\"Authorization\", \"Bearer \" + Platform.Function.AuthToken());\n    request.setHeader(\"Content-Type\", \"application/json\");",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "var request = new Script.Util.HttpRequest(url);\n    request.Authorization = \"Bearer token\";",
             "score": 2,
             "isCorrect": false
           },
           {
-            "text": "});\n  // No hay return en la función principal",
+            "text": "var request = new Script.Util.HttpRequest(url);\n    request.authenticate = true;",
             "score": 0,
             "isCorrect": false
-          },
-          {
-            "text": "});\n};\n\n// Corrección: Añadir return para devolver la promesa\nconst fetchUsers = () => {\n  return fetch('https://api.example.com/users')\n    .then((response) => {\n      return response.json();\n    })\n    .then(data => {\n      console.log(data);\n      return data;\n    });\n};",
-            "score": 10,
-            "isCorrect": true
           }
         ]
       },
       {
-        "line": 15,
-        "description": "No se espera la resolución de la promesa antes de usar el resultado",
+        "line": 14,
+        "description": "No verifica el estado de la respuesta HTTP antes de procesar el contenido",
         "possibleFixes": [
           {
-            "text": "const users = fetchUsers();",
+            "text": "var resultObj = Platform.Function.ParseJSON(response.content);\nreturn resultObj;",
             "score": 0,
             "isCorrect": false
           },
           {
-            "text": "const users = await fetchUsers(); // Esperar la resolución de la promesa",
+            "text": "/* Verificar el código de estado HTTP */\nif (response.statusCode == 200) {\n  var resultObj = Platform.Function.ParseJSON(response.content);\n  return resultObj;\n} else {\n  throw new Error(\"Error en la API: \" + response.statusCode + \" \" + response.content);\n}",
             "score": 10,
             "isCorrect": true
           },
           {
-            "text": "const users = fetchUsers().resolve();",
-            "score": 0,
+            "text": "if (response.isOk) {\n  var resultObj = Platform.Function.ParseJSON(response.content);\n  return resultObj;\n}",
+            "score": 5,
             "isCorrect": false
           },
           {
-            "text": "fetchUsers().then(users => { /* Manejar usuarios aquí */ });",
-            "score": 6,
-            "isCorrect": true
+            "text": "try {\n  var resultObj = Platform.Function.ParseJSON(response.content);\n  return resultObj;\n} catch (e) {\n  return null;\n}",
+            "score": 3,
+            "isCorrect": false
           }
         ]
       },
       {
-        "line": 22,
-        "description": "El bloque catch no maneja el error correctamente",
+        "line": 21,
+        "description": "Falta el parámetro en la llamada a la función getSubscribersFromDE",
         "possibleFixes": [
           {
-            "text": "} catch {",
+            "text": "var subscribers = getSubscribersFromDE();",
             "score": 0,
             "isCorrect": false
           },
           {
-            "text": "} catch (error) {\n    console.error('Error al guardar en la base de datos:', error.message);",
+            "text": "var subscribers = getSubscribersFromDE(\"SubscriberDE\"); // Pasar el key de la Data Extension",
             "score": 10,
             "isCorrect": true
           },
           {
-            "text": "} catch (e) {",
-            "score": 2,
-            "isCorrect": false
+            "text": "var deKey = \"SubscriberDE\";\nvar subscribers = getSubscribersFromDE(deKey);",
+            "score": 10,
+            "isCorrect": true
           },
           {
-            "text": "} finally {",
+            "text": "getSubscribersFromDE().then(function(subscribers) {\n  // Procesar suscriptores\n});",
             "score": 0,
             "isCorrect": false
           }
@@ -175,85 +175,85 @@
   },
   {
     "id": "cs3",
-    "language": "javascript",
-    "title": "Manipulación del DOM con JavaScript",
-    "description": "Este código intenta manipular el DOM para crear una lista dinámica. Encuentra y corrige los problemas.",
-    "code": "// Función para crear una lista dinámica\nfunction createDynamicList(items) {\n  // Obtener el contenedor\n  const container = document.getElementById('list-container');\n  \n  // Error: no verifica si el contenedor existe\n  \n  // Crear la lista\n  const list = document.createElement('ul');\n  list.className = 'dynamic-list';\n  \n  // Añadir elementos\n  items.forEach(item => {\n    const listItem = document.createElement('li');\n    // Error: Asigna valor directamente a innerHTML\n    listItem.innerHTML = item;\n    \n    // Añadir evento de clic\n    // Error: Añade evento incorrecto\n    listItem.onclick = function() {\n      listItem.style.textDecoration = 'line-through';\n    };\n    \n    // Error: Añadir elemento a la lista antes de configurarlo por completo\n    list.appendChild(listItem);\n  });\n  \n  // Añadir la lista al contenedor\n  container.appendChild(list);\n}\n\n// Ejemplo de uso\ndocument.addEventListener('DOMContentLoaded', function() {\n  const items = ['Tarea 1', 'Tarea 2', 'Tarea 3'];\n  createDynamicList(items);\n});",
+    "language": "html",
+    "title": "CloudPage con AMPscript para formulario dinámico",
+    "description": "Este código implementa un formulario de suscripción en una CloudPage con AMPscript. Encuentra y corrige los problemas.",
+    "code": "%%[\n/* Definición de variables para el formulario */\nVAR @submitted, @email, @firstName, @lastName, @errorMessage, @successMessage\n\n/* Comprobar si el formulario ha sido enviado */\nSET @submitted = RequestParameter(\"submitted\")\n\nIF @submitted == \"true\" THEN\n  /* Obtener valores del formulario */\n  SET @email = RequestParameter(\"email\")\n  SET @firstName = RequestParameter(\"firstName\")\n  SET @lastName = RequestParameter(\"lastName\")\n  \n  /* Error: No valida si los campos están completos */\n  \n  /* Error: Intento de inserción en Data Extension sin verificar existencia */\n  SET @insertResult = InsertData(\"Newsletter_Subscribers\",\n    \"EmailAddress\", @email,\n    \"FirstName\", @firstName,\n    \"LastName\", @lastName,\n    \"SubscriptionDate\", NOW()\n  )\n  \n  /* Error: No maneja posibles errores de la inserción */\n  SET @successMessage = \"¡Gracias por suscribirte!\"\nENDIF\n]%%\n\n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <title>Formulario de Suscripción</title>\n    <style>\n        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }\n        .form-container { max-width: 500px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; }\n        .form-group { margin-bottom: 15px; }\n        label { display: block; margin-bottom: 5px; }\n        input { width: 100%; padding: 8px; box-sizing: border-box; }\n        .btn { background-color: #4CAF50; color: white; padding: 10px 15px; border: none; cursor: pointer; }\n        .error { color: red; }\n        .success { color: green; }\n    </style>\n</head>\n<body>\n    <div class=\"form-container\">\n        <h1>Suscríbete a nuestro newsletter</h1>\n        \n        %%[ IF @successMessage != \"\" THEN ]%%\n            <div class=\"success\">%%=v(@successMessage)=%%</div>\n        %%[ ELSE ]%%\n            %%[ IF @errorMessage != \"\" THEN ]%%\n                <div class=\"error\">%%=v(@errorMessage)=%%</div>\n            %%[ ENDIF ]%%\n            \n            <form method=\"post\" action=\"\">\n                <div class=\"form-group\">\n                    <label for=\"email\">Email:</label>\n                    <!-- Error: Falta el atributo name en el input -->\n                    <input type=\"email\" id=\"email\" required>\n                </div>\n                \n                <div class=\"form-group\">\n                    <label for=\"firstName\">Nombre:</label>\n                    <input type=\"text\" id=\"firstName\" name=\"firstName\" value=\"%%=v(@firstName)=%%\">\n                </div>\n                \n                <div class=\"form-group\">\n                    <label for=\"lastName\">Apellido:</label>\n                    <input type=\"text\" id=\"lastName\" name=\"lastName\" value=\"%%=v(@lastName)=%%\">\n                </div>\n                \n                <input type=\"hidden\" name=\"submitted\" value=\"true\">\n                <button type=\"submit\" class=\"btn\">Suscribirme</button>\n            </form>\n        %%[ ENDIF ]%%\n    </div>\n</body>\n</html>",
     "issues": [
       {
-        "line": 6,
-        "description": "No verifica si el contenedor existe antes de usarlo",
+        "line": 13,
+        "description": "No valida si los campos están completos antes de procesar",
         "possibleFixes": [
           {
-            "text": "// Error: no verifica si el contenedor existe",
+            "text": "/* Error: No valida si los campos están completos */",
             "score": 0,
             "isCorrect": false
           },
           {
-            "text": "// Verificar si el contenedor existe\nif (!container) {\n  console.error('El contenedor no existe');\n  return;\n}",
+            "text": "/* Validar que los campos requeridos estén completos */\nIF EMPTY(@email) THEN\n  SET @errorMessage = \"El email es obligatorio.\"\nELSEIF NOT VALIDATOR(@email,\"EMAILADDRESS\") THEN\n  SET @errorMessage = \"Por favor, introduce un email válido.\"\nELSEIF EMPTY(@firstName) THEN\n  SET @errorMessage = \"El nombre es obligatorio.\"\nENDIF\n\n/* Continuar solo si no hay errores */\nIF EMPTY(@errorMessage) THEN",
             "score": 10,
             "isCorrect": true
           },
           {
-            "text": "// Crear contenedor si no existe\nif (!container) {\n  container = document.createElement('div');\n  document.body.appendChild(container);\n}",
+            "text": "/* Verificar email únicamente */\nIF NOT VALIDATOR(@email,\"EMAILADDRESS\") THEN\n  SET @errorMessage = \"Email no válido\"\nENDIF",
             "score": 5,
             "isCorrect": false
           },
           {
-            "text": "// Ignorar verificación",
+            "text": "/* Crear arrays para validación */\nVAR @requiredFields, @fieldValues\nSET @requiredFields = ARRAY(\"email\", \"firstName\")\n/* Implementar validación con arrays */",
+            "score": 3,
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "line": 16,
+        "description": "Intento de inserción en Data Extension sin verificar duplicados",
+        "possibleFixes": [
+          {
+            "text": "SET @insertResult = InsertData(\"Newsletter_Subscribers\",\n    \"EmailAddress\", @email,\n    \"FirstName\", @firstName,\n    \"LastName\", @lastName,\n    \"SubscriptionDate\", NOW()\n  )",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "/* Verificar si el email ya existe en la Data Extension */\nSET @existingRecord = LookupRows(\"Newsletter_Subscribers\", \"EmailAddress\", @email)\nIF RowCount(@existingRecord) > 0 THEN\n  /* Actualizar registro existente */\n  SET @updateResult = UpdateData(\"Newsletter_Subscribers\", \n    [\"EmailAddress\"], [@email], \n    \"FirstName\", @firstName,\n    \"LastName\", @lastName,\n    \"SubscriptionDate\", NOW()\n  )\n  IF @updateResult == 1 THEN\n    SET @successMessage = \"Tu información ha sido actualizada.\"\n  ELSE\n    SET @errorMessage = \"Error al actualizar tus datos.\"\n  ENDIF\nELSE\n  /* Insertar nuevo registro */\n  SET @insertResult = InsertData(\"Newsletter_Subscribers\",\n    \"EmailAddress\", @email,\n    \"FirstName\", @firstName,\n    \"LastName\", @lastName,\n    \"SubscriptionDate\", NOW()\n  )\n  IF @insertResult == 1 THEN\n    SET @successMessage = \"¡Gracias por suscribirte!\"\n  ELSE\n    SET @errorMessage = \"Error al procesar tu suscripción.\"\n  ENDIF\nENDIF",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "/* Usar UpsertData para insertar o actualizar */\nSET @upsertResult = UpsertData(\"Newsletter_Subscribers\", \n  \"EmailAddress\", @email,\n  \"FirstName\", @firstName,\n  \"LastName\", @lastName,\n  \"SubscriptionDate\", NOW()\n)",
+            "score": 8,
+            "isCorrect": true
+          },
+          {
+            "text": "/* Usar TreatAsContent para procesar la inserción */\nVAR @insertQuery\nSET @insertQuery = CONCAT(\"INSERT INTO Newsletter_Subscribers VALUES('\", @email, \"')\")\nSET @insertResult = TreatAsContent(@insertQuery)",
             "score": 0,
             "isCorrect": false
           }
         ]
       },
       {
-        "line": 15,
-        "description": "Uso inseguro de innerHTML que puede permitir ataques XSS",
+        "line": 58,
+        "description": "Falta el atributo name en el input de email",
         "possibleFixes": [
           {
-            "text": "listItem.innerHTML = item;",
+            "text": "<input type=\"email\" id=\"email\" required>",
             "score": 0,
             "isCorrect": false
           },
           {
-            "text": "listItem.textContent = item; // Uso seguro de textContent para evitar XSS",
+            "text": "<input type=\"email\" id=\"email\" name=\"email\" value=\"%%=v(@email)=%%\" required>",
             "score": 10,
             "isCorrect": true
           },
           {
-            "text": "listItem.innerText = item;",
-            "score": 7,
+            "text": "<input type=\"email\" id=\"email\" name=\"email\" required>",
+            "score": 8,
             "isCorrect": true
           },
           {
-            "text": "listItem.appendChild(document.createTextNode(item));",
-            "score": 10,
-            "isCorrect": true
-          }
-        ]
-      },
-      {
-        "line": 19,
-        "description": "Uso de onclick en lugar de addEventListener para mejor práctica",
-        "possibleFixes": [
-          {
-            "text": "listItem.onclick = function() {",
-            "score": 2,
-            "isCorrect": false
-          },
-          {
-            "text": "listItem.addEventListener('click', function() {",
-            "score": 10,
-            "isCorrect": true
-          },
-          {
-            "text": "listItem.onmousedown = function() {",
-            "score": 0,
-            "isCorrect": false
-          },
-          {
-            "text": "$(listItem).click(function() {",
-            "score": 1,
+            "text": "<input type=\"email\" id=\"email\" name=\"subscriberEmail\" required>",
+            "score": 3,
             "isCorrect": false
           }
         ]
@@ -262,85 +262,85 @@
   },
   {
     "id": "cs4",
-    "language": "javascript",
-    "title": "Manejo de estados en componentes de React",
-    "description": "Este componente React muestra un formulario de registro. Encuentra y corrige los problemas.",
-    "code": "import React, { useState } from 'react';\n\nfunction RegistrationForm() {\n  const [email, setEmail] = useState('');\n  const [password, setPassword] = useState('');\n  const [name, setName] = useState('');\n  \n  // Error: Creación de un estado para un valor derivado\n  const [isFormValid, setIsFormValid] = useState(false);\n  \n  // Error: Actualización del estado en el cuerpo del componente\n  if (email && password && name) {\n    setIsFormValid(true); // Esto causará un bucle infinito\n  } else {\n    setIsFormValid(false);\n  }\n  \n  const handleSubmit = (e) => {\n    e.preventDefault();\n    \n    // Error: No valida los datos antes de enviarlos\n    console.log('Datos enviados:', { email, password, name });\n  };\n  \n  return (\n    <form onSubmit={handleSubmit}>\n      <div>\n        <label htmlFor=\"name\">Nombre:</label>\n        <input \n          type=\"text\" \n          id=\"name\" \n          value={name} \n          onChange={(e) => setName(e.target.value)} \n          // Error: No hay indicador de campo obligatorio\n        />\n      </div>\n      \n      <div>\n        <label htmlFor=\"email\">Email:</label>\n        <input \n          type=\"email\" \n          id=\"email\" \n          value={email} \n          onChange={(e) => setEmail(e.target.value)} \n        />\n      </div>\n      \n      <div>\n        <label htmlFor=\"password\">Contraseña:</label>\n        <input \n          type=\"password\" \n          id=\"password\" \n          value={password} \n          onChange={(e) => setPassword(e.target.value)} \n        />\n      </div>\n      \n      <button type=\"submit\" disabled={!isFormValid}>\n        Registrarse\n      </button>\n    </form>\n  );\n}\n\nexport default RegistrationForm;",
+    "language": "ampscript",
+    "title": "Email Dinámico con Contenido Condicional",
+    "description": "Este código implementa un email dinámico con contenido condicional basado en datos del suscriptor. Encuentra y corrige los problemas.",
+    "code": "%%[\n/* Configuración para un email dinámico basado en datos del suscriptor */\nVAR @subscriberKey, @emailAddress, @firstName, @accountStatus, @lastPurchaseDate\nVAR @currentDate, @daysSinceLastPurchase, @recommendedProducts, @productCount\n\n/* Obtener datos básicos del suscriptor */\nSET @subscriberKey = AttributeValue(\"SubscriberKey\")\nSET @emailAddress = AttributeValue(\"EmailAddress\")\nSET @firstName = AttributeValue(\"FirstName\")\n/* Error: No asigna un valor por defecto si FirstName está vacío */\n\n/* Obtener estado de la cuenta desde una Data Extension relacionada */\nSET @accountRow = LookupRows(\"CustomerAccounts\", \"SubscriberKey\", @subscriberKey)\n/* Error: No verifica si se encontraron registros */\nSET @accountStatus = Field(Row(@accountRow, 1), \"AccountStatus\")\n\n/* Calcular días desde la última compra */\nSET @lastPurchaseRow = LookupOrderedRows(\"Purchases\", 1, \"PurchaseDate DESC\", \"SubscriberKey\", @subscriberKey)\n/* Error: No verifica si existen compras previas */\nSET @lastPurchaseDate = Field(Row(@lastPurchaseRow, 1), \"PurchaseDate\")\nSET @currentDate = Now()\nSET @daysSinceLastPurchase = DateDiff(@lastPurchaseDate, @currentDate, \"D\")\n\n/* Obtener recomendaciones de productos basadas en el historial de compras */\nIF @daysSinceLastPurchase < 30 THEN\n  SET @recommendedProducts = LookupRows(\"RecommendedProducts\", \"CustomerSegment\", \"Recent\")\nELSEIF @daysSinceLastPurchase < 90 THEN\n  SET @recommendedProducts = LookupRows(\"RecommendedProducts\", \"CustomerSegment\", \"Active\")\nELSE\n  SET @recommendedProducts = LookupRows(\"RecommendedProducts\", \"CustomerSegment\", \"Inactive\")\nENDIF\n\n/* Contar productos recomendados */\nSET @productCount = RowCount(@recommendedProducts)\n]%%\n\n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\">\n    <title>Ofertas personalizadas para ti</title>\n</head>\n<body>\n    <h1>Hola %%=v(@firstName)=%%,</h1>\n    \n    %%[ IF @accountStatus == \"Active\" THEN ]%%\n        <p>Gracias por ser un cliente activo. Aquí tienes algunas recomendaciones especialmente para ti.</p>\n    %%[ ELSEIF @accountStatus == \"Inactive\" THEN ]%%\n        <p>Te extrañamos. Han pasado %%=v(@daysSinceLastPurchase)=%% días desde tu última compra.</p>\n    %%[ ELSE ]%%\n        <p>Bienvenido a nuestra tienda. Descubre nuestros productos destacados.</p>\n    %%[ ENDIF ]%%\n    \n    <h2>Productos recomendados</h2>\n    <ul>\n    %%[ IF @productCount > 0 THEN ]%%\n        %%[ FOR @i = 1 TO 3 DO ]%%\n            %%[ IF @i <= @productCount THEN ]%%\n                %%[\n                    /* Error: El índice de array debe ser un número entero, no una variable */\n                    SET @product = Row(@recommendedProducts, @i)\n                    SET @productName = Field(@product, \"ProductName\")\n                    SET @productPrice = Field(@product, \"Price\")\n                    SET @productImage = Field(@product, \"ImageURL\")\n                ]%%\n                <li>\n                    <img src=\"%%=v(@productImage)=%%\" alt=\"%%=v(@productName)=%%\" width=\"100\">\n                    <h3>%%=v(@productName)=%%</h3>\n                    <p>Precio: $%%=v(@productPrice)=%%</p>\n                    <!-- Error: URL incompleto para el botón de compra -->\n                    <a href=\"/product?id=%%=v(Field(@product,\"ProductID\"))=%%\">Comprar ahora</a>\n                </li>\n            %%[ ENDIF ]%%\n        %%[ NEXT @i ]%%\n    %%[ ELSE ]%%\n        <p>No hay recomendaciones disponibles en este momento.</p>\n    %%[ ENDIF ]%%\n    </ul>\n    \n    <footer>\n        <p>Si no deseas recibir más emails, <a href=\"%%=RedirectTo(CloudPagesURL(123))=%%\">haz clic aquí para darte de baja</a>.</p>\n    </footer>\n</body>\n</html>",
     "issues": [
       {
-        "line": 12,
-        "description": "Actualización de estado en el cuerpo del componente que causa un bucle infinito",
+        "line": 10,
+        "description": "No asigna un valor por defecto si FirstName está vacío",
         "possibleFixes": [
           {
-            "text": "if (email && password && name) {\n    setIsFormValid(true); // Esto causará un bucle infinito\n  } else {\n    setIsFormValid(false);\n  }",
+            "text": "SET @firstName = AttributeValue(\"FirstName\")",
             "score": 0,
             "isCorrect": false
           },
           {
-            "text": "// Usar useEffect para actualizar el estado derivado\nReact.useEffect(() => {\n  setIsFormValid(email !== '' && password !== '' && name !== '');\n}, [email, password, name]);",
+            "text": "/* Asignar un valor por defecto si FirstName está vacío */\nIF EMPTY(@firstName) THEN\n  SET @firstName = \"Estimado cliente\"\nENDIF",
             "score": 10,
             "isCorrect": true
           },
           {
-            "text": "// Eliminar este código y usar un cálculo directo en lugar de un estado\n// La validez del formulario puede calcularse directamente en el JSX",
-            "score": 8,
+            "text": "SET @firstName = IIF(EMPTY(AttributeValue(\"FirstName\")), \"Estimado cliente\", AttributeValue(\"FirstName\"))",
+            "score": 10,
             "isCorrect": true
           },
           {
-            "text": "setTimeout(() => {\n  setIsFormValid(email && password && name);\n}, 0);",
-            "score": 2,
+            "text": "/* Simplemente concatenar al nombre */\nSET @firstName = CONCAT(@firstName, \" \")",
+            "score": 0,
             "isCorrect": false
           }
         ]
       },
       {
-        "line": 20,
-        "description": "El formulario no valida los datos antes de enviarlos",
+        "line": 14,
+        "description": "No verifica si se encontraron registros en LookupRows",
         "possibleFixes": [
           {
-            "text": "console.log('Datos enviados:', { email, password, name });",
+            "text": "SET @accountRow = LookupRows(\"CustomerAccounts\", \"SubscriberKey\", @subscriberKey)\nSET @accountStatus = Field(Row(@accountRow, 1), \"AccountStatus\")",
             "score": 0,
             "isCorrect": false
           },
           {
-            "text": "// Validar datos antes de enviar\nif (!email.includes('@') || password.length < 6 || !name) {\n  alert('Por favor, verifique los datos ingresados');\n  return;\n}\n    \nconsole.log('Datos enviados:', { email, password, name });",
+            "text": "SET @accountRow = LookupRows(\"CustomerAccounts\", \"SubscriberKey\", @subscriberKey)\n/* Verificar si se encontraron registros */\nIF RowCount(@accountRow) > 0 THEN\n  SET @accountStatus = Field(Row(@accountRow, 1), \"AccountStatus\")\nELSE\n  SET @accountStatus = \"Unknown\"\nENDIF",
             "score": 10,
             "isCorrect": true
           },
           {
-            "text": "// Usar una librería de validación\nimport { validate } from 'validator';\nif (!validate(email, password, name)) {\n  return;\n}\nconsole.log('Datos enviados:', { email, password, name });",
-            "score": 5,
-            "isCorrect": false
+            "text": "SET @accountRow = LookupRows(\"CustomerAccounts\", \"SubscriberKey\", @subscriberKey)\nSET @accountStatus = IIF(RowCount(@accountRow) > 0, Field(Row(@accountRow, 1), \"AccountStatus\"), \"Unknown\")",
+            "score": 10,
+            "isCorrect": true
           },
           {
-            "text": "try {\n  console.log('Datos enviados:', { email, password, name });\n} catch (error) {\n  console.error(error);\n}",
-            "score": 2,
+            "text": "/* Usar try/catch para manejar errores */\nTRY\n  SET @accountRow = LookupRows(\"CustomerAccounts\", \"SubscriberKey\", @subscriberKey)\n  SET @accountStatus = Field(Row(@accountRow, 1), \"AccountStatus\")\nCATCH\n  SET @accountStatus = \"Error\"\nENDTRY",
+            "score": 0,
             "isCorrect": false
           }
         ]
       },
       {
-        "line": 33,
-        "description": "No hay indicador de campo obligatorio en los inputs",
+        "line": 30,
+        "description": "Falta cerrar la estructura condicional IF-ELSEIF-ELSE",
         "possibleFixes": [
           {
-            "text": "// Error: No hay indicador de campo obligatorio",
+            "text": "ELSE\n  SET @recommendedProducts = LookupRows(\"RecommendedProducts\", \"CustomerSegment\", \"Inactive\")\n/* Error: Falta cerrar la estructura condicional */",
             "score": 0,
             "isCorrect": false
           },
           {
-            "text": "required // Añadir atributo required para indicar campo obligatorio",
+            "text": "ELSE\n  SET @recommendedProducts = LookupRows(\"RecommendedProducts\", \"CustomerSegment\", \"Inactive\")\nENDIF",
             "score": 10,
             "isCorrect": true
           },
           {
-            "text": "aria-required=\"true\" // Añadir atributo de accesibilidad",
-            "score": 8,
-            "isCorrect": true
+            "text": "ELSE\n  SET @recommendedProducts = LookupRows(\"RecommendedProducts\", \"CustomerSegment\", \"Inactive\")\nEND",
+            "score": 0,
+            "isCorrect": false
           },
           {
-            "text": "placeholder=\"Campo obligatorio\"",
-            "score": 3,
+            "text": "ELSE\n  SET @recommendedProducts = LookupRows(\"RecommendedProducts\", \"CustomerSegment\", \"Inactive\")\nENDELSE",
+            "score": 0,
             "isCorrect": false
           }
         ]
@@ -349,85 +349,85 @@
   },
   {
     "id": "cs5",
-    "language": "javascript",
-    "title": "Optimización de rendimiento en React",
-    "description": "Este componente muestra una lista de elementos con búsqueda. Encuentra y corrige los problemas de rendimiento.",
-    "code": "import React, { useState, useEffect } from 'react';\n\nfunction ItemList({ items }) {\n  const [search, setSearch] = useState('');\n  const [filteredItems, setFilteredItems] = useState([]);\n  \n  // Error: Recreación de función en cada renderizado\n  const handleSearchChange = (e) => {\n    setSearch(e.target.value);\n  };\n  \n  // Error: Cálculo costoso en cada render sin memoización\n  useEffect(() => {\n    console.log('Filtrando items...');\n    const filtered = items.filter(item => \n      item.name.toLowerCase().includes(search.toLowerCase())\n    );\n    setFilteredItems(filtered);\n  }, [search, items]); // Se ejecuta cuando cambia search o items\n  \n  // Error: Crear una función flecha dentro del renderizado para cada elemento\n  return (\n    <div>\n      <input \n        type=\"text\" \n        placeholder=\"Buscar...\" \n        value={search} \n        onChange={handleSearchChange} \n      />\n      \n      <ul>\n        {filteredItems.map(item => (\n          <li \n            key={item.id} \n            onClick={() => {\n              // Error: Función flecha definida en render\n              console.log('Item seleccionado:', item.name);\n              // Esta función se recreará en cada renderizado\n            }}\n          >\n            {item.name} - ${item.price}\n          </li>\n        ))}\n      </ul>\n    </div>\n  );\n}\n\nexport default ItemList;",
+    "language": "ssjs",
+    "title": "Segmentación de suscriptores con SSJS en Automation Studio",
+    "description": "Este código implementa una segmentación de suscriptores usando SSJS en un Script Activity de Automation Studio. Encuentra y corrige los problemas.",
+    "code": "<script runat=\"server\">\n  /* Configuración para ejecutar una segmentación de suscriptores */\n  var targetDE = \"TargetSubscribers\";\n  var sourceDE = \"AllSubscribers\";\n  var daysThreshold = 30;\n  \n  /* Error: No usa try-catch para manejo de errores */\n  \n  /* Obtener la fecha actual y calcular la fecha límite */\n  var currentDate = new Date();\n  var targetDate = new Date();\n  \n  /* Error: Método incorrecto para restar días de una fecha */\n  targetDate.setDate(currentDate.getDate - daysThreshold);\n  \n  /* Formatear fechas para la consulta */\n  var formattedDate = formatDateForDE(targetDate);\n  \n  /* Crear la consulta para extraer suscriptores */\n  var query = \"\";\n  query += \"SELECT s.SubscriberKey, s.EmailAddress, s.FirstName, s.LastName, \"; \n  query += \"s.CreatedDate, s.Status \"; \n  query += \"FROM \" + sourceDE + \" s \";\n  \n  /* Error: Condición de WHERE incompleta */\n  query += \"WHERE s.CreatedDate > '\" + formattedDate + \"' \";\n  query += \"AND s.Status = Active\";\n  \n  /* Ejecutar la consulta y procesar los resultados */\n  var results = executeQuery(query);\n  \n  /* Procesar resultados y guardar en la Data Extension target */\n  var processedCount = 0;\n  var targetDataExtension = DataExtension.Init(targetDE);\n  \n  /* Error: No verifica que results sea un array antes de iterar */\n  for (var i = 0; i < results.length; i++) {\n    var subscriber = results[i];\n    \n    try {\n      /* Añadir a la Data Extension destino */\n      targetDataExtension.Rows.Add({\n        SubscriberKey: subscriber.SubscriberKey,\n        EmailAddress: subscriber.EmailAddress,\n        FirstName: subscriber.FirstName,\n        LastName: subscriber.LastName,\n        SegmentationDate: currentDate\n      });\n      processedCount++;\n    } catch (e) {\n      /* Error: No registra información específica del error */\n      Write(\"Error al procesar un suscriptor.\\n\");\n    }\n  }\n  \n  Write(\"Proceso completado. Suscriptores procesados: \" + processedCount);\n  \n  /* Función auxiliar para formatear fechas */\n  function formatDateForDE(date) {\n    return date.getFullYear() + \"-\" + \n           padNumber(date.getMonth() + 1) + \"-\" + \n           padNumber(date.getDate());\n  }\n  \n  function padNumber(number) {\n    return number < 10 ? \"0\" + number : number;\n  }\n  \n  /* Función para ejecutar queries */\n  function executeQuery(queryStr) {\n    /* Error: No utiliza la API correcta de Marketing Cloud para ejecutar consultas */\n    var query = queryStr;\n    var results = Platform.Function.QueryDE(sourceDE, queryStr);\n    return results;\n  }\n</script>",
     "issues": [
       {
-        "line": 8,
-        "description": "Función del manejador de eventos se recrea en cada renderizado",
+        "line": 7,
+        "description": "No utiliza try-catch para manejar errores a nivel de script",
         "possibleFixes": [
           {
-            "text": "const handleSearchChange = (e) => {\n    setSearch(e.target.value);\n  };",
+            "text": "/* Error: No usa try-catch para manejo de errores */",
             "score": 0,
             "isCorrect": false
           },
           {
-            "text": "// Usar useCallback para memorizar la función\nconst handleSearchChange = React.useCallback((e) => {\n  setSearch(e.target.value);\n}, []); // Sin dependencias porque no usa valores externos",
+            "text": "/* Implementar try-catch para manejo de errores */\ntry {\n  /* El código principal se colocará aquí */\n} catch(error) {\n  Write(\"Error en el proceso de segmentación: \" + error.message + \"\\n\");\n  /* Opcionalmente, enviar email de notificación al administrador */\n  sendErrorNotification(error);\n}",
             "score": 10,
             "isCorrect": true
           },
           {
-            "text": "// Definir la función fuera del componente\nfunction handleSearchChangeStatic(e, setter) {\n  setter(e.target.value);\n}\n\nfunction ItemList({ items }) {\n  // ... resto del componente\n  // Y usar como: onChange={(e) => handleSearchChangeStatic(e, setSearch)}",
-            "score": 4,
-            "isCorrect": false
+            "text": "/* Crear función de log para errores */\nfunction logError(message) {\n  Platform.Function.InsertData(\"ErrorLogs\",\n    [\"ErrorMessage\", \"Timestamp\"],\n    [message, Now()]);\n}",
+            "score": 6,
+            "isCorrect": true
           },
           {
-            "text": "// No es necesario cambiar esta función ya que es simple",
-            "score": 3,
+            "text": "/* Registrar hora de inicio para debug */\nvar startTime = new Date();\nWrite(\"Inicio del proceso: \" + startTime);",
+            "score": 2,
             "isCorrect": false
           }
         ]
       },
       {
         "line": 13,
-        "description": "Cálculo costoso para filtrar items sin memoización",
+        "description": "Método incorrecto para restar días de una fecha",
         "possibleFixes": [
           {
-            "text": "useEffect(() => {\n    console.log('Filtrando items...');\n    const filtered = items.filter(item => \n      item.name.toLowerCase().includes(search.toLowerCase())\n    );\n    setFilteredItems(filtered);\n  }, [search, items]);",
-            "score": 2,
-            "isCorrect": false
-          },
-          {
-            "text": "// Usar useMemo para memorizar el cálculo costoso\nconst filteredItems = React.useMemo(() => {\n  console.log('Filtrando items...');\n  return items.filter(item => \n    item.name.toLowerCase().includes(search.toLowerCase())\n  );\n}, [search, items]); // Se recalcula cuando cambia search o items\n\n// Eliminar el estado filteredItems y el useEffect",
-            "score": 10,
-            "isCorrect": true
-          },
-          {
-            "text": "// Optimizar dentro del useEffect\nuseEffect(() => {\n  console.log('Filtrando items...');\n  if (search === '') {\n    setFilteredItems(items);\n    return;\n  }\n  const searchLower = search.toLowerCase();\n  const filtered = items.filter(item => \n    item.name.toLowerCase().includes(searchLower)\n  );\n  setFilteredItems(filtered);\n}, [search, items]);",
-            "score": 7,
-            "isCorrect": true
-          },
-          {
-            "text": "// Usar debounce para evitar demasiadas actualizaciones\nimport { debounce } from 'lodash';\n// Implementar debounce en la función de filtrado",
-            "score": 5,
-            "isCorrect": false
-          }
-        ]
-      },
-      {
-        "line": 34,
-        "description": "Función flecha definida dentro del renderizado para cada elemento",
-        "possibleFixes": [
-          {
-            "text": "onClick={() => {\n              console.log('Item seleccionado:', item.name);\n            }}",
+            "text": "targetDate.setDate(currentDate.getDate - daysThreshold);",
             "score": 0,
             "isCorrect": false
           },
           {
-            "text": "// Usar useCallback para crear una función memorizada que tome el item como argumento\nconst handleItemClick = React.useCallback((item) => {\n  console.log('Item seleccionado:', item.name);\n}, []);\n\n// Y luego en el JSX:\nonClick={() => handleItemClick(item)}",
+            "text": "targetDate.setDate(currentDate.getDate() - daysThreshold);",
             "score": 10,
             "isCorrect": true
           },
           {
-            "text": "// Pasar el ID en lugar del objeto completo\nonClick={() => handleItemClick(item.id)}",
-            "score": 7,
+            "text": "targetDate = new Date(currentDate.getTime() - (daysThreshold * 24 * 60 * 60 * 1000));",
+            "score": 8,
             "isCorrect": true
           },
           {
-            "text": "// Usar un evento delegado en el contenedor\n// Agregar manejador en el <ul> en lugar de cada <li>",
-            "score": 6,
+            "text": "var msPerDay = 24 * 60 * 60 * 1000;\ntargetDate = new Date(currentDate - (daysThreshold * msPerDay));",
+            "score": 8,
+            "isCorrect": true
+          }
+        ]
+      },
+      {
+        "line": 24,
+        "description": "Error en la sintaxis SQL de la condición WHERE",
+        "possibleFixes": [
+          {
+            "text": "query += \"WHERE s.CreatedDate > '\" + formattedDate + \"' \";\nquery += \"AND s.Status = Active\";",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "query += \"WHERE s.CreatedDate > '\" + formattedDate + \"' \";\nquery += \"AND s.Status = 'Active'\";",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "query += \"WHERE s.CreatedDate > CONVERT(DATETIME, '\" + formattedDate + \"') \";\nquery += \"AND s.Status = 'Active'\";",
+            "score": 8,
+            "isCorrect": true
+          },
+          {
+            "text": "/* Cambiar la consulta completa */\nquery = \"SELECT s.SubscriberKey, s.EmailAddress, s.FirstName, s.LastName, \" +\n       \"s.CreatedDate, s.Status FROM \" + sourceDE + \" s \" +\n       \"WHERE s.CreatedDate > '\" + formattedDate + \"' \" +\n       \"AND s.Status = 'Active'\";",
+            "score": 7,
             "isCorrect": true
           }
         ]
