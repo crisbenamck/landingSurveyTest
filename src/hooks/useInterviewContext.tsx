@@ -116,8 +116,8 @@ export function InterviewProvider({ children }: { children: ReactNode }) {
       const allowedDifficulties: Record<string, string[]> = {
         'Junior': ['easy'],
         'Advanced': ['easy', 'medium'],
-        'Senior': ['easy', 'medium', 'hard'],
-        'Specialist': ['medium', 'hard', 'expert'] // Specialist ahora puede ver preguntas expert
+        'Senior': ['medium', 'hard'],
+        'Specialist': ['hard', 'expert']
       };
       
       // Safety check: ensure seniority is a valid value
@@ -186,8 +186,8 @@ export function InterviewProvider({ children }: { children: ReactNode }) {
       const allowedDifficulties: Record<string, string[]> = {
         'Junior': ['easy'],
         'Advanced': ['easy', 'medium'],
-        'Senior': ['easy', 'medium', 'hard'],
-        'Specialist': ['medium', 'hard', 'expert'] // Specialist ahora puede ver preguntas expert
+        'Senior': ['medium', 'hard'],
+        'Specialist': ['hard', 'expert']
       };
       
       // Safety check: ensure seniority is a valid value
