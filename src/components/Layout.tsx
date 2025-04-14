@@ -3,6 +3,9 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { useInterviewContext } from '@hooks/useInterviewContext';
 
+// Importar el logo local directamente (esto es compatible con Vite)
+import mcKinseyLogo from '../assets/mckinsey-logo.svg';
+
 const LayoutContainer = styled.div`
   min-height: 100vh;
   display: flex;
@@ -26,23 +29,15 @@ const HeaderContent = styled.div`
 const Logo = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
   color: ${({ theme }) => theme.colors.primary.main};
   font-weight: 600;
   font-size: 1.5rem;
 `;
 
-const LogoIcon = styled.div`
-  width: 32px;
-  height: 32px;
-  background-color: ${({ theme }) => theme.colors.primary.main};
-  color: white;
-  border-radius: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  font-weight: 700;
+const LogoImg = styled.img`
+  height: 40px;
+  width: auto;
 `;
 
 const Nav = styled.nav`
@@ -99,27 +94,27 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <Header>
         <HeaderContent>
           <Logo>
-            <LogoIcon>IT</LogoIcon>
-            Entrevista Técnica
+            <LogoImg src={mcKinseyLogo} alt="McKinsey Logo" />
+            Technical Interview
           </Logo>
           
           <Nav>
             <NavLink to="/" active={location.pathname === '/'}>
-              Inicio
+              Home
             </NavLink>
             {interviewInProgress && (
               <>
                 <NavLink to="/questions" active={location.pathname === '/questions'}>
-                  Preguntas
+                  Questions
                 </NavLink>
                 <NavLink to="/code-correction" active={location.pathname === '/code-correction'}>
-                  Corrección de Código
+                  Code Correction
                 </NavLink>
               </>
             )}
             {location.pathname === '/results' && (
               <NavLink to="/results" active={true}>
-                Resultados
+                Results
               </NavLink>
             )}
           </Nav>
@@ -133,7 +128,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </Main>
       
       <Footer>
-        © {new Date().getFullYear()} Entrevista Técnica - Sistema de Evaluación para Desarrolladores
+        © {new Date().getFullYear()} Technical Interview - Evaluation System for Developers
       </Footer>
     </LayoutContainer>
   );
