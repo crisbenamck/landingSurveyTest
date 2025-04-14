@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { useInterviewContext } from '@hooks/useInterviewContext';
@@ -10,6 +10,7 @@ const LayoutContainer = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative; /* Esto es importante para el posicionamiento del contenido */
 `;
 
 const Header = styled.header`
@@ -137,6 +138,7 @@ const MainContainer = styled.div`
   display: flex;
   flex: 1;
   background-color: #ffffff;
+  position: relative; /* Para posicionamiento del footer */
 `;
 
 // Barra lateral izquierda para el menú
@@ -146,12 +148,14 @@ const Sidebar = styled.div<{ $isOpen: boolean }>`
   border-right: 1px solid #0a2e45;
   padding: 2rem 1rem;
   flex-shrink: 0;
+  position: fixed; /* Cambiado de sticky a fixed para mantenerlo completamente inmóvil */
+  top: 84px; /* Altura del header */
+  height: calc(100vh - 84px);
+  overflow-y: auto;
+  z-index: 900; /* Valor alto para asegurar que esté por encima del contenido */
   
   @media (max-width: 768px) {
-    position: fixed;
-    top: 84px; /* Actualizado para coincidir con el nuevo header height */
     left: 0;
-    height: calc(100vh - 84px); /* Actualizado para coincidir con el nuevo header height */
     transform: ${({ $isOpen }) => ($isOpen ? 'translateX(0)' : 'translateX(-100%)')};
     transition: transform 0.3s ease-in-out;
     box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
@@ -242,6 +246,11 @@ const NavLink: React.FC<NavLinkProps> = ({ to, active, children, onClick }) => {
 const Main = styled.main`
   flex: 1;
   padding: 0;
+  margin-left: 250px; /* Añadir margen igual al ancho del Sidebar */
+  
+  @media (max-width: 768px) {
+    margin-left: 0; /* En móvil no necesitamos el margen porque el menú está oculto o en overlay */
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -262,6 +271,10 @@ const Footer = styled.footer`
   color: #555555;
   font-size: 0.875rem;
   border-top: 1px solid #e9ecef;
+  width: 100%;
+  z-index: 1002; /* Aumentado para estar por encima del menú */
+  margin-top: auto;
+  position: relative;
 `;
 
 interface LayoutProps {
@@ -272,6 +285,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
   const { interviewInProgress, settings } = useInterviewContext();
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
+  const footerRef = useRef<HTMLElement>(null);
 
   const toggleMenu = () => setMenuOpen(!isMenuOpen);
   
@@ -279,6 +294,26 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   useEffect(() => {
     setMenuOpen(false);
   }, [location.pathname]);
+  
+  // Detectar cuando el footer es visible
+  useEffect(() => {
+    if (!footerRef.current) return;
+    
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsFooterVisible(entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+    
+    observer.observe(footerRef.current);
+    
+    return () => {
+      if (footerRef.current) {
+        observer.unobserve(footerRef.current);
+      }
+    };
+  }, [footerRef.current]);
   
   // Cerrar el menú cuando se hace clic fuera del menú en dispositivos móviles
   useEffect(() => {
@@ -350,7 +385,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </Main>
       </MainContainer>
       
-      <Footer>
+      <Footer ref={footerRef}>
         © {new Date().getFullYear()} Technical Interview - Evaluation System for Developers
       </Footer>
     </LayoutContainer>
