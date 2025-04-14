@@ -461,7 +461,6 @@ const CodeCorrectionPage: React.FC = () => {
             <IssueItem key={issueIndex}>
               <IssueHeader>
                 <IssueTitle>Issue at line {issue.line}</IssueTitle>
-                <Tag color="error">Needs fixing</Tag>
               </IssueHeader>
               
               <IssueDescription>{issue.description}</IssueDescription>
