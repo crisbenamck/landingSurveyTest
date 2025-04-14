@@ -337,7 +337,11 @@ export function InterviewProvider({ children }: { children: ReactNode }) {
   
   // Move to the next code snippet
   const nextCodeSnippet = () => {
-    if (codeSnippetIndex < codeSnippets.length - 1) {
+    // If codeSnippetIndex is -1, set it to 0 (first code snippet)
+    // instead of incrementing it to ensure we always start with the first snippet
+    if (codeSnippetIndex === -1) {
+      setCodeSnippetIndex(0);
+    } else if (codeSnippetIndex < codeSnippets.length - 1) {
       setCodeSnippetIndex(prev => prev + 1);
     } else {
       finishInterview();
