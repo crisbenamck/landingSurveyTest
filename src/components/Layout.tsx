@@ -369,9 +369,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </HamburgerIcon>
           </HamburgerButton>
           
-          <Logo>
-            <LogoImg src={mcKinseyLogo} alt="McKinsey Logo" />
-          </Logo>
+          <Link to="/" style={{ textDecoration: 'none' }}>
+            <Logo>
+              <LogoImg src={mcKinseyLogo} alt="McKinsey Logo" />
+            </Logo>
+          </Link>
           
           <LogoText>Technical Interview</LogoText>
         </HeaderContent>
