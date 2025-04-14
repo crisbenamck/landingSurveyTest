@@ -2,13 +2,13 @@
   {
     "id": "cs1",
     "language": "ampscript",
-    "title": "Personalización básica con AMPscript",
-    "description": "Este código intenta personalizar un email de bienvenida con AMPscript. Encuentra y corrige los problemas.",
+    "title": "Basic Personalization with AMPscript",
+    "description": "This code attempts to personalize a welcome email with AMPscript. Find and fix the issues.",
     "code": "%%[\n/* Inicialización de variables para el email de bienvenida */\nVAR @firstName, @lastName, @fullName, @membershipLevel\n\n/* Error: asignación incorrecta de variables */\nSET @firstName = AttributeValue(\"FirstName\")\nSET @lastName = AttributeValue(\"LastName\")\n\n/* Error: concatenación incorrecta */\nSET @fullName = CONCAT(@firstName, ' ', @lastName)\n\n/* Determinación del nivel de membresía */\nIF AttributeValue(\"LoyaltyPoints\") > 100 THEN\n  SET @membershipLevel = \"Gold\"\nELIF AttributeValue(\"LoyaltyPoints\") > 50 THEN\n  SET @membershipLevel = \"Silver\"\nELSE\n  SET @membershipLevel = \"Bronze\"\nENDIF\n]%%\n\n<h1>Bienvenido, %%=v(@fullName)=%%!</h1>\n<p>Gracias por unirte a nuestro programa de fidelidad.</p>\n<p>Tu nivel actual es: %%=v(@membershipLevel)=%%</p>\n\n%%[\n/* Error: intenta usar una función que no existe */\nIF IsNull(@membershipLevel) THEN\n  /* Código a ejecutar si es nulo */\nENDIF\n]%%",
     "issues": [
       {
         "line": 6,
-        "description": "Uso incorrecto del operador de asignación",
+        "description": "Incorrect usage of assignment operator",
         "possibleFixes": [
           {
             "text": "@firstName == AttributeValue(\"FirstName\")",
@@ -34,7 +34,7 @@
       },
       {
         "line": 9,
-        "description": "Concatenación incorrecta de strings en AMPscript",
+        "description": "Incorrect string concatenation in AMPscript",
         "possibleFixes": [
           {
             "text": "@fullName = @firstName + @lastName",
@@ -60,7 +60,7 @@
       },
       {
         "line": 17,
-        "description": "No cierra la estructura condicional IF-ELSEIF-ELSE",
+        "description": "Does not close the IF-ELSEIF-ELSE conditional structure",
         "possibleFixes": [
           {
             "text": "SET @membershipLevel = \"Bronze\"",
@@ -89,13 +89,13 @@
   {
     "id": "cs2",
     "language": "ssjs",
-    "title": "Llamadas API con Server-Side JavaScript",
-    "description": "Este código intenta recuperar datos de suscriptores mediante la API REST de Marketing Cloud. Encuentra y corrige los problemas.",
+    "title": "API Calls with Server-Side JavaScript",
+    "description": "This code attempts to retrieve subscriber data using the Marketing Cloud REST API. Find and fix the issues.",
     "code": "<script runat=\"server\">\n  /* Función para obtener suscriptores de una Data Extension */\n  function getSubscribersFromDE(deKey) {\n    var url = \"https://\" + Request.Host + \"/data/v1/customobjectdata/key/\" + deKey + \"/rowset\";\n    \n    /* Error: No configura headers de autenticación */\n    var request = new Script.Util.HttpRequest(url);\n    request.emptyContentHandling = 0;\n    request.retries = 2;\n    request.continueOnError = true;\n    request.method = \"GET\";\n    \n    /* Error: No maneja la respuesta correctamente */\n    var response = request.send();\n    \n    /* Error: No verifica el estado de la respuesta */\n    var resultObj = Platform.Function.ParseJSON(response.content);\n    return resultObj;\n  }\n  \n  /* Función para procesar suscriptores */\n  function processSubscribers() {\n    try {\n      /* Error: Falta el parámetro en la llamada a la función */\n      var subscribers = getSubscribersFromDE();\n      \n      /* Procesar suscriptores activos */\n      var activeSubscribers = [];\n      \n      /* Error: No verifica si subscribers es nulo o indefinido */\n      for (var i = 0; i < subscribers.items.length; i++) {\n        if (subscribers.items[i].values.Status == \"Active\") {\n          activeSubscribers.push(subscribers.items[i]);\n        }\n      }\n      \n      /* Actualizar otra Data Extension con los suscriptores activos */\n      saveToActiveDE(activeSubscribers);\n      return \"Proceso completado con éxito. Se procesaron \" + activeSubscribers.length + \" suscriptores activos.\";\n    } catch (error) {\n      /* Error: Mensaje de error no específico */\n      return \"Error\";\n    }\n  }\n  \n  /* Función para guardar en otra Data Extension */\n  function saveToActiveDE(subscribers) {\n    /* Implementación de guardado en Data Extension */\n    var de = DataExtension.Init(\"ActiveSubscribers\");\n    \n    for (var i = 0; i < subscribers.length; i++) {\n      var subscriber = subscribers[i].values;\n      de.Rows.Add({\"SubscriberKey\": subscriber.SubscriberKey, \n                   \"EmailAddress\": subscriber.EmailAddress,\n                   \"Status\": \"Active\",\n                   \"ProcessedDate\": Now()});\n    }\n  }\n  \n  /* Ejecutar el proceso principal */\n  var result = processSubscribers();\n  Write(result);\n</script>",
     "issues": [
       {
         "line": 6,
-        "description": "No configura headers de autenticación necesarios para la API REST",
+        "description": "Does not set required authentication headers for the REST API",
         "possibleFixes": [
           {
             "text": "var request = new Script.Util.HttpRequest(url);",
@@ -103,7 +103,7 @@
             "isCorrect": false
           },
           {
-            "text": "var request = new Script.Util.HttpRequest(url);\n    request.emptyContentHandling = 0;\n    request.retries = 2;\n    request.continueOnError = true;\n    request.method = \"GET\";\n    \n    /* Añadir headers de autenticación */\n    request.setHeader(\"Authorization\", \"Bearer \" + Platform.Function.AuthToken());\n    request.setHeader(\"Content-Type\", \"application/json\");",
+            "text": "var request = new Script.Util.HttpRequest(url);\n    request.emptyContentHandling = 0;\n    request.retries = 2;\n    request.continueOnError = true;\n    request.method = \"GET\";\n    \n    /* Add authentication headers */\n    request.setHeader(\"Authorization\", \"Bearer \" + Platform.Function.AuthToken());\n    request.setHeader(\"Content-Type\", \"application/json\");",
             "score": 10,
             "isCorrect": true
           },
@@ -121,7 +121,7 @@
       },
       {
         "line": 14,
-        "description": "No verifica el estado de la respuesta HTTP antes de procesar el contenido",
+        "description": "Does not check the HTTP response status before processing the content",
         "possibleFixes": [
           {
             "text": "var resultObj = Platform.Function.ParseJSON(response.content);\nreturn resultObj;",
@@ -129,7 +129,7 @@
             "isCorrect": false
           },
           {
-            "text": "/* Verificar el código de estado HTTP */\nif (response.statusCode == 200) {\n  var resultObj = Platform.Function.ParseJSON(response.content);\n  return resultObj;\n} else {\n  throw new Error(\"Error en la API: \" + response.statusCode + \" \" + response.content);\n}",
+            "text": "/* Verify the HTTP status code */\nif (response.statusCode == 200) {\n  var resultObj = Platform.Function.ParseJSON(response.content);\n  return resultObj;\n} else {\n  throw new Error(\"API Error: \" + response.statusCode + \" \" + response.content);\n}",
             "score": 10,
             "isCorrect": true
           },
@@ -147,7 +147,7 @@
       },
       {
         "line": 21,
-        "description": "Falta el parámetro en la llamada a la función getSubscribersFromDE",
+        "description": "Missing parameter in the call to the getSubscribersFromDE function",
         "possibleFixes": [
           {
             "text": "var subscribers = getSubscribersFromDE();",
@@ -155,7 +155,7 @@
             "isCorrect": false
           },
           {
-            "text": "var subscribers = getSubscribersFromDE(\"SubscriberDE\"); // Pasar el key de la Data Extension",
+            "text": "var subscribers = getSubscribersFromDE(\"SubscriberDE\"); // Pass the Data Extension key",
             "score": 10,
             "isCorrect": true
           },
@@ -165,7 +165,7 @@
             "isCorrect": true
           },
           {
-            "text": "getSubscribersFromDE().then(function(subscribers) {\n  // Procesar suscriptores\n});",
+            "text": "getSubscribersFromDE().then(function(subscribers) {\n  // Process subscribers\n});",
             "score": 0,
             "isCorrect": false
           }
@@ -176,13 +176,13 @@
   {
     "id": "cs3",
     "language": "html",
-    "title": "CloudPage con AMPscript para formulario dinámico",
-    "description": "Este código implementa un formulario de suscripción en una CloudPage con AMPscript. Encuentra y corrige los problemas.",
+    "title": "CloudPage with AMPscript for Dynamic Form",
+    "description": "This code implements a subscription form in a CloudPage with AMPscript. Find and fix the issues.",
     "code": "%%[\n/* Definición de variables para el formulario */\nVAR @submitted, @email, @firstName, @lastName, @errorMessage, @successMessage\n\n/* Comprobar si el formulario ha sido enviado */\nSET @submitted = RequestParameter(\"submitted\")\n\nIF @submitted == \"true\" THEN\n  /* Obtener valores del formulario */\n  SET @email = RequestParameter(\"email\")\n  SET @firstName = RequestParameter(\"firstName\")\n  SET @lastName = RequestParameter(\"lastName\")\n  \n  /* Error: No valida si los campos están completos */\n  \n  /* Error: Intento de inserción en Data Extension sin verificar existencia */\n  SET @insertResult = InsertData(\"Newsletter_Subscribers\",\n    \"EmailAddress\", @email,\n    \"FirstName\", @firstName,\n    \"LastName\", @lastName,\n    \"SubscriptionDate\", NOW()\n  )\n  \n  /* Error: No maneja posibles errores de la inserción */\n  SET @successMessage = \"¡Gracias por suscribirte!\"\nENDIF\n]%%\n\n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <title>Formulario de Suscripción</title>\n    <style>\n        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }\n        .form-container { max-width: 500px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; }\n        .form-group { margin-bottom: 15px; }\n        label { display: block; margin-bottom: 5px; }\n        input { width: 100%; padding: 8px; box-sizing: border-box; }\n        .btn { background-color: #4CAF50; color: white; padding: 10px 15px; border: none; cursor: pointer; }\n        .error { color: red; }\n        .success { color: green; }\n    </style>\n</head>\n<body>\n    <div class=\"form-container\">\n        <h1>Suscríbete a nuestro newsletter</h1>\n        \n        %%[ IF @successMessage != \"\" THEN ]%%\n            <div class=\"success\">%%=v(@successMessage)=%%</div>\n        %%[ ELSE ]%%\n            %%[ IF @errorMessage != \"\" THEN ]%%\n                <div class=\"error\">%%=v(@errorMessage)=%%</div>\n            %%[ ENDIF ]%%\n            \n            <form method=\"post\" action=\"\">\n                <div class=\"form-group\">\n                    <label for=\"email\">Email:</label>\n                    <!-- Error: Falta el atributo name en el input -->\n                    <input type=\"email\" id=\"email\" required>\n                </div>\n                \n                <div class=\"form-group\">\n                    <label for=\"firstName\">Nombre:</label>\n                    <input type=\"text\" id=\"firstName\" name=\"firstName\" value=\"%%=v(@firstName)=%%\">\n                </div>\n                \n                <div class=\"form-group\">\n                    <label for=\"lastName\">Apellido:</label>\n                    <input type=\"text\" id=\"lastName\" name=\"lastName\" value=\"%%=v(@lastName)=%%\">\n                </div>\n                \n                <input type=\"hidden\" name=\"submitted\" value=\"true\">\n                <button type=\"submit\" class=\"btn\">Suscribirme</button>\n            </form>\n        %%[ ENDIF ]%%\n    </div>\n</body>\n</html>",
     "issues": [
       {
         "line": 13,
-        "description": "No valida si los campos están completos antes de procesar",
+        "description": "Does not validate if the fields are complete before processing",
         "possibleFixes": [
           {
             "text": "/* Error: No valida si los campos están completos */",
@@ -190,17 +190,17 @@
             "isCorrect": false
           },
           {
-            "text": "/* Validar que los campos requeridos estén completos */\nIF EMPTY(@email) THEN\n  SET @errorMessage = \"El email es obligatorio.\"\nELSEIF NOT VALIDATOR(@email,\"EMAILADDRESS\") THEN\n  SET @errorMessage = \"Por favor, introduce un email válido.\"\nELSEIF EMPTY(@firstName) THEN\n  SET @errorMessage = \"El nombre es obligatorio.\"\nENDIF\n\n/* Continuar solo si no hay errores */\nIF EMPTY(@errorMessage) THEN",
+            "text": "/* Validate that required fields are complete */\nIF EMPTY(@email) THEN\n  SET @errorMessage = \"Email is required.\"\nELSEIF NOT VALIDATOR(@email,\"EMAILADDRESS\") THEN\n  SET @errorMessage = \"Please enter a valid email address.\"\nELSEIF EMPTY(@firstName) THEN\n  SET @errorMessage = \"First name is required.\"\nENDIF\n\n/* Continue only if there are no errors */\nIF EMPTY(@errorMessage) THEN",
             "score": 10,
             "isCorrect": true
           },
           {
-            "text": "/* Verificar email únicamente */\nIF NOT VALIDATOR(@email,\"EMAILADDRESS\") THEN\n  SET @errorMessage = \"Email no válido\"\nENDIF",
+            "text": "/* Verify email only */\nIF NOT VALIDATOR(@email,\"EMAILADDRESS\") THEN\n  SET @errorMessage = \"Invalid email\"\nENDIF",
             "score": 5,
             "isCorrect": false
           },
           {
-            "text": "/* Crear arrays para validación */\nVAR @requiredFields, @fieldValues\nSET @requiredFields = ARRAY(\"email\", \"firstName\")\n/* Implementar validación con arrays */",
+            "text": "/* Create arrays for validation */\nVAR @requiredFields, @fieldValues\nSET @requiredFields = ARRAY(\"email\", \"firstName\")\n/* Implement validation with arrays */",
             "score": 3,
             "isCorrect": false
           }
@@ -208,7 +208,7 @@
       },
       {
         "line": 16,
-        "description": "Intento de inserción en Data Extension sin verificar duplicados",
+        "description": "Attempt to insert into Data Extension without checking for duplicates",
         "possibleFixes": [
           {
             "text": "SET @insertResult = InsertData(\"Newsletter_Subscribers\",\n    \"EmailAddress\", @email,\n    \"FirstName\", @firstName,\n    \"LastName\", @lastName,\n    \"SubscriptionDate\", NOW()\n  )",
@@ -216,17 +216,17 @@
             "isCorrect": false
           },
           {
-            "text": "/* Verificar si el email ya existe en la Data Extension */\nSET @existingRecord = LookupRows(\"Newsletter_Subscribers\", \"EmailAddress\", @email)\nIF RowCount(@existingRecord) > 0 THEN\n  /* Actualizar registro existente */\n  SET @updateResult = UpdateData(\"Newsletter_Subscribers\", \n    [\"EmailAddress\"], [@email], \n    \"FirstName\", @firstName,\n    \"LastName\", @lastName,\n    \"SubscriptionDate\", NOW()\n  )\n  IF @updateResult == 1 THEN\n    SET @successMessage = \"Tu información ha sido actualizada.\"\n  ELSE\n    SET @errorMessage = \"Error al actualizar tus datos.\"\n  ENDIF\nELSE\n  /* Insertar nuevo registro */\n  SET @insertResult = InsertData(\"Newsletter_Subscribers\",\n    \"EmailAddress\", @email,\n    \"FirstName\", @firstName,\n    \"LastName\", @lastName,\n    \"SubscriptionDate\", NOW()\n  )\n  IF @insertResult == 1 THEN\n    SET @successMessage = \"¡Gracias por suscribirte!\"\n  ELSE\n    SET @errorMessage = \"Error al procesar tu suscripción.\"\n  ENDIF\nENDIF",
+            "text": "/* Check if the email already exists in the Data Extension */\nSET @existingRecord = LookupRows(\"Newsletter_Subscribers\", \"EmailAddress\", @email)\nIF RowCount(@existingRecord) > 0 THEN\n  /* Update existing record */\n  SET @updateResult = UpdateData(\"Newsletter_Subscribers\", \n    [\"EmailAddress\"], [@email], \n    \"FirstName\", @firstName,\n    \"LastName\", @lastName,\n    \"SubscriptionDate\", NOW()\n  )\n  IF @updateResult == 1 THEN\n    SET @successMessage = \"Your information has been updated.\"\n  ELSE\n    SET @errorMessage = \"Error updating your data.\"\n  ENDIF\nELSE\n  /* Insert new record */\n  SET @insertResult = InsertData(\"Newsletter_Subscribers\",\n    \"EmailAddress\", @email,\n    \"FirstName\", @firstName,\n    \"LastName\", @lastName,\n    \"SubscriptionDate\", NOW()\n  )\n  IF @insertResult == 1 THEN\n    SET @successMessage = \"Thank you for subscribing!\"\n  ELSE\n    SET @errorMessage = \"Error processing your subscription.\"\n  ENDIF\nENDIF",
             "score": 10,
             "isCorrect": true
           },
           {
-            "text": "/* Usar UpsertData para insertar o actualizar */\nSET @upsertResult = UpsertData(\"Newsletter_Subscribers\", \n  \"EmailAddress\", @email,\n  \"FirstName\", @firstName,\n  \"LastName\", @lastName,\n  \"SubscriptionDate\", NOW()\n)",
+            "text": "/* Use UpsertData to insert or update */\nSET @upsertResult = UpsertData(\"Newsletter_Subscribers\", \n  \"EmailAddress\", @email,\n  \"FirstName\", @firstName,\n  \"LastName\", @lastName,\n  \"SubscriptionDate\", NOW()\n)",
             "score": 8,
             "isCorrect": true
           },
           {
-            "text": "/* Usar TreatAsContent para procesar la inserción */\nVAR @insertQuery\nSET @insertQuery = CONCAT(\"INSERT INTO Newsletter_Subscribers VALUES('\", @email, \"')\")\nSET @insertResult = TreatAsContent(@insertQuery)",
+            "text": "/* Use TreatAsContent to process the insertion */\nVAR @insertQuery\nSET @insertQuery = CONCAT(\"INSERT INTO Newsletter_Subscribers VALUES('\", @email, \"')\")\nSET @insertResult = TreatAsContent(@insertQuery)",
             "score": 0,
             "isCorrect": false
           }
@@ -234,7 +234,7 @@
       },
       {
         "line": 58,
-        "description": "Falta el atributo name en el input de email",
+        "description": "Missing name attribute in the email input",
         "possibleFixes": [
           {
             "text": "<input type=\"email\" id=\"email\" required>",
@@ -263,13 +263,13 @@
   {
     "id": "cs4",
     "language": "ampscript",
-    "title": "Email Dinámico con Contenido Condicional",
-    "description": "Este código implementa un email dinámico con contenido condicional basado en datos del suscriptor. Encuentra y corrige los problemas.",
+    "title": "Dynamic Email with Conditional Content",
+    "description": "This code implements a dynamic email with conditional content based on subscriber data. Find and fix the issues.",
     "code": "%%[\n/* Configuración para un email dinámico basado en datos del suscriptor */\nVAR @subscriberKey, @emailAddress, @firstName, @accountStatus, @lastPurchaseDate\nVAR @currentDate, @daysSinceLastPurchase, @recommendedProducts, @productCount\n\n/* Obtener datos básicos del suscriptor */\nSET @subscriberKey = AttributeValue(\"SubscriberKey\")\nSET @emailAddress = AttributeValue(\"EmailAddress\")\nSET @firstName = AttributeValue(\"FirstName\")\n/* Error: No asigna un valor por defecto si FirstName está vacío */\n\n/* Obtener estado de la cuenta desde una Data Extension relacionada */\nSET @accountRow = LookupRows(\"CustomerAccounts\", \"SubscriberKey\", @subscriberKey)\n/* Error: No verifica si se encontraron registros */\nSET @accountStatus = Field(Row(@accountRow, 1), \"AccountStatus\")\n\n/* Calcular días desde la última compra */\nSET @lastPurchaseRow = LookupOrderedRows(\"Purchases\", 1, \"PurchaseDate DESC\", \"SubscriberKey\", @subscriberKey)\n/* Error: No verifica si existen compras previas */\nSET @lastPurchaseDate = Field(Row(@lastPurchaseRow, 1), \"PurchaseDate\")\nSET @currentDate = Now()\nSET @daysSinceLastPurchase = DateDiff(@lastPurchaseDate, @currentDate, \"D\")\n\n/* Obtener recomendaciones de productos basadas en el historial de compras */\nIF @daysSinceLastPurchase < 30 THEN\n  SET @recommendedProducts = LookupRows(\"RecommendedProducts\", \"CustomerSegment\", \"Recent\")\nELSEIF @daysSinceLastPurchase < 90 THEN\n  SET @recommendedProducts = LookupRows(\"RecommendedProducts\", \"CustomerSegment\", \"Active\")\nELSE\n  SET @recommendedProducts = LookupRows(\"RecommendedProducts\", \"CustomerSegment\", \"Inactive\")\nENDIF\n\n/* Contar productos recomendados */\nSET @productCount = RowCount(@recommendedProducts)\n]%%\n\n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\">\n    <title>Ofertas personalizadas para ti</title>\n</head>\n<body>\n    <h1>Hola %%=v(@firstName)=%%,</h1>\n    \n    %%[ IF @accountStatus == \"Active\" THEN ]%%\n        <p>Gracias por ser un cliente activo. Aquí tienes algunas recomendaciones especialmente para ti.</p>\n    %%[ ELSEIF @accountStatus == \"Inactive\" THEN ]%%\n        <p>Te extrañamos. Han pasado %%=v(@daysSinceLastPurchase)=%% días desde tu última compra.</p>\n    %%[ ELSE ]%%\n        <p>Bienvenido a nuestra tienda. Descubre nuestros productos destacados.</p>\n    %%[ ENDIF ]%%\n    \n    <h2>Productos recomendados</h2>\n    <ul>\n    %%[ IF @productCount > 0 THEN ]%%\n        %%[ FOR @i = 1 TO 3 DO ]%%\n            %%[ IF @i <= @productCount THEN ]%%\n                %%[\n                    /* Error: El índice de array debe ser un número entero, no una variable */\n                    SET @product = Row(@recommendedProducts, @i)\n                    SET @productName = Field(@product, \"ProductName\")\n                    SET @productPrice = Field(@product, \"Price\")\n                    SET @productImage = Field(@product, \"ImageURL\")\n                ]%%\n                <li>\n                    <img src=\"%%=v(@productImage)=%%\" alt=\"%%=v(@productName)=%%\" width=\"100\">\n                    <h3>%%=v(@productName)=%%</h3>\n                    <p>Precio: $%%=v(@productPrice)=%%</p>\n                    <!-- Error: URL incompleto para el botón de compra -->\n                    <a href=\"/product?id=%%=v(Field(@product,\"ProductID\"))=%%\">Comprar ahora</a>\n                </li>\n            %%[ ENDIF ]%%\n        %%[ NEXT @i ]%%\n    %%[ ELSE ]%%\n        <p>No hay recomendaciones disponibles en este momento.</p>\n    %%[ ENDIF ]%%\n    </ul>\n    \n    <footer>\n        <p>Si no deseas recibir más emails, <a href=\"%%=RedirectTo(CloudPagesURL(123))=%%\">haz clic aquí para darte de baja</a>.</p>\n    </footer>\n</body>\n</html>",
     "issues": [
       {
         "line": 10,
-        "description": "No asigna un valor por defecto si FirstName está vacío",
+        "description": "Does not assign a default value if FirstName is empty",
         "possibleFixes": [
           {
             "text": "SET @firstName = AttributeValue(\"FirstName\")",
@@ -277,17 +277,17 @@
             "isCorrect": false
           },
           {
-            "text": "/* Asignar un valor por defecto si FirstName está vacío */\nIF EMPTY(@firstName) THEN\n  SET @firstName = \"Estimado cliente\"\nENDIF",
+            "text": "/* Assign a default value if FirstName is empty */\nIF EMPTY(@firstName) THEN\n  SET @firstName = \"Valued Customer\"\nENDIF",
             "score": 10,
             "isCorrect": true
           },
           {
-            "text": "SET @firstName = IIF(EMPTY(AttributeValue(\"FirstName\")), \"Estimado cliente\", AttributeValue(\"FirstName\"))",
+            "text": "SET @firstName = IIF(EMPTY(AttributeValue(\"FirstName\")), \"Valued Customer\", AttributeValue(\"FirstName\"))",
             "score": 10,
             "isCorrect": true
           },
           {
-            "text": "/* Simplemente concatenar al nombre */\nSET @firstName = CONCAT(@firstName, \" \")",
+            "text": "/* Simply concatenate to the name */\nSET @firstName = CONCAT(@firstName, \" \")",
             "score": 0,
             "isCorrect": false
           }
@@ -295,7 +295,7 @@
       },
       {
         "line": 14,
-        "description": "No verifica si se encontraron registros en LookupRows",
+        "description": "Does not verify if records were found in LookupRows",
         "possibleFixes": [
           {
             "text": "SET @accountRow = LookupRows(\"CustomerAccounts\", \"SubscriberKey\", @subscriberKey)\nSET @accountStatus = Field(Row(@accountRow, 1), \"AccountStatus\")",
@@ -303,7 +303,7 @@
             "isCorrect": false
           },
           {
-            "text": "SET @accountRow = LookupRows(\"CustomerAccounts\", \"SubscriberKey\", @subscriberKey)\n/* Verificar si se encontraron registros */\nIF RowCount(@accountRow) > 0 THEN\n  SET @accountStatus = Field(Row(@accountRow, 1), \"AccountStatus\")\nELSE\n  SET @accountStatus = \"Unknown\"\nENDIF",
+            "text": "SET @accountRow = LookupRows(\"CustomerAccounts\", \"SubscriberKey\", @subscriberKey)\n/* Verify if records were found */\nIF RowCount(@accountRow) > 0 THEN\n  SET @accountStatus = Field(Row(@accountRow, 1), \"AccountStatus\")\nELSE\n  SET @accountStatus = \"Unknown\"\nENDIF",
             "score": 10,
             "isCorrect": true
           },
@@ -313,7 +313,7 @@
             "isCorrect": true
           },
           {
-            "text": "/* Usar try/catch para manejar errores */\nTRY\n  SET @accountRow = LookupRows(\"CustomerAccounts\", \"SubscriberKey\", @subscriberKey)\n  SET @accountStatus = Field(Row(@accountRow, 1), \"AccountStatus\")\nCATCH\n  SET @accountStatus = \"Error\"\nENDTRY",
+            "text": "/* Use try/catch to handle errors */\nTRY\n  SET @accountRow = LookupRows(\"CustomerAccounts\", \"SubscriberKey\", @subscriberKey)\n  SET @accountStatus = Field(Row(@accountRow, 1), \"AccountStatus\")\nCATCH\n  SET @accountStatus = \"Error\"\nENDTRY",
             "score": 0,
             "isCorrect": false
           }
@@ -321,10 +321,10 @@
       },
       {
         "line": 30,
-        "description": "Falta cerrar la estructura condicional IF-ELSEIF-ELSE",
+        "description": "Missing closure of the IF-ELSEIF-ELSE conditional structure",
         "possibleFixes": [
           {
-            "text": "ELSE\n  SET @recommendedProducts = LookupRows(\"RecommendedProducts\", \"CustomerSegment\", \"Inactive\")\n/* Error: Falta cerrar la estructura condicional */",
+            "text": "ELSE\n  SET @recommendedProducts = LookupRows(\"RecommendedProducts\", \"CustomerSegment\", \"Inactive\")\n/* Error: Missing conditional structure closure */",
             "score": 0,
             "isCorrect": false
           },
@@ -350,13 +350,13 @@
   {
     "id": "cs5",
     "language": "ssjs",
-    "title": "Segmentación de suscriptores con SSJS en Automation Studio",
-    "description": "Este código implementa una segmentación de suscriptores usando SSJS en un Script Activity de Automation Studio. Encuentra y corrige los problemas.",
+    "title": "Subscriber Segmentation with SSJS in Automation Studio",
+    "description": "This code implements subscriber segmentation using SSJS in an Automation Studio Script Activity. Find and fix the issues.",
     "code": "<script runat=\"server\">\n  /* Configuración para ejecutar una segmentación de suscriptores */\n  var targetDE = \"TargetSubscribers\";\n  var sourceDE = \"AllSubscribers\";\n  var daysThreshold = 30;\n  \n  /* Error: No usa try-catch para manejo de errores */\n  \n  /* Obtener la fecha actual y calcular la fecha límite */\n  var currentDate = new Date();\n  var targetDate = new Date();\n  \n  /* Error: Método incorrecto para restar días de una fecha */\n  targetDate.setDate(currentDate.getDate - daysThreshold);\n  \n  /* Formatear fechas para la consulta */\n  var formattedDate = formatDateForDE(targetDate);\n  \n  /* Crear la consulta para extraer suscriptores */\n  var query = \"\";\n  query += \"SELECT s.SubscriberKey, s.EmailAddress, s.FirstName, s.LastName, \"; \n  query += \"s.CreatedDate, s.Status \"; \n  query += \"FROM \" + sourceDE + \" s \";\n  \n  /* Error: Condición de WHERE incompleta */\n  query += \"WHERE s.CreatedDate > '\" + formattedDate + \"' \";\n  query += \"AND s.Status = Active\";\n  \n  /* Ejecutar la consulta y procesar los resultados */\n  var results = executeQuery(query);\n  \n  /* Procesar resultados y guardar en la Data Extension target */\n  var processedCount = 0;\n  var targetDataExtension = DataExtension.Init(targetDE);\n  \n  /* Error: No verifica que results sea un array antes de iterar */\n  for (var i = 0; i < results.length; i++) {\n    var subscriber = results[i];\n    \n    try {\n      /* Añadir a la Data Extension destino */\n      targetDataExtension.Rows.Add({\n        SubscriberKey: subscriber.SubscriberKey,\n        EmailAddress: subscriber.EmailAddress,\n        FirstName: subscriber.FirstName,\n        LastName: subscriber.LastName,\n        SegmentationDate: currentDate\n      });\n      processedCount++;\n    } catch (e) {\n      /* Error: No registra información específica del error */\n      Write(\"Error al procesar un suscriptor.\\n\");\n    }\n  }\n  \n  Write(\"Proceso completado. Suscriptores procesados: \" + processedCount);\n  \n  /* Función auxiliar para formatear fechas */\n  function formatDateForDE(date) {\n    return date.getFullYear() + \"-\" + \n           padNumber(date.getMonth() + 1) + \"-\" + \n           padNumber(date.getDate());\n  }\n  \n  function padNumber(number) {\n    return number < 10 ? \"0\" + number : number;\n  }\n  \n  /* Función para ejecutar queries */\n  function executeQuery(queryStr) {\n    /* Error: No utiliza la API correcta de Marketing Cloud para ejecutar consultas */\n    var query = queryStr;\n    var results = Platform.Function.QueryDE(sourceDE, queryStr);\n    return results;\n  }\n</script>",
     "issues": [
       {
         "line": 7,
-        "description": "No utiliza try-catch para manejar errores a nivel de script",
+        "description": "Does not use try-catch for script-level error handling",
         "possibleFixes": [
           {
             "text": "/* Error: No usa try-catch para manejo de errores */",
@@ -364,17 +364,17 @@
             "isCorrect": false
           },
           {
-            "text": "/* Implementar try-catch para manejo de errores */\ntry {\n  /* El código principal se colocará aquí */\n} catch(error) {\n  Write(\"Error en el proceso de segmentación: \" + error.message + \"\\n\");\n  /* Opcionalmente, enviar email de notificación al administrador */\n  sendErrorNotification(error);\n}",
+            "text": "/* Implement try-catch for error handling */\ntry {\n  /* Main code will go here */\n} catch(error) {\n  Write(\"Error in segmentation process: \" + error.message + \"\\n\");\n  /* Optionally, send notification email to administrator */\n  sendErrorNotification(error);\n}",
             "score": 10,
             "isCorrect": true
           },
           {
-            "text": "/* Crear función de log para errores */\nfunction logError(message) {\n  Platform.Function.InsertData(\"ErrorLogs\",\n    [\"ErrorMessage\", \"Timestamp\"],\n    [message, Now()]);\n}",
+            "text": "/* Create log function for errors */\nfunction logError(message) {\n  Platform.Function.InsertData(\"ErrorLogs\",\n    [\"ErrorMessage\", \"Timestamp\"],\n    [message, Now()]);\n}",
             "score": 6,
             "isCorrect": true
           },
           {
-            "text": "/* Registrar hora de inicio para debug */\nvar startTime = new Date();\nWrite(\"Inicio del proceso: \" + startTime);",
+            "text": "/* Log start time for debugging */\nvar startTime = new Date();\nWrite(\"Process start: \" + startTime);",
             "score": 2,
             "isCorrect": false
           }
@@ -382,7 +382,7 @@
       },
       {
         "line": 13,
-        "description": "Método incorrecto para restar días de una fecha",
+        "description": "Incorrect method for subtracting days from a date",
         "possibleFixes": [
           {
             "text": "targetDate.setDate(currentDate.getDate - daysThreshold);",
@@ -408,7 +408,7 @@
       },
       {
         "line": 24,
-        "description": "Error en la sintaxis SQL de la condición WHERE",
+        "description": "Error in SQL WHERE clause syntax",
         "possibleFixes": [
           {
             "text": "query += \"WHERE s.CreatedDate > '\" + formattedDate + \"' \";\nquery += \"AND s.Status = Active\";",
@@ -426,7 +426,7 @@
             "isCorrect": true
           },
           {
-            "text": "/* Cambiar la consulta completa */\nquery = \"SELECT s.SubscriberKey, s.EmailAddress, s.FirstName, s.LastName, \" +\n       \"s.CreatedDate, s.Status FROM \" + sourceDE + \" s \" +\n       \"WHERE s.CreatedDate > '\" + formattedDate + \"' \" +\n       \"AND s.Status = 'Active'\";",
+            "text": "/* Change the complete query */\nquery = \"SELECT s.SubscriberKey, s.EmailAddress, s.FirstName, s.LastName, \" +\n       \"s.CreatedDate, s.Status FROM \" + sourceDE + \" s \" +\n       \"WHERE s.CreatedDate > '\" + formattedDate + \"' \" +\n       \"AND s.Status = 'Active'\";",
             "score": 7,
             "isCorrect": true
           }

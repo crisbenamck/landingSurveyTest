@@ -1,27 +1,27 @@
 [
   {
     "id": "q1",
-    "text": "¿Qué es AMPscript en Salesforce Marketing Cloud?",
+    "text": "What is AMPscript in Salesforce Marketing Cloud?",
     "category": "ampscript",
     "difficulty": "medium",
     "possibleAnswers": [
       {
-        "text": "Un lenguaje de scripting propietario de Salesforce que se utiliza para personalizar contenido en emails, páginas web y SMS dentro de Marketing Cloud.",
+        "text": "A proprietary scripting language from Salesforce used to personalize content in emails, web pages, and SMS within Marketing Cloud.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Una herramienta para automatizar campañas de email en cualquier plataforma de marketing.",
+        "text": "A tool to automate email campaigns on any marketing platform.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Un módulo específico para gestionar la analítica en Marketing Cloud.",
+        "text": "A specific module for managing analytics in Marketing Cloud.",
         "score": 2,
         "isCorrect": false
       },
       {
-        "text": "El lenguaje estándar para crear landing pages en cualquier CRM.",
+        "text": "The standard language for creating landing pages in any CRM.",
         "score": 1,
         "isCorrect": false
       }
@@ -29,27 +29,27 @@
   },
   {
     "id": "q2",
-    "text": "¿Cuál es la diferencia entre AMPscript y SSJS en Marketing Cloud?",
+    "text": "What is the difference between AMPscript and SSJS in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "easy",
     "possibleAnswers": [
       {
-        "text": "No hay diferencia, son dos nombres para el mismo lenguaje.",
+        "text": "There is no difference, they are two names for the same language.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "AMPscript es un lenguaje proprietario de Salesforce y se procesa en tiempo real, mientras que SSJS es una implementación de JavaScript que se procesa en el servidor antes de enviar el contenido.",
+        "text": "AMPscript is a proprietary Salesforce language and is processed in real-time, while SSJS is a JavaScript implementation that is processed on the server before sending the content.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "SSJS solo funciona en emails y AMPscript en páginas web.",
+        "text": "SSJS only works in emails and AMPscript only works on web pages.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "AMPscript es para desarrolladores junior y SSJS para expertos.",
+        "text": "AMPscript is for junior developers and SSJS is for experts.",
         "score": 0,
         "isCorrect": false
       }
@@ -57,27 +57,27 @@
   },
   {
     "id": "q3",
-    "text": "¿Qué son los Data Extensions en Marketing Cloud?",
+    "text": "What are Data Extensions in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "medium",
     "possibleAnswers": [
       {
-        "text": "Tablas relacionales similares a tablas SQL que almacenan datos para su uso en Marketing Cloud.",
+        "text": "Relational tables similar to SQL tables that store data for use in Marketing Cloud.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Funciones avanzadas de AMPscript para extender datos.",
+        "text": "Advanced AMPscript functions to extend data.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Un método para conectar Marketing Cloud con bases de datos externas.",
+        "text": "A method to connect Marketing Cloud with external databases.",
         "score": 2,
         "isCorrect": false
       },
       {
-        "text": "Reportes personalizados sobre la actividad de los suscriptores.",
+        "text": "Custom reports on subscriber activity.",
         "score": 0,
         "isCorrect": false
       }
@@ -85,27 +85,27 @@
   },
   {
     "id": "q4",
-    "text": "¿Cuál es la función del tag %%[ ]%% en AMPscript?",
+    "text": "What is the function of the %%[ ]%% tag in AMPscript?",
     "category": "ampscript",
     "difficulty": "medium",
     "possibleAnswers": [
       {
-        "text": "Delimitar bloques de código AMPscript en emails y páginas web para su procesamiento.",
+        "text": "Delimiting AMPscript code blocks in emails and web pages for processing.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Indicar al sistema que ignore ese contenido durante el envío.",
+        "text": "Indicating to the system to ignore that content during sending.",
         "score": 1,
         "isCorrect": false
       },
       {
-        "text": "Insertar imágenes dinámicamente en los correos electrónicos.",
+        "text": "Dynamically inserting images into emails.",
         "score": 2,
         "isCorrect": false
       },
       {
-        "text": "Crear variables globales utilizables en toda la plataforma.",
+        "text": "Creating global variables usable throughout the platform.",
         "score": 1,
         "isCorrect": false
       }
@@ -113,27 +113,27 @@
   },
   {
     "id": "q5",
-    "text": "¿Qué es Journey Builder en Salesforce Marketing Cloud?",
+    "text": "What is Journey Builder in Salesforce Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "easy",
     "possibleAnswers": [
       {
-        "text": "Una herramienta para diseñar plantillas de email.",
+        "text": "A tool for designing email templates.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Un sistema para gestionar listas de suscriptores.",
+        "text": "A system for managing subscriber lists.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Una herramienta visual que permite crear experiencias de cliente multicanal automatizadas basadas en eventos y datos.",
+        "text": "A visual tool that allows you to create automated multi-channel customer experiences based on events and data.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Un sistema para visualizar el recorrido histórico de los clientes.",
+        "text": "A system for visualizing the historical journey of customers.",
         "score": 2,
         "isCorrect": false
       }
@@ -141,27 +141,27 @@
   },
   {
     "id": "q6",
-    "text": "¿Cómo se accede a datos de una Data Extension usando AMPscript?",
+    "text": "How do you access data from a Data Extension using AMPscript?",
     "category": "ampscript",
     "difficulty": "hard",
     "possibleAnswers": [
       {
-        "text": "Utilizando únicamente la función DataExtension().",
+        "text": "Using only the DataExtension() function.",
         "score": 3,
         "isCorrect": false
       },
       {
-        "text": "Con funciones como Lookup(), LookupRows(), LookupOrderedRows() o LookupRowsCS().",
+        "text": "With functions like Lookup(), LookupRows(), LookupOrderedRows() or LookupRowsCS().",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Solo a través de la interfaz de usuario de Content Builder.",
+        "text": "Only through the Content Builder user interface.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Utilizando exclusivamente SQL Query Activity.",
+        "text": "Using exclusively SQL Query Activity.",
         "score": 2,
         "isCorrect": false
       }
@@ -169,27 +169,27 @@
   },
   {
     "id": "q7",
-    "text": "¿Qué es Content Builder en Marketing Cloud?",
+    "text": "What is Content Builder in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "easy",
     "possibleAnswers": [
       {
-        "text": "Una herramienta para gestionar integraciones con CRM.",
+        "text": "A tool for managing CRM integrations.",
         "score": 2,
         "isCorrect": false
       },
       {
-        "text": "Un sistema de análisis de campañas de email.",
+        "text": "An email campaign analysis system.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Una herramienta centralizada para crear, gestionar y entregar contenido en Marketing Cloud.",
+        "text": "A centralized tool for creating, managing, and delivering content in Marketing Cloud.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Un editor exclusivo para código HTML.",
+        "text": "An exclusive editor for HTML code.",
         "score": 0,
         "isCorrect": false
       }
@@ -197,27 +197,27 @@
   },
   {
     "id": "q8",
-    "text": "¿Cómo se manejan las variables en AMPscript?",
+    "text": "How are variables handled in AMPscript?",
     "category": "ampscript",
     "difficulty": "hard",
     "possibleAnswers": [
       {
-        "text": "Utilizando el signo $ como prefijo para todas las variables.",
+        "text": "Using the $ sign as a prefix for all variables.",
         "score": 3,
         "isCorrect": false
       },
       {
-        "text": "Se declaran con SET @nombreVariable = valor y se accede a ellas utilizando la @ como prefijo.",
+        "text": "They are declared with SET @variableName = value and accessed using @ as a prefix.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "No se pueden crear variables en AMPscript, solo usar datos existentes.",
+        "text": "You cannot create variables in AMPscript, only use existing data.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Utilizando let o var como en JavaScript estándar.",
+        "text": "Using let or var as in standard JavaScript.",
         "score": 1,
         "isCorrect": false
       }
@@ -225,27 +225,27 @@
   },
   {
     "id": "q9",
-    "text": "¿Qué es Automation Studio en Marketing Cloud?",
+    "text": "What is Automation Studio in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "hard",
     "possibleAnswers": [
       {
-        "text": "Una herramienta para crear plantillas de diseño responsivo.",
+        "text": "A tool for creating responsive design templates.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Una herramienta para crear, gestionar y ejecutar actividades de marketing automatizadas que pueden incluir importaciones de datos, segmentaciones, envíos y más.",
+        "text": "A tool for creating, managing, and executing automated marketing activities that can include data imports, segmentations, sends, and more.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Un editor avanzado exclusivo para AMPscript.",
+        "text": "An advanced editor exclusively for AMPscript.",
         "score": 2,
         "isCorrect": false
       },
       {
-        "text": "Un sistema para programar envíos de correos electrónicos únicamente.",
+        "text": "A system for scheduling email sends only.",
         "score": 0,
         "isCorrect": false
       }
@@ -253,27 +253,27 @@
   },
   {
     "id": "q10",
-    "text": "¿Qué es la función ContentBlockByID() en AMPscript?",
+    "text": "What is the ContentBlockByID() function in AMPscript?",
     "category": "ampscript",
     "difficulty": "medium",
     "possibleAnswers": [
       {
-        "text": "Una función que solo permite mostrar imágenes guardadas en Content Builder.",
+        "text": "A function that only allows displaying images saved in Content Builder.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Una función que permite insertar contenido de un Content Block específico utilizando su ID como referencia.",
+        "text": "A function that allows you to insert content from a specific Content Block using its ID as a reference.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Una función para crear nuevos bloques de contenido dinámicamente.",
+        "text": "A function for dynamically creating new content blocks.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Una herramienta para actualizar contenido existente en la base de datos.",
+        "text": "A tool for updating existing content in the database.",
         "score": 2,
         "isCorrect": false
       }
@@ -281,27 +281,27 @@
   },
   {
     "id": "q11",
-    "text": "¿Cuál es la principal diferencia entre Script.Util.HttpRequest en SSJS y el uso de HTTPGet() en AMPscript?",
+    "text": "What is the main difference between Script.Util.HttpRequest in SSJS and using HTTPGet() in AMPscript?",
     "category": "ssjs",
     "difficulty": "medium",
     "possibleAnswers": [
       {
-        "text": "Script.Util.HttpRequest en SSJS ofrece más opciones de configuración y mayor flexibilidad para llamadas API complejas, mientras que HTTPGet() en AMPscript es más sencillo pero limitado.",
+        "text": "Script.Util.HttpRequest in SSJS offers more configuration options and greater flexibility for complex API calls, while HTTPGet() in AMPscript is simpler but more limited.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "No hay diferencia funcional entre ambos.",
+        "text": "There is no functional difference between the two.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "HTTPGet() es más rápido y siempre preferible.",
+        "text": "HTTPGet() is faster and always preferable.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Script.Util.HttpRequest solo funciona en CloudPages.",
+        "text": "Script.Util.HttpRequest only works in CloudPages.",
         "score": 0,
         "isCorrect": false
       }
@@ -309,27 +309,27 @@
   },
   {
     "id": "q12",
-    "text": "¿Qué son las CloudPages en Marketing Cloud?",
+    "text": "What are CloudPages in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "medium",
     "possibleAnswers": [
       {
-        "text": "Páginas de informes de campañas para clientes.",
+        "text": "Campaign report pages for clients.",
         "score": 1,
         "isCorrect": false
       },
       {
-        "text": "Páginas web alojadas en Marketing Cloud que pueden utilizar AMPscript, SSJS y otras funcionalidades de la plataforma.",
+        "text": "Web pages hosted in Marketing Cloud that can use AMPscript, SSJS, and other platform functionalities.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Un sistema exclusivo para almacenar imágenes en la nube.",
+        "text": "An exclusive system for storing images in the cloud.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "El nombre antiguo de Content Builder.",
+        "text": "The old name for Content Builder.",
         "score": 0,
         "isCorrect": false
       }
@@ -337,27 +337,27 @@
   },
   {
     "id": "q13",
-    "text": "¿Qué son los Salesforce Data Extensions y cómo se relacionan con Marketing Cloud?",
+    "text": "What are Salesforce Data Extensions and how do they relate to Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "hard",
     "possibleAnswers": [
       {
-        "text": "Son tablas de datos genéricas sin relación con Salesforce CRM.",
+        "text": "They are generic data tables with no relation to Salesforce CRM.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Son Data Extensions especiales que sincronizan automáticamente datos entre Salesforce CRM y Marketing Cloud mediante Marketing Cloud Connect.",
+        "text": "They are special Data Extensions that automatically synchronize data between Salesforce CRM and Marketing Cloud using Marketing Cloud Connect.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Son plantillas predefinidas para campañas de email.",
+        "text": "They are predefined templates for email campaigns.",
         "score": 1,
         "isCorrect": false
       },
       {
-        "text": "Son extensiones de código para personalizar la interfaz de usuario.",
+        "text": "They are code extensions to customize the user interface.",
         "score": 3,
         "isCorrect": false
       }
@@ -365,27 +365,27 @@
   },
   {
     "id": "q14",
-    "text": "¿Cómo se utiliza la estructura try-catch en SSJS?",
+    "text": "How is the try-catch structure used in SSJS?",
     "category": "ssjs",
     "difficulty": "hard",
     "possibleAnswers": [
       {
-        "text": "SSJS no soporta manejo de excepciones try-catch.",
+        "text": "SSJS does not support try-catch exception handling.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "Solo funciona con errores de base de datos.",
+        "text": "It only works with database errors.",
         "score": 1,
         "isCorrect": false
       },
       {
-        "text": "Se utiliza como en JavaScript estándar: try { código que puede fallar } catch(error) { manejo del error }, permitiendo capturar y gestionar errores de forma elegante.",
+        "text": "It is used as in standard JavaScript: try { code that may fail } catch(error) { error handling }, allowing you to capture and manage errors elegantly.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "Requiere una licencia especial para su uso en Marketing Cloud.",
+        "text": "It requires a special license for use in Marketing Cloud.",
         "score": 2,
         "isCorrect": false
       }
@@ -393,27 +393,27 @@
   },
   {
     "id": "q15",
-    "text": "¿Qué ventajas ofrece el uso de SSJS sobre AMPscript en Marketing Cloud?",
+    "text": "What advantages does using SSJS offer over AMPscript in Marketing Cloud?",
     "category": "ssjs",
     "difficulty": "medium",
     "possibleAnswers": [
       {
-        "text": "SSJS siempre se ejecuta más rápido que AMPscript.",
+        "text": "SSJS always executes faster than AMPscript.",
         "score": 1,
         "isCorrect": false
       },
       {
-        "text": "SSJS ofrece una sintaxis familiar para quienes conocen JavaScript, soporte para arrays y objetos complejos, y acceso a APIs adicionales como Platform y Core para interactuar con componentes de Marketing Cloud.",
+        "text": "SSJS offers a familiar syntax for those who know JavaScript, support for arrays and complex objects, and access to additional APIs such as Platform and Core to interact with Marketing Cloud components.",
         "score": 10,
         "isCorrect": true
       },
       {
-        "text": "SSJS es compatible con todos los navegadores sin limitaciones.",
+        "text": "SSJS is compatible with all browsers without limitations.",
         "score": 0,
         "isCorrect": false
       },
       {
-        "text": "SSJS permite enviar emails sin necesidad de Journey Builder.",
+        "text": "SSJS allows sending emails without the need for Journey Builder.",
         "score": 3,
         "isCorrect": false
       }
