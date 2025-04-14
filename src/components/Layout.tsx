@@ -26,12 +26,13 @@ const HeaderContent = styled.div`
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0;
   height: 84px;
+  justify-content: flex-start;
+  gap: 2rem; /* Incrementado el espacio entre elementos */
 
   @media (max-width: 768px) {
-    padding-right: 1rem;
+    padding: 0 1rem;
   }
 `;
 
@@ -39,11 +40,11 @@ const Logo = styled.div`
   display: flex;
   align-items: center;
   gap: 1.25rem;
-  padding-left: 2rem;
+  padding-left: 0;
 `;
 
 const LogoImg = styled.img`
-  height: 48px;
+  height: 38px; /* Reducido en un 20% desde 48px */
   width: auto;
 `;
 
@@ -53,7 +54,11 @@ const LogoText = styled.span`
   font-size: 1.875rem; /* Aumentado en un 50% de 1.25rem a 1.875rem */
   letter-spacing: 0.5px;
   font-family: 'Bower', 'Times New Roman', Times, serif;
-  margin-left: 4rem;
+  margin-left: 1rem;
+  
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const HamburgerButton = styled.button`
@@ -68,6 +73,7 @@ const HamburgerButton = styled.button`
     width: 30px;
     height: 30px;
     position: relative;
+    order: -1; /* Asegura que el botón hamburguesa aparezca primero en móvil */
   }
   
   &:focus {
@@ -276,11 +282,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <LayoutContainer>
       <Header>
         <HeaderContent>
-          <Logo>
-            <LogoImg src={mcKinseyLogo} alt="McKinsey Logo" />
-            <LogoText>Technical Interview</LogoText>
-          </Logo>
-          
           <HamburgerButton onClick={toggleMenu}>
             <HamburgerIcon $isOpen={isMenuOpen}>
               <span></span>
@@ -288,6 +289,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <span></span>
             </HamburgerIcon>
           </HamburgerButton>
+          
+          <Logo>
+            <LogoImg src={mcKinseyLogo} alt="McKinsey Logo" />
+          </Logo>
+          
+          <LogoText>Technical Interview</LogoText>
         </HeaderContent>
         <MobileMenuOverlay $isOpen={isMenuOpen} onClick={toggleMenu} />
       </Header>
