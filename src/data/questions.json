@@ -418,5 +418,1041 @@
         "isCorrect": false
       }
     ]
+  },
+  {
+    "id": "q16",
+    "text": "What is the purpose of the Marketing Cloud SDK?",
+    "category": "marketing_cloud",
+    "difficulty": "easy",
+    "possibleAnswers": [
+      {
+        "text": "To create custom apps that integrate with Marketing Cloud.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "To design email templates only.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "To analyze email performance.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "To create website pop-ups.",
+        "score": 1,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q17",
+    "text": "What is a Landing Page in Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "easy",
+    "possibleAnswers": [
+      {
+        "text": "A page shown only on mobile devices.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "A web page hosted in Marketing Cloud designed to capture leads or provide specific information to recipients.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "The first page users see when logging into Marketing Cloud.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "A feature exclusively for Enterprise accounts.",
+        "score": 0,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q18",
+    "text": "What is the v() function in AMPscript used for?",
+    "category": "ampscript",
+    "difficulty": "medium",
+    "possibleAnswers": [
+      {
+        "text": "It's used for validating email addresses.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "It's an alternate way to output variable values without concatenation.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "It's used for versioning AMPscript code.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "It's only used in CloudPages for visualization.",
+        "score": 1,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q19",
+    "text": "What is the purpose of the CreateSendEvent() function in AMPscript?",
+    "category": "ampscript",
+    "difficulty": "hard",
+    "possibleAnswers": [
+      {
+        "text": "It's only used to create new email templates.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "It sends an email using a triggered send definition.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "It creates a new event in Automation Studio.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "It schedules email sends for a later date.",
+        "score": 1,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q20",
+    "text": "What is MobilePush in Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "medium",
+    "possibleAnswers": [
+      {
+        "text": "A feature to optimize email rendering on mobile devices.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "A solution for creating and sending push notifications to mobile app users.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "A feature to push data between Marketing Cloud instances.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "A tool to design mobile websites.",
+        "score": 1,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q21",
+    "text": "How do you debug SSJS code in Marketing Cloud?",
+    "category": "ssjs",
+    "difficulty": "hard",
+    "possibleAnswers": [
+      {
+        "text": "Using browser developer tools like in normal JavaScript.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "Using Write() or Platform.Response.Write() to output variable values and debug information to the page or email.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "Using a built-in debugger in Marketing Cloud Studio.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Debugging is not possible in SSJS.",
+        "score": 0,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q22",
+    "text": "What are Guide Template Language (GTL) and Content Blocks in Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "medium",
+    "possibleAnswers": [
+      {
+        "text": "GTL is a proprietary language used for creating templates, and Content Blocks are reusable pieces of content stored in Content Builder.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "They are outdated technologies no longer used in Marketing Cloud.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "GTL is only used in Journey Builder, and Content Blocks are exclusive to Email Studio.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "They are the same thing with different names.",
+        "score": 0,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q23",
+    "text": "What are event-driven triggers in Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "expert",
+    "possibleAnswers": [
+      {
+        "text": "Triggers are used only for scheduling emails.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "They are mechanisms that initiate journeys or sends based on subscriber actions like form submissions, API calls, or data changes.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "They are premium features not available in standard Marketing Cloud.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "They only work for mobile push notifications.",
+        "score": 2,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q24",
+    "text": "How does the Platform.Function.ParseJSON method work in SSJS?",
+    "category": "ssjs",
+    "difficulty": "expert",
+    "possibleAnswers": [
+      {
+        "text": "It only works for simple JSON structures.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "It's not available in Marketing Cloud SSJS.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "It converts a JSON string into a JavaScript object that can be manipulated in SSJS code.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "It requires specific permissions to use.",
+        "score": 1,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q25",
+    "text": "What is the difference between Shared and Local Data Extensions?",
+    "category": "marketing_cloud",
+    "difficulty": "hard",
+    "possibleAnswers": [
+      {
+        "text": "There is no difference technically, only in their naming convention.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Shared Data Extensions are accessible across business units while Local Data Extensions are accessible only within the business unit where they're created.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "Local Data Extensions can only store customer data.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "Shared Data Extensions are read-only.",
+        "score": 1,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q26",
+    "text": "What is the purpose of the Upsert method in SSJS Data Extensions?",
+    "category": "ssjs",
+    "difficulty": "expert",
+    "possibleAnswers": [
+      {
+        "text": "It's only used for deleting rows in a Data Extension.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "It is a combination of 'update' and 'insert' that will update a record if it exists based on the primary key, or insert a new record if it doesn't exist.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "It only sorts data in a Data Extension.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "It's used to create new Data Extensions programmatically.",
+        "score": 2,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q27",
+    "text": "What is the ContentAreaByName() function in AMPscript used for?",
+    "category": "ampscript",
+    "difficulty": "medium",
+    "possibleAnswers": [
+      {
+        "text": "It's only used for retrieving images from Content Builder.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "It retrieves a content area from Classic Content by its name for use in an email or page.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "It's a function for creating new content areas dynamically.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "It extracts text from Content Builder blocks.",
+        "score": 1,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q28",
+    "text": "What are Behavioral Triggers in Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "expert",
+    "possibleAnswers": [
+      {
+        "text": "They are only available in Journey Builder.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "They allow you to send personalized messages based on subscriber behaviors like browsing patterns, abandoned carts, or specific interactions with your brand.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "They're used to block suspicious email activity.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "They're exclusively for mobile push notifications.",
+        "score": 1,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q29",
+    "text": "How do you implement complex decision logic in AMPscript?",
+    "category": "ampscript",
+    "difficulty": "expert",
+    "possibleAnswers": [
+      {
+        "text": "Complex logic isn't possible in AMPscript.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Using IF/ELSEIF/ELSE statements, FOR loops, and WHILE loops to create conditional branching logic and iterations.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "Only by using external JavaScript.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "Only through Content Builder interface wizards.",
+        "score": 2,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q30",
+    "text": "What is the purpose of the Platform.Request.GetFormField() method in SSJS?",
+    "category": "ssjs",
+    "difficulty": "expert",
+    "possibleAnswers": [
+      {
+        "text": "It is used exclusively for validating email formats.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "It retrieves values submitted in a form from the HTTP request, allowing you to capture user input from CloudPages forms.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "It is used only in Automation Studio.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "It's a security validation method for API calls.",
+        "score": 2,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q31",
+    "text": "What is Einstein in Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "hard",
+    "possibleAnswers": [
+      {
+        "text": "A tool for creating email templates with AI.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "Salesforce's AI technology that provides predictive intelligence, recommendations, and automation capabilities in Marketing Cloud to enhance personalization and optimization.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "A specialized SSJS framework for complex calculations.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "A premium email sending service.",
+        "score": 1,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q32",
+    "text": "What is the proper way to use ContentBlockByKey() in AMPscript?",
+    "category": "ampscript",
+    "difficulty": "expert",
+    "possibleAnswers": [
+      {
+        "text": "It can only be used in emails, not in CloudPages.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "ContentBlockByKey('content-key') retrieves a content block from Content Builder using its external key, and can be used across business units when set up correctly.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "It's only for retrieving image content.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "It requires special permissions to use.",
+        "score": 2,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q33",
+    "text": "How do you handle asynchronous operations in SSJS?",
+    "category": "ssjs",
+    "difficulty": "expert",
+    "possibleAnswers": [
+      {
+        "text": "Using promises and async/await just like in modern JavaScript.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "SSJS does not support true asynchronous operations; all code executes synchronously. For API calls, you must use blocking methods and handle responses sequentially.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "Using setTimeout() functions.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "Only by implementing custom JavaScript libraries.",
+        "score": 1,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q34",
+    "text": "What is Interaction Studio in Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "expert",
+    "possibleAnswers": [
+      {
+        "text": "A tool exclusively for email template design.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "A real-time personalization and interaction management engine that tracks customer behavior across channels and delivers contextualized experiences.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "A special version of Content Builder for mobile apps.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "A deprecated feature in Marketing Cloud.",
+        "score": 1,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q35",
+    "text": "What is the purpose of the Transactional Messaging API in Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "expert",
+    "possibleAnswers": [
+      {
+        "text": "It's used only for SMS messages.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "It allows you to send real-time, personalized, event-triggered transactional messages like order confirmations or password resets via a REST API.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "It's only for financial transactions tracking.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "It's a payment gateway within Marketing Cloud.",
+        "score": 2,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q36",
+    "text": "What is the purpose of Contact Builder in Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "easy",
+    "possibleAnswers": [
+      {
+        "text": "A tool for creating contact forms on websites.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "A centralized place to view and manage customer data, attributes, and subscriber relationships across Marketing Cloud.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "A feature for building contact lists manually.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "A tool only available in Enterprise editions of Marketing Cloud.",
+        "score": 0,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q37",
+    "text": "What is Subscriber Key in Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "easy",
+    "possibleAnswers": [
+      {
+        "text": "A unique identifier for subscribers that allows for consistent identification across channels and solutions in Marketing Cloud.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "An encryption key used to secure subscriber data.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "A feature only available in premium accounts.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "A password subscribers use to access their preference center.",
+        "score": 2,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q38",
+    "text": "What are Business Units in Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "medium",
+    "possibleAnswers": [
+      {
+        "text": "Financial tracking categories for billing purposes only.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Separate, autonomous Marketing Cloud environments that can represent different brands, regions, or business functions within an organization.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "User role categories for assigning permissions.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "Campaign categories for organizing marketing activities.",
+        "score": 1,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q39",
+    "text": "What is the Marketing Cloud Connect?",
+    "category": "marketing_cloud",
+    "difficulty": "medium",
+    "possibleAnswers": [
+      {
+        "text": "A tool for connecting Marketing Cloud to external databases only.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "An integration that connects Salesforce CRM and Marketing Cloud, allowing data and functionality to be shared between the platforms.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "A network monitoring tool for Marketing Cloud servers.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "A mobile app for Marketing Cloud administrators.",
+        "score": 2,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q40",
+    "text": "What is a Suppression List in Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "easy",
+    "possibleAnswers": [
+      {
+        "text": "A list of email templates that are no longer in use.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "A list of email addresses that should not receive communications, even if they are in a sendable Data Extension.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "A list of blocked IP addresses.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "A list of deprecated features in Marketing Cloud.",
+        "score": 1,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q41",
+    "text": "What is a Publication List in Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "easy",
+    "possibleAnswers": [
+      {
+        "text": "A list of all publications created in Content Builder.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "A list that represents a subscriber's opt-in to a specific type of communication, used for compliance with privacy regulations.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "A report showing all sent emails in chronological order.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "A list of scheduled publications for future sends.",
+        "score": 2,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q42",
+    "text": "What is the purpose of Audience Builder in Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "medium",
+    "possibleAnswers": [
+      {
+        "text": "A tool exclusively for importing contacts from external systems.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "A tool for creating and managing segments of subscribers based on attributes, behaviors, and other criteria for targeted marketing.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "A system for building custom forms for data collection.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "A feature only available in premium editions.",
+        "score": 0,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q43",
+    "text": "What is the role of Sender Authentication Package (SAP) in Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "hard",
+    "possibleAnswers": [
+      {
+        "text": "It's only used for account security within Marketing Cloud.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "It establishes trusted sending domains, improves deliverability, and provides brand consistency by authenticating email sending domains through DKIM, SenderID, and custom sending domains.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "It's a package for authenticating users in the Marketing Cloud interface.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "It's only for tracking email opens and clicks securely.",
+        "score": 2,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q44",
+    "text": "What is the importance of IP Warming in Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "hard",
+    "possibleAnswers": [
+      {
+        "text": "It's a process to increase server performance during peak sending times.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "It's a gradual process of establishing a positive sending reputation for new IP addresses by incrementally increasing email volume over time to improve deliverability.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "It's a technical check to ensure IP addresses are properly configured.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "It's only relevant for companies sending more than 10 million emails daily.",
+        "score": 0,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q45",
+    "text": "What are Data Filters in Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "medium",
+    "possibleAnswers": [
+      {
+        "text": "Tools used only for data validation during imports.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Saved SQL queries that can be applied to Data Extensions to segment data without creating new Data Extensions.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "Security features that prevent unauthorized data access.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "Compression algorithms to reduce database size.",
+        "score": 1,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q46",
+    "text": "What is the purpose of Google Analytics 360 integration with Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "hard",
+    "possibleAnswers": [
+      {
+        "text": "It's only used for tracking email opens and clicks.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "It allows for bidirectional data sharing between Marketing Cloud and Google Analytics 360, enabling the creation of audiences based on web behavior and comprehensive campaign performance analysis across channels.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "It's exclusively for AdWords campaign management.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "It's a reporting dashboard with limited functionality.",
+        "score": 0,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q47",
+    "text": "What is the purpose of the Query Activity in Automation Studio?",
+    "category": "marketing_cloud",
+    "difficulty": "hard",
+    "possibleAnswers": [
+      {
+        "text": "It's only used for report generation.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "It allows you to use SQL to extract, filter, and manipulate data from Data Extensions and create target audiences for marketing activities.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "It's exclusively for data imports from external systems.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "It's a debugging tool for technical issues.",
+        "score": 2,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q48",
+    "text": "What are the key considerations for email deliverability in Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "expert",
+    "possibleAnswers": [
+      {
+        "text": "Only email design and content matter for deliverability.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Key factors include proper authentication (SPF, DKIM, DMARC), IP reputation management, engagement-based sending, list hygiene, content quality, and compliance with anti-spam laws.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "Deliverability is only determined by the sending volume.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "Deliverability is only influenced by the email service provider's reputation.",
+        "score": 2,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q49",
+    "text": "What is Distributed Marketing in Salesforce Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "expert",
+    "possibleAnswers": [
+      {
+        "text": "A feature for managing multiple Marketing Cloud instances.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "A solution that allows corporate marketers to create templates and journeys that local business units or partners can personalize and deploy while maintaining brand consistency and compliance.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "A system for distributing marketing budgets across departments.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "A tool for segmenting audiences by geographic location only.",
+        "score": 2,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q50",
+    "text": "What is the role of Data Designer in Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "expert",
+    "possibleAnswers": [
+      {
+        "text": "A tool exclusively for creating data visualizations.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "A visual interface in Contact Builder that allows you to define and visualize the relationships between data extensions and attribute groups to create a unified customer profile.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "A system for designing database schemas outside of Marketing Cloud.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "A feature only available in premium editions for advanced reporting.",
+        "score": 1,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q51",
+    "text": "What is the significance of RFM (Recency, Frequency, Monetary) analysis in Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "expert",
+    "possibleAnswers": [
+      {
+        "text": "It's only used for technical performance monitoring.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "A customer segmentation approach that analyzes how recently a customer purchased (Recency), how often they purchase (Frequency), and how much they spend (Monetary) to identify high-value customers and tailor marketing strategies accordingly.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "A coding framework specific to Marketing Cloud development.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "A reporting standard for email campaign metrics.",
+        "score": 2,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q52",
+    "text": "What are Customer Data Platforms (CDPs) and how do they relate to Marketing Cloud?",
+    "category": "marketing_cloud",
+    "difficulty": "expert",
+    "possibleAnswers": [
+      {
+        "text": "CDPs are only relevant for non-Salesforce customers.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Customer Data Platforms are systems that create unified customer databases accessible to other systems; Salesforce CDP integrates with Marketing Cloud to provide a complete view of customers across all touchpoints for more personalized messaging.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "CDPs are deprecated technologies replaced by Marketing Cloud.",
+        "score": 1,
+        "isCorrect": false
+      },
+      {
+        "text": "CDPs are only focused on data collection, with no relation to marketing execution.",
+        "score": 2,
+        "isCorrect": false
+      }
+    ]
   }
 ]
