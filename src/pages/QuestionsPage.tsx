@@ -232,7 +232,7 @@ const QuestionsPage: React.FC = () => {
   return (
     <PageContainer>
       <Header>
-        <Title>Preguntas Técnicas</Title>
+        <Title>Technical Questions</Title>
         <Timer timeRunningOut={isTimeRunningOut}>
           {formatTime(timeRemaining)}
         </Timer>
@@ -240,8 +240,8 @@ const QuestionsPage: React.FC = () => {
       
       <ProgressContainer>
         <ProgressLabel>
-          <span>Pregunta {questionIndex + 1} de {settings.questionCount}</span>
-          <span>{Math.round(progressPercent)}% Completado</span>
+          <span>Question {questionIndex + 1} of {settings.questionCount}</span>
+          <span>{Math.round(progressPercent)}% Complete</span>
         </ProgressLabel>
         <ProgressBar>
           <Progress percent={progressPercent} />
@@ -256,9 +256,9 @@ const QuestionsPage: React.FC = () => {
             'error'
           }>
             {
-              currentQuestion.difficulty === 'easy' ? 'Fácil' :
-              currentQuestion.difficulty === 'medium' ? 'Media' :
-              'Difícil'
+              currentQuestion.difficulty === 'easy' ? 'Easy' :
+              currentQuestion.difficulty === 'medium' ? 'Medium' :
+              'Hard'
             }
           </Tag>
           <Tag color="secondary">{currentQuestion.category}</Tag>
@@ -284,14 +284,14 @@ const QuestionsPage: React.FC = () => {
           variant="secondary"
           onClick={() => navigate('/')}
         >
-          Cancelar Entrevista
+          Cancel Interview
         </Button>
         
         <Button
           onClick={handleNextQuestion}
           disabled={effectiveSelectedAnswer === null}
         >
-          {questionIndex === settings.questionCount - 1 ? 'Ir a Ejercicios de Código' : 'Siguiente Pregunta'}
+          {questionIndex === settings.questionCount - 1 ? 'Go to Code Exercises' : 'Next Question'}
         </Button>
       </ButtonsContainer>
     </PageContainer>
