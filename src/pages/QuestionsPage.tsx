@@ -261,12 +261,14 @@ const QuestionsPage: React.FC = () => {
           <Tag color={
             currentQuestion.difficulty === 'easy' ? 'success' :
             currentQuestion.difficulty === 'medium' ? 'warning' :
-            'error'
+            currentQuestion.difficulty === 'hard' ? 'error' :
+            'secondary' // Para 'expert'
           }>
             {
               currentQuestion.difficulty === 'easy' ? 'Easy' :
               currentQuestion.difficulty === 'medium' ? 'Medium' :
-              'Hard'
+              currentQuestion.difficulty === 'hard' ? 'Hard' :
+              'Expert'
             }
           </Tag>
           <Tag color="secondary">{currentQuestion.category}</Tag>
