@@ -132,9 +132,9 @@ const ConfigPage: React.FC = () => {
   const { settings, updateSettings, startInterview } = useInterviewContext();
   
   const categories = [
-    { id: 'javascript', label: 'JavaScript' },
-    { id: 'react', label: 'React' },
-    { id: 'general', label: 'Conceptos Generales' },
+    { id: 'ampscript', label: 'AMPscript' },
+    { id: 'ssjs', label: 'Server-Side JavaScript' },
+    { id: 'marketing_cloud', label: 'Marketing Cloud' },
   ];
   
   const handleCategoryToggle = (categoryId: string) => {
@@ -156,12 +156,12 @@ const ConfigPage: React.FC = () => {
     
     // Validate settings
     if (!settings.candidateName.trim()) {
-      alert('Por favor ingresa el nombre del candidato');
+      alert('Please enter the candidate name');
       return;
     }
     
     if (settings.selectedCategories.length === 0) {
-      alert('Por favor selecciona al menos una categoría');
+      alert('Please select at least one category');
       return;
     }
     
@@ -173,26 +173,26 @@ const ConfigPage: React.FC = () => {
   return (
     <PageContainer>
       <PageHeader>
-        <Title>Configuración de la Entrevista</Title>
-        <Subtitle>Complete la siguiente información para iniciar una evaluación técnica</Subtitle>
+        <Title>Interview Configuration</Title>
+        <Subtitle>Complete the following information to start a technical assessment</Subtitle>
       </PageHeader>
       
       <Form onSubmit={handleStartInterview}>
         <FormGroup>
-          <Label htmlFor="candidateName">Nombre del Candidato</Label>
+          <Label htmlFor="candidateName">Candidate Name</Label>
           <Input
             id="candidateName"
             type="text"
             value={settings.candidateName}
             onChange={(e) => updateSettings({ candidateName: e.target.value })}
-            placeholder="Ingresa el nombre del candidato"
+            placeholder="Enter candidate name"
           />
         </FormGroup>
         
         <Separator />
         
         <FormGroup>
-          <Label>Categorías</Label>
+          <Label>Categories</Label>
           <CheckboxGroup>
             {categories.map((category) => (
               <CheckboxLabel key={category.id} checked={settings.selectedCategories.includes(category.id)}>
@@ -207,23 +207,23 @@ const ConfigPage: React.FC = () => {
         </FormGroup>
         
         <FormGroup>
-          <Label htmlFor="difficulty">Nivel de Dificultad</Label>
+          <Label htmlFor="difficulty">Difficulty Level</Label>
           <Select
             id="difficulty"
             value={settings.difficultyLevel}
             onChange={(e) => updateSettings({ difficultyLevel: e.target.value as any })}
           >
-            <option value="easy">Fácil</option>
-            <option value="medium">Media</option>
-            <option value="hard">Difícil</option>
-            <option value="mixed">Mixta</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+            <option value="mixed">Mixed</option>
           </Select>
         </FormGroup>
         
         <Separator />
         
         <FormGroup>
-          <Label htmlFor="questionCount">Número de Preguntas</Label>
+          <Label htmlFor="questionCount">Number of Questions</Label>
           <Input
             id="questionCount"
             type="number"
@@ -235,7 +235,7 @@ const ConfigPage: React.FC = () => {
         </FormGroup>
         
         <FormGroup>
-          <Label htmlFor="codeSnippetCount">Número de Ejercicios de Código</Label>
+          <Label htmlFor="codeSnippetCount">Number of Code Exercises</Label>
           <Input
             id="codeSnippetCount"
             type="number"
@@ -247,7 +247,7 @@ const ConfigPage: React.FC = () => {
         </FormGroup>
         
         <FormGroup>
-          <Label htmlFor="timeLimit">Tiempo Límite (minutos)</Label>
+          <Label htmlFor="timeLimit">Time Limit (minutes)</Label>
           <Input
             id="timeLimit"
             type="number"
@@ -258,7 +258,7 @@ const ConfigPage: React.FC = () => {
           />
         </FormGroup>
         
-        <StartButton type="submit">Iniciar Entrevista</StartButton>
+        <StartButton type="submit">Start Interview</StartButton>
       </Form>
     </PageContainer>
   );
