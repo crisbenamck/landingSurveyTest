@@ -140,7 +140,7 @@ const Sidebar = styled.div<{ $isOpen: boolean }>`
     transform: ${({ $isOpen }) => ($isOpen ? 'translateX(0)' : 'translateX(-100%)')};
     transition: transform 0.3s ease-in-out;
     box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
-    z-index: 999;
+    z-index: 1001; /* Aumentado para estar por encima del overlay */
   }
 `;
 
@@ -161,7 +161,8 @@ const MobileMenuOverlay = styled.div<{ $isOpen: boolean }>`
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 998;
+    z-index: 1000;
+    pointer-events: ${({ $isOpen }) => ($isOpen ? 'auto' : 'none')}; /* Permitir eventos de click solo cuando está abierto */
   }
 `;
 
@@ -178,10 +179,11 @@ const StyledNavLink = styled.div<{ $active: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer; /* Agregar cursor pointer para indicar que es clickeable */
   
   &:hover {
     color: #00a9f4;
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.05); /* Agregar un fondo sutil al hover */
   }
 `;
 
@@ -267,7 +269,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      if (isMenuOpen && !target.closest('nav') && !target.closest('button')) {
+      // Solo cerrar el menú si se hace click en el overlay, pero no en el menú o su botón
+      if (isMenuOpen && target.closest('.mobile-menu-overlay') && !target.closest('nav') && !target.closest('button')) {
         setMenuOpen(false);
       }
     };
@@ -296,7 +299,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           
           <LogoText>Technical Interview</LogoText>
         </HeaderContent>
-        <MobileMenuOverlay $isOpen={isMenuOpen} onClick={toggleMenu} />
+        <MobileMenuOverlay className="mobile-menu-overlay" $isOpen={isMenuOpen} onClick={toggleMenu} />
       </Header>
       
       <MainContainer>
