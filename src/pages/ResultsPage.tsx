@@ -197,17 +197,17 @@ const ResultsPage: React.FC = () => {
   const formatTime = (seconds: number): string => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    return `${minutes} minutos y ${remainingSeconds} segundos`;
+    return `${minutes} minutes and ${remainingSeconds} seconds`;
   };
 
   // Get feedback based on total score percentage
   const getFeedback = (percentage: number): string => {
-    if (percentage >= 90) return "¡Excelente! Demuestras un conocimiento excepcional en los temas evaluados.";
-    if (percentage >= 80) return "¡Muy bien! Tienes un sólido dominio de los conceptos evaluados.";
-    if (percentage >= 70) return "Bien. Has mostrado un buen conocimiento de los temas principales.";
-    if (percentage >= 60) return "Aceptable. Tienes conocimientos básicos pero hay áreas por mejorar.";
-    if (percentage >= 50) return "Regular. Necesitas reforzar varios conceptos importantes.";
-    return "Necesitas mejorar significativamente tu conocimiento en estos temas.";
+    if (percentage >= 90) return "Excellent! You demonstrate exceptional knowledge in the evaluated topics.";
+    if (percentage >= 80) return "Very good! You have a solid understanding of the evaluated concepts.";
+    if (percentage >= 70) return "Good. You have shown good knowledge of the main topics.";
+    if (percentage >= 60) return "Acceptable. You have basic knowledge but there are areas to improve.";
+    if (percentage >= 50) return "Fair. You need to reinforce several important concepts.";
+    return "You need to significantly improve your knowledge in these topics.";
   };
 
   // Calculate maximum possible score
@@ -217,58 +217,58 @@ const ResultsPage: React.FC = () => {
   return (
     <PageContainer>
       <Header>
-        <Title>Resultados de la Entrevista</Title>
-        <Subtitle>Candidato: {settings.candidateName}</Subtitle>
+        <Title>Interview Results</Title>
+        <Subtitle>Candidate: {settings.candidateName}</Subtitle>
       </Header>
 
       <ResultsContainer>
-        <SectionTitle>Resumen de Resultados</SectionTitle>
+        <SectionTitle>Results Summary</SectionTitle>
         
         <ScoreSummary score={totalPercentage}>
           <ScoreText>
-            <ScoreLabel>Puntuación General</ScoreLabel>
+            <ScoreLabel>Overall Score</ScoreLabel>
             <TimeDisplay>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
               </svg>
-              Tiempo utilizado: {formatTime(results.timeSpent)}
+              Time used: {formatTime(results.timeSpent)}
             </TimeDisplay>
           </ScoreText>
           <ScoreBadge score={totalPercentage}>{totalPercentage}%</ScoreBadge>
         </ScoreSummary>
 
-        <SectionTitle>Detalle de Preguntas Técnicas</SectionTitle>
+        <SectionTitle>Technical Questions Details</SectionTitle>
         <ScoreBreakdown>
           {results.questionScores.map((score, index) => (
             <ScoreItem key={index} score={score.score}>
-              <ScoreItemTitle>Pregunta {index + 1}</ScoreItemTitle>
-              <ScoreValue score={score.score}>{score.score} puntos</ScoreValue>
+              <ScoreItemTitle>Question {index + 1}</ScoreItemTitle>
+              <ScoreValue score={score.score}>{score.score} points</ScoreValue>
             </ScoreItem>
           ))}
         </ScoreBreakdown>
 
-        <SectionTitle>Detalle de Ejercicios de Código</SectionTitle>
+        <SectionTitle>Code Exercises Details</SectionTitle>
         <ScoreBreakdown>
           {results.codeScores.map((score, index) => (
             <ScoreItem key={index} score={score.score}>
-              <ScoreItemTitle>Ejercicio {index + 1}</ScoreItemTitle>
-              <ScoreValue score={score.score}>{score.score} puntos</ScoreValue>
+              <ScoreItemTitle>Exercise {index + 1}</ScoreItemTitle>
+              <ScoreValue score={score.score}>{score.score} points</ScoreValue>
             </ScoreItem>
           ))}
         </ScoreBreakdown>
 
         <SummarySection>
-          <SummaryTitle>Evaluación Final</SummaryTitle>
+          <SummaryTitle>Final Evaluation</SummaryTitle>
           <SummaryDescription>{getFeedback(totalPercentage)}</SummaryDescription>
         </SummarySection>
 
         <ButtonsContainer>
           <Button variant="secondary" onClick={() => window.print()}>
-            Imprimir Resultados
+            Print Results
           </Button>
           <Button onClick={() => navigate('/')}>
-            Nueva Entrevista
+            New Interview
           </Button>
         </ButtonsContainer>
       </ResultsContainer>
