@@ -302,7 +302,12 @@ const QuestionsPage: React.FC = () => {
               'Expert'
             }
           </Tag>
-          <Tag color="secondary">{currentQuestion.category}</Tag>
+          <Tag color="secondary">
+            {currentQuestion.category === 'marketing_cloud' ? 'Marketing Cloud' :
+             currentQuestion.category === 'ampscript' ? 'AMPscript' :
+             currentQuestion.category === 'ssjs' ? 'SSJS' :
+             currentQuestion.category.charAt(0).toUpperCase() + currentQuestion.category.slice(1)}
+          </Tag>
         </QuestionMeta>
         
         <QuestionText>{currentQuestion.text}</QuestionText>

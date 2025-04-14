@@ -429,7 +429,14 @@ const CodeCorrectionPage: React.FC = () => {
             <Tag color="primary">
               Exercise {codeSnippetIndex + 1} of {settings.codeSnippetCount}
             </Tag>
-            <Tag color="secondary">{currentCodeSnippet.language}</Tag>
+            <Tag color="secondary">
+              {currentCodeSnippet.language === 'javascript' ? 'JavaScript' :
+               currentCodeSnippet.language === 'typescript' ? 'TypeScript' :
+               currentCodeSnippet.language === 'ssjs' ? 'SSJS' :
+               currentCodeSnippet.language === 'marketing_cloud' ? 'Marketing Cloud' :
+               currentCodeSnippet.language === 'ampscript' ? 'AMPscript' :
+               currentCodeSnippet.language.charAt(0).toUpperCase() + currentCodeSnippet.language.slice(1)}
+            </Tag>
           </TagsContainer>
           
           <CodeTitle>{currentCodeSnippet.title}</CodeTitle>
@@ -440,7 +447,10 @@ const CodeCorrectionPage: React.FC = () => {
           <CodeHeader>
             {currentCodeSnippet.language === 'javascript' ? 'JavaScript' :
              currentCodeSnippet.language === 'typescript' ? 'TypeScript' :
-             currentCodeSnippet.language}
+             currentCodeSnippet.language === 'ssjs' ? 'SSJS' :
+             currentCodeSnippet.language === 'marketing_cloud' ? 'Marketing Cloud' :
+             currentCodeSnippet.language === 'ampscript' ? 'AMPscript' :
+             currentCodeSnippet.language.charAt(0).toUpperCase() + currentCodeSnippet.language.slice(1)}
           </CodeHeader>
           <CodeContent>
             {codeLines.map((line, index) => (
