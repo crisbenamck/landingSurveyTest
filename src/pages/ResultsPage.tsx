@@ -166,14 +166,17 @@ const ButtonsContainer = styled.div`
   margin-top: 3rem;
 `;
 
-const Button = styled.button<{ $variant?: 'primary' | 'secondary' }>`
+const Button = styled.button<{ $variant?: 'primary' | 'secondary' | 'cancel' }>`
   padding: 0.75rem 1.5rem;
   background-color: ${({ theme, $variant }) => 
-    $variant === 'secondary' ? 'transparent' : '#2251ff'};
+    $variant === 'secondary' ? 'transparent' : 
+    $variant === 'cancel' ? 'white' : '#2251ff'};
   color: ${({ theme, $variant }) => 
-    $variant === 'secondary' ? theme.colors.text.primary : 'white'};
+    $variant === 'secondary' ? theme.colors.text.primary : 
+    $variant === 'cancel' ? '#2251ff' : 'white'};
   border: ${({ theme, $variant }) => 
-    $variant === 'secondary' ? `1px solid ${theme.colors.grey[300]}` : 'none'};
+    $variant === 'secondary' ? `1px solid ${theme.colors.grey[300]}` :
+    $variant === 'cancel' ? '1px solid #2251ff' : '1px solid #2251ff'};
   border-radius: 0;
   font-weight: 500;
   cursor: pointer;
@@ -181,7 +184,14 @@ const Button = styled.button<{ $variant?: 'primary' | 'secondary' }>`
   
   &:hover {
     background-color: ${({ theme, $variant }) => 
-      $variant === 'secondary' ? theme.colors.grey[200] : '#1a41cc'};
+      $variant === 'secondary' ? theme.colors.text.primary : 
+      $variant === 'cancel' ? '#2251ff' : 'white'};
+    color: ${({ theme, $variant }) => 
+      $variant === 'secondary' ? 'white' : 
+      $variant === 'cancel' ? 'white' : '#2251ff'};
+    border-color: ${({ $variant }) => 
+      $variant === 'cancel' ? '#2251ff' : 
+      $variant === 'secondary' ? theme.colors.text.primary : '#2251ff'};
   }
   
   &:focus {
@@ -278,7 +288,7 @@ const ResultsPage: React.FC = () => {
         </SummarySection>
 
         <ButtonsContainer>
-          <Button $variant="secondary" onClick={() => window.print()}>
+          <Button $variant="cancel" onClick={() => window.print()}>
             Print Results
           </Button>
           <Button onClick={() => navigate('/')}>
