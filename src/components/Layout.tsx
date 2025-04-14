@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { useInterviewContext } from '@hooks/useInterviewContext';
 
 // Importar el logo local directamente (esto es compatible con Vite)
@@ -11,6 +11,24 @@ const LayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative; /* Esto es importante para el posicionamiento del contenido */
+`;
+
+// Estilo global que se aplicará cuando el menú esté abierto
+const GlobalStyleMenuOpen = createGlobalStyle<{ $menuOpen: boolean }>`
+  ${({ $menuOpen }) => $menuOpen && `
+    body, html {
+      overflow: hidden !important;
+    }
+    
+    form {
+      overflow: hidden !important;
+    }
+    
+    /* Evitar scroll en todos los contenedores con scroll */
+    .scroll-container, div[style*="overflow"] {
+      overflow: hidden !important;
+    }
+  `}
 `;
 
 const Header = styled.header`
@@ -264,7 +282,7 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const Footer = styled.footer`
+const Footer = styled.footer<{ $menuOpen?: boolean }>`
   background-color: #f5f5f5;
   padding: 2rem;
   text-align: center;
@@ -275,6 +293,10 @@ const Footer = styled.footer`
   z-index: 1002; /* Aumentado para estar por encima del menú */
   margin-top: auto;
   position: relative;
+  
+  @media (max-width: 768px) {
+    display: ${({ $menuOpen }) => ($menuOpen ? 'none' : 'block')};
+  }
 `;
 
 interface LayoutProps {
@@ -333,6 +355,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <LayoutContainer>
+      <GlobalStyleMenuOpen $menuOpen={isMenuOpen} />
       <Header>
         <HeaderContent>
           <HamburgerButton onClick={toggleMenu}>
@@ -385,7 +408,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </Main>
       </MainContainer>
       
-      <Footer ref={footerRef}>
+      <Footer ref={footerRef} $menuOpen={isMenuOpen}>
         © {new Date().getFullYear()} Technical Interview - Evaluation System for Developers
       </Footer>
     </LayoutContainer>
