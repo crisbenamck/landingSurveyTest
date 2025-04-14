@@ -62,26 +62,28 @@ const QuestionMeta = styled.div`
 
 const Tag = styled.span`
   background-color: ${({ theme, color }: { theme: any; color: string }) => {
-    // Usar colores con mayor contraste para el fondo
-    if (color === 'success') return '#e6f4f4'; // Verde más claro para el fondo
-    if (color === 'warning') return '#fff3cd'; // Amarillo más claro para el fondo
-    if (color === 'error') return '#f8d7da'; // Rojo más claro para el fondo
-    if (color === 'secondary') return '#e2eaf2'; // Azul más claro para el fondo
+    // Fondo más claro pero con suficiente contraste
+    if (color === 'success') return '#d1e7dd'; // Verde claro con mejor contraste
+    if (color === 'warning') return '#fff3cd'; // Amarillo claro
+    if (color === 'error') return '#f8d7da'; // Rojo claro
+    if (color === 'primary') return '#cfe2ff'; // Azul claro para Expert
+    if (color === 'secondary') return '#e2e3e5'; // Gris claro para categorías
     return theme.colors[color].light;
   }};
   color: ${({ theme, color }: { theme: any; color: string }) => {
-    // Usar colores más oscuros para el texto, garantizando un buen contraste
-    if (color === 'success') return '#00504f'; // Verde más oscuro para el texto
-    if (color === 'warning') return '#856404'; // Amarillo más oscuro para el texto
-    if (color === 'error') return '#721c24'; // Rojo más oscuro para el texto
-    if (color === 'secondary') return '#042f5b'; // Azul más oscuro para el texto
+    // Texto oscuro para garantizar legibilidad
+    if (color === 'success') return '#0f5132'; // Verde oscuro 
+    if (color === 'warning') return '#664d03'; // Amarillo oscuro
+    if (color === 'error') return '#842029'; // Rojo oscuro
+    if (color === 'primary') return '#084298'; // Azul oscuro para Expert
+    if (color === 'secondary') return '#41464b'; // Gris oscuro para categorías
     return theme.colors[color].dark;
   }};
   padding: 0.25rem 0.75rem;
   font-size: 0.875rem;
-  font-weight: 600; /* Aumentado para mejor legibilidad */
+  font-weight: 500; // Vuelto a normal para mejor legibilidad
   border-left: 3px solid ${({ theme, color }: { theme: any; color: string }) => theme.colors[color].main};
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* Sombra sutil para distinguir del fondo */
+  border-radius: 2px; // Bordes ligeramente redondeados para suavizar apariencia
 `;
 
 const QuestionText = styled.h2`
@@ -277,7 +279,7 @@ const QuestionsPage: React.FC = () => {
             currentQuestion.difficulty === 'easy' ? 'success' :
             currentQuestion.difficulty === 'medium' ? 'warning' :
             currentQuestion.difficulty === 'hard' ? 'error' :
-            'secondary' // Para 'expert'
+            'primary' // Cambiado de 'secondary' a 'primary' para Expert
           }>
             {
               currentQuestion.difficulty === 'easy' ? 'Easy' :
