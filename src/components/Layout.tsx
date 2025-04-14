@@ -151,7 +151,7 @@ const HamburgerIcon = styled.div<{ $isOpen: boolean }>`
 const StyledNavLink = styled.div<{ $active: boolean }>`
   position: relative;
   padding: 0.75rem 0;
-  color: ${({ $active }) => ($active ? '#002373' : '#333')};
+  color: ${({ $active }) => ($active ? '#2251ff' : '#333')};
   font-weight: ${({ $active }) => ($active ? 600 : 400)};
   text-decoration: none;
   font-size: 1rem;
@@ -163,14 +163,14 @@ const StyledNavLink = styled.div<{ $active: boolean }>`
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: #002373; /* McKinsey blue */
+    background-color: #2251ff; /* Actualizado al color McKinsey */
     transform: ${({ $active }) => ($active ? 'scaleX(1)' : 'scaleX(0)')};
     transform-origin: left;
     transition: transform 0.3s ease;
   }
   
   &:hover {
-    color: #002373;
+    color: #2251ff;
     
     &::after {
       transform: scaleX(1);
