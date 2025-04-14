@@ -317,8 +317,18 @@ const CodeCorrectionPage: React.FC = () => {
     answerCodeIssue,
     nextCodeSnippet,
     resetInterview,
-    interviewInProgress,
+    interviewInProgress
   } = useInterviewContext();
+  
+  // Si no hay un fragmento de código actual pero estamos en la página, 
+  // iniciar el primer ejercicio de código
+  React.useEffect(() => {
+    // Si estamos en la página de corrección de código pero no hay un fragmento activo,
+    // llamar a nextCodeSnippet para configurar el primer ejercicio
+    if (codeSnippetIndex === -1 && settings.codeSnippetCount > 0) {
+      nextCodeSnippet();
+    }
+  }, [codeSnippetIndex, nextCodeSnippet, settings.codeSnippetCount]);
   
   // Format time remaining
   const formatTime = (seconds: number): string => {
@@ -381,14 +391,19 @@ const CodeCorrectionPage: React.FC = () => {
   
   // Handle next code snippet
   const handleNext = () => {
-    nextCodeSnippet();
-    
-    // Reset local state
-    setSelectedFixes({});
-    setAllIssuesFixed(false);
-    
-    // Scroll to top of the page when changing questions
-    window.scrollTo(0, 0);
+    // Si estamos en el último ejercicio, navegar directamente a resultados
+    if (codeSnippetIndex === settings.codeSnippetCount - 1) {
+      navigate('/results');
+    } else {
+      nextCodeSnippet();
+      
+      // Reset local state
+      setSelectedFixes({});
+      setAllIssuesFixed(false);
+      
+      // Scroll to top of the page when changing questions
+      window.scrollTo(0, 0);
+    }
   };
   
   // If no current code snippet, redirect to the proper page
