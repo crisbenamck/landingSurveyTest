@@ -22,16 +22,16 @@ const Header = styled.header`
 `;
 
 const HeaderContent = styled.div`
-  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2rem;
-  height: 84px; /* Aumentado en 20% de 70px */
+  padding: 0;
+  height: 84px;
 
   @media (max-width: 768px) {
-    padding: 0 1rem;
+    padding-right: 1rem;
   }
 `;
 
@@ -39,6 +39,7 @@ const Logo = styled.div`
   display: flex;
   align-items: center;
   gap: 1.25rem;
+  padding-left: 2rem;
 `;
 
 const LogoImg = styled.img`
