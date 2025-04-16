@@ -181,8 +181,6 @@ const ConfigPage: React.FC = () => {
           </Select>
         </FormGroup>
         
-        <Separator />
-        
         <FormGroup>
           <Label htmlFor="seniority">Seniority</Label>
           <Select
@@ -196,8 +194,6 @@ const ConfigPage: React.FC = () => {
             <option value="Specialist">Specialist</option>
           </Select>
         </FormGroup>
-        
-        <Separator />
         
         <FormGroup>
           <Label htmlFor="questionCount">Number of Questions</Label>
