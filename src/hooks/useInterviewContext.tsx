@@ -33,7 +33,7 @@ interface CodeSnippet {
 interface InterviewSettings {
   candidateName: string;
   role: 'developer' | 'consultant';
-  seniority: 'Junior' | 'Advanced' | 'Senior' | 'Specialist'; // Nuevos niveles de seniority
+  seniority: 'Junior' | 'Advanced' | 'Senior' | 'Specialist'; // New seniority levels
   questionCount: number;
   codeSnippetCount: number;
   selectedCategories: string[];
@@ -61,7 +61,7 @@ interface InterviewContextType {
   nextQuestion: () => void;
   nextCodeSnippet: () => void;
   finishInterview: () => void;
-  resetInterview: () => void; // Nueva función para resetear la entrevista
+  resetInterview: () => void; // New function to reset the interview
   interviewInProgress: boolean;
   questionIndex: number;
   codeSnippetIndex: number;
@@ -285,7 +285,7 @@ export function InterviewProvider({ children }: { children: ReactNode }) {
         }
         return prev - 1;
       });
-    }, 1000); // Actualizar cada segundo (1000ms)
+    }, 1000); // Update every second (1000ms)
     
     // Clean up the timer when the component unmounts
     return () => {
@@ -400,13 +400,13 @@ export function InterviewProvider({ children }: { children: ReactNode }) {
 
   // Reset the interview
   const resetInterview = () => {
-    // Limpiar el timer si existe
+    // Clear the timer if it exists
     if (window.interviewTimer) {
       clearInterval(window.interviewTimer);
       window.interviewTimer = undefined;
     }
     
-    // Resetear todos los estados relacionados con la entrevista
+    // Reset all states related to the interview
     setQuestions([]);
     setCodeSnippets([]);
     setQuestionIndex(-1);
@@ -423,7 +423,7 @@ export function InterviewProvider({ children }: { children: ReactNode }) {
     setStartTime(null);
     setTimeRemaining(0);
     
-    // Resetear solo el nombre del candidato, manteniendo el resto de la configuración
+    // Reset only the candidate name, keeping the rest of the settings
     setSettings(prev => ({
       ...prev,
       candidateName: ''

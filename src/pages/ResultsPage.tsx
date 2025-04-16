@@ -68,9 +68,9 @@ const ScoreBadge = styled.div<{ $score: number }>`
   font-size: 1.5rem;
   font-weight: 600;
   color: ${({ theme, $score }) => 
-    $score >= 80 ? '#0f5132' :  // Verde oscuro para mejor contraste
-    $score >= 60 ? '#664d03' :  // Amarillo oscuro para mejor contraste
-    '#842029'                  // Rojo oscuro para mejor contraste
+    $score >= 80 ? '#0f5132' :  // Dark green for better contrast
+    $score >= 60 ? '#664d03' :  // Dark yellow for better contrast
+    '#842029'                  // Dark red for better contrast
   };
   border-left: 4px solid ${({ theme, $score }) => 
     $score >= 80 ? theme.colors.success.main :
@@ -78,9 +78,9 @@ const ScoreBadge = styled.div<{ $score: number }>`
     theme.colors.error.main
   };
   background-color: ${({ theme, $score }) => 
-    $score >= 80 ? '#d1e7dd' :  // Verde claro para mejor contraste
-    $score >= 60 ? '#fff3cd' :  // Amarillo claro para mejor contraste
-    '#f8d7da'                  // Rojo claro para mejor contraste
+    $score >= 80 ? '#d1e7dd' :  // Light green for better contrast
+    $score >= 60 ? '#fff3cd' :  // Light yellow for better contrast
+    '#f8d7da'                  // Light red for better contrast
   };
   border-radius: 2px;
 `;
@@ -126,16 +126,16 @@ const ScoreValue = styled.div<{ $score: number }>`
   font-weight: 600;
   font-size: 1.125rem;
   color: ${({ $score }) => 
-    $score >= 8 ? '#0f5132' :  // Verde oscuro para mejor contraste
-    $score >= 5 ? '#664d03' :  // Amarillo oscuro para mejor contraste
-    '#842029'                  // Rojo oscuro para mejor contraste
+    $score >= 8 ? '#0f5132' :  // Dark green for better contrast
+    $score >= 5 ? '#664d03' :  // Dark yellow for better contrast
+    '#842029'                  // Dark red for better contrast
   };
   padding: 0.25rem 0.5rem;
   display: inline-block;
   background-color: ${({ $score }) => 
-    $score >= 8 ? '#d1e7dd' :  // Verde claro para mejor contraste
-    $score >= 5 ? '#fff3cd' :  // Amarillo claro para mejor contraste
-    '#f8d7da'                  // Rojo claro para mejor contraste
+    $score >= 8 ? '#d1e7dd' :  // Light green for better contrast
+    $score >= 5 ? '#fff3cd' :  // Light yellow for better contrast
+    '#f8d7da'                  // Light red for better contrast
   };
   border-radius: 2px;
 `;
@@ -293,7 +293,7 @@ const ResultsPage: React.FC = () => {
           </Button>
           <Button onClick={() => {
             resetInterview();
-            // Usar setTimeout para asegurar que el reseteo se complete antes de navegar
+            // Use setTimeout to ensure that reset completes before navigation
             setTimeout(() => {
               navigate('/');
             }, 0);

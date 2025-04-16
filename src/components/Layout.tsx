@@ -3,20 +3,20 @@ import { Link, useLocation } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
 import { useInterviewContext } from '@hooks/useInterviewContext';
 
-// Importar el logo local directamente (esto es compatible con Vite)
+// Import local logo directly (this is compatible with Vite)
 import mcKinseyLogo from '../assets/mckinsey-logo.svg';
 
 const LayoutContainer = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  position: relative; /* Esto es importante para el posicionamiento del contenido */
+  position: relative; /* This is important for content positioning */
 `;
 
-// Estilo global que se aplicará cuando el menú esté abierto
+// Global style that will be applied when the menu is open
 const GlobalStyleMenuOpen = createGlobalStyle<{ $menuOpen: boolean }>`
   ${({ $menuOpen }) => $menuOpen && `
-    /* Solo aplicar overflow hidden en dispositivos móviles */
+    /* Only apply overflow hidden on mobile devices */
     @media (max-width: 768px) {
       body, html {
         overflow: hidden !important;
@@ -26,7 +26,7 @@ const GlobalStyleMenuOpen = createGlobalStyle<{ $menuOpen: boolean }>`
         overflow: hidden !important;
       }
       
-      /* Evitar scroll en todos los contenedores con scroll */
+      /* Prevent scroll on all containers with scroll */
       .scroll-container, div[style*="overflow"] {
         overflow: hidden !important;
       }
@@ -48,10 +48,10 @@ const HeaderContent = styled.div`
   margin: 0 auto;
   display: flex;
   align-items: center;
-  padding: 0 2rem; /* Añadido padding horizontal para dar espacio en escritorio */
+  padding: 0 2rem; /* Added horizontal padding to provide space on desktop */
   height: 84px;
   justify-content: flex-start;
-  gap: 2rem; /* Incrementado el espacio entre elementos */
+  gap: 2rem; /* Increased space between elements */
 
   @media (max-width: 768px) {
     padding: 0 1rem;
@@ -61,40 +61,40 @@ const HeaderContent = styled.div`
 const Logo = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Cambiado de center a flex-start */
-  width: 250px; /* Coincide con el ancho del menú de navegación */
-  padding-left: 2rem; /* Añadido padding izquierdo para ajustar la posición */
+  justify-content: flex-start; /* Changed from center to flex-start */
+  width: 250px; /* Matches the width of the navigation menu */
+  padding-left: 2rem; /* Added left padding to adjust position */
   
   @media (max-width: 768px) {
-    width: auto; /* En móvil vuelve a su ancho automático */
+    width: auto; /* On mobile returns to its automatic width */
     padding-left: 0;
   }
 `;
 
 const LogoImg = styled.img`
-  height: 38px; /* Reducido en un 20% desde 48px */
+  height: 38px; /* Reduced by 20% from 48px */
   width: auto;
 `;
 
 const LogoText = styled.span`
   color: #002373; /* McKinsey blue */
   font-weight: 600;
-  font-size: 1.875rem; /* Aumentado en un 50% de 1.25rem a 1.875rem */
+  font-size: 1.875rem; /* Increased by 50% from 1.25rem to 1.875rem */
   letter-spacing: 0.5px;
   font-family: 'Bower', 'Times New Roman', Times, serif;
   position: absolute;
-  left: 284px; /* Posición fija desde el borde izquierdo */
+  left: 284px; /* Fixed position from the left edge */
   
   @media (max-width: 1024px) {
-    left: 284px; /* Mantiene la misma posición en pantallas medianas */
-    /* Se ha eliminado la reducción de tamaño de fuente para mantener consistencia */
+    left: 284px; /* Maintains the same position on medium screens */
+    /* Font size reduction has been removed to maintain consistency */
   }
   
   @media (max-width: 768px) {
     font-size: 1.5rem;
     position: relative;
     left: auto;
-    margin-left: 1rem; /* En pantallas pequeñas, usa margin en lugar de position absolute */
+    margin-left: 1rem; /* On small screens, use margin instead of absolute positioning */
   }
 `;
 
@@ -110,7 +110,7 @@ const HamburgerButton = styled.button`
     width: 30px;
     height: 30px;
     position: relative;
-    order: -1; /* Asegura que el botón hamburguesa aparezca primero en móvil */
+    order: -1; /* Ensures the hamburger button appears first on mobile */
   }
   
   &:focus {
@@ -154,33 +154,33 @@ const HamburgerIcon = styled.div<{ $isOpen: boolean }>`
   }
 `;
 
-// Nueva estructura principal con diseño de columnas
+// New main structure with column design
 const MainContainer = styled.div`
   display: flex;
   flex: 1;
   background-color: #ffffff;
-  position: relative; /* Para posicionamiento del footer */
+  position: relative; /* For footer positioning */
 `;
 
-// Barra lateral izquierda para el menú
+// Left sidebar for the menu
 const Sidebar = styled.div<{ $isOpen: boolean }>`
   width: 250px;
   background-color: #051c2c;
   border-right: 1px solid #0a2e45;
   padding: 2rem 1rem;
   flex-shrink: 0;
-  position: fixed; /* Cambiado de sticky a fixed para mantenerlo completamente inmóvil */
-  top: 84px; /* Altura del header */
+  position: fixed; /* Changed from sticky to fixed to keep it completely immobile */
+  top: 84px; /* Header height */
   height: calc(100vh - 84px);
   overflow-y: auto;
-  z-index: 900; /* Valor alto para asegurar que esté por encima del contenido */
+  z-index: 900; /* High value to ensure it's above the content */
   
   @media (max-width: 768px) {
     left: 0;
     transform: ${({ $isOpen }) => ($isOpen ? 'translateX(0)' : 'translateX(-100%)')};
     transition: transform 0.3s ease-in-out;
     box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
-    z-index: 1001; /* Aumentado para estar por encima del overlay */
+    z-index: 1001; /* Increased to be above the overlay */
   }
 `;
 
@@ -196,17 +196,17 @@ const MobileMenuOverlay = styled.div<{ $isOpen: boolean }>`
   @media (max-width: 768px) {
     display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
     position: fixed;
-    top: 84px; /* Actualizado para coincidir con el nuevo header height */
+    top: 84px; /* Updated to match the new header height */
     left: 0;
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
-    pointer-events: ${({ $isOpen }) => ($isOpen ? 'auto' : 'none')}; /* Permitir eventos de click solo cuando está abierto */
+    pointer-events: ${({ $isOpen }) => ($isOpen ? 'auto' : 'none')}; /* Allow click events only when open */
   }
 `;
 
-// Componente styled para el estilo utilizando un data-attribute para el estado activo
+// Styled component for styling using a data-attribute for the active state
 const StyledNavLink = styled.div<{ $active: boolean }>`
   position: relative;
   padding: 0.75rem 1rem;
@@ -219,11 +219,11 @@ const StyledNavLink = styled.div<{ $active: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer; /* Agregar cursor pointer para indicar que es clickeable */
+  cursor: pointer; /* Add pointer cursor to indicate it's clickable */
   
   &:hover {
     color: #00a9f4;
-    background-color: transparent; /* Eliminado el fondo en hover */
+    background-color: transparent; /* Removed background on hover */
   }
 `;
 
@@ -267,10 +267,10 @@ const NavLink: React.FC<NavLinkProps> = ({ to, active, children, onClick }) => {
 const Main = styled.main`
   flex: 1;
   padding: 0;
-  margin-left: 250px; /* Añadir margen igual al ancho del Sidebar */
+  margin-left: 250px; /* Add margin equal to the Sidebar width */
   
   @media (max-width: 768px) {
-    margin-left: 0; /* En móvil no necesitamos el margen porque el menú está oculto o en overlay */
+    margin-left: 0; /* On mobile we don't need the margin because the menu is hidden or in overlay */
   }
 `;
 
@@ -293,7 +293,7 @@ const Footer = styled.footer<{ $menuOpen?: boolean }>`
   font-size: 0.875rem;
   border-top: 1px solid #e9ecef;
   width: 100%;
-  z-index: 1002; /* Aumentado para estar por encima del menú */
+  z-index: 1002; /* Increased to be above the menu */
   margin-top: auto;
   position: relative;
   
@@ -315,12 +315,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   const toggleMenu = () => setMenuOpen(!isMenuOpen);
   
-  // Cerrar el menú cuando cambia la ruta
+  // Close the menu when the route changes
   useEffect(() => {
     setMenuOpen(false);
   }, [location.pathname]);
   
-  // Detectar cuando el footer es visible
+  // Detect when the footer is visible
   useEffect(() => {
     if (!footerRef.current) return;
     
@@ -340,11 +340,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     };
   }, [footerRef.current]);
   
-  // Cerrar el menú cuando se hace clic fuera del menú en dispositivos móviles
+  // Close the menu when clicking outside the menu on mobile devices
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      // Solo cerrar el menú si se hace click en el overlay, pero no en el menú o su botón
+      // Only close the menu if clicking on the overlay, but not on the menu or its button
       if (isMenuOpen && target.closest('.mobile-menu-overlay') && !target.closest('nav') && !target.closest('button')) {
         setMenuOpen(false);
       }

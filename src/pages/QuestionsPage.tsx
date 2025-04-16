@@ -63,28 +63,28 @@ const QuestionMeta = styled.div`
 
 const Tag = styled.span`
   background-color: ${({ theme, color }: { theme: any; color: string }) => {
-    // Fondo más claro pero con suficiente contraste
-    if (color === 'success') return '#d1e7dd'; // Verde claro con mejor contraste
-    if (color === 'warning') return '#fff3cd'; // Amarillo claro
-    if (color === 'error') return '#f8d7da'; // Rojo claro
-    if (color === 'primary') return '#cfe2ff'; // Azul claro para Expert
-    if (color === 'secondary') return '#e2e3e5'; // Gris claro para categorías
+    // Lighter background with sufficient contrast
+    if (color === 'success') return '#d1e7dd'; // Light green with better contrast
+    if (color === 'warning') return '#fff3cd'; // Light yellow
+    if (color === 'error') return '#f8d7da'; // Light red
+    if (color === 'primary') return '#cfe2ff'; // Light blue for Expert
+    if (color === 'secondary') return '#e2e3e5'; // Light gray for categories
     return theme.colors[color].light;
   }};
   color: ${({ theme, color }: { theme: any; color: string }) => {
-    // Texto oscuro para garantizar legibilidad
-    if (color === 'success') return '#0f5132'; // Verde oscuro 
-    if (color === 'warning') return '#664d03'; // Amarillo oscuro
-    if (color === 'error') return '#842029'; // Rojo oscuro
-    if (color === 'primary') return '#084298'; // Azul oscuro para Expert
-    if (color === 'secondary') return '#41464b'; // Gris oscuro para categorías
+    // Dark text to ensure readability
+    if (color === 'success') return '#0f5132'; // Dark green 
+    if (color === 'warning') return '#664d03'; // Dark yellow
+    if (color === 'error') return '#842029'; // Dark red
+    if (color === 'primary') return '#084298'; // Dark blue for Expert
+    if (color === 'secondary') return '#41464b'; // Dark gray for categories
     return theme.colors[color].dark;
   }};
   padding: 0.25rem 0.75rem;
   font-size: 0.875rem;
-  font-weight: 500; // Vuelto a normal para mejor legibilidad
+  font-weight: 500; // Returned to normal for better readability
   border-left: 3px solid ${({ theme, color }: { theme: any; color: string }) => theme.colors[color].main};
-  border-radius: 2px; // Bordes ligeramente redondeados para suavizar apariencia
+  border-radius: 2px; // Slightly rounded corners to soften appearance
 `;
 
 const QuestionText = styled.h2`
@@ -294,7 +294,7 @@ const QuestionsPage: React.FC = () => {
             currentQuestion.difficulty === 'easy' ? 'success' :
             currentQuestion.difficulty === 'medium' ? 'warning' :
             currentQuestion.difficulty === 'hard' ? 'error' :
-            'primary' // Cambiado de 'secondary' a 'primary' para Expert
+            'primary' // Changed from 'secondary' to 'primary' for Expert
           }>
             {
               currentQuestion.difficulty === 'easy' ? 'Easy' :
@@ -331,7 +331,7 @@ const QuestionsPage: React.FC = () => {
           $variant="cancel"
           onClick={() => {
             resetInterview();
-            // Usar setTimeout para asegurar que el reseteo se complete antes de navegar
+            // Use setTimeout to ensure reset completes before navigating
             setTimeout(() => {
               navigate('/');
             }, 0);

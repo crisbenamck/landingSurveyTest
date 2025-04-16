@@ -8,10 +8,10 @@ export const GlobalStyles = createGlobalStyle`
   }
   
   html {
-    /* Forzar la barra de desplazamiento siempre visible para evitar saltos de layout */
+    /* Force the scrollbar to always be visible to avoid layout jumps */
     overflow-y: scroll;
-    scrollbar-width: thin; /* Para Firefox */
-    scrollbar-color: #CCC #F4F4F4; /* Para Firefox */
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: #CCC #F4F4F4; /* For Firefox */
     font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
     background-color: #ffffff;
     color: #333333;
@@ -20,7 +20,7 @@ export const GlobalStyles = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
   
-  /* Estilo de la barra de desplazamiento para navegadores webkit (Chrome, Safari) */
+  /* Scrollbar style for webkit browsers (Chrome, Safari) */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;

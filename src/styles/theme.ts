@@ -1,17 +1,17 @@
 export const theme = {
   colors: {
     primary: {
-      main: '#003d7d', // Azul McKinsey
+      main: '#003d7d', // McKinsey blue
       light: '#3366a5',
       dark: '#002c59',
     },
     secondary: {
-      main: '#042f5b', // Azul oscuro McKinsey
+      main: '#042f5b', // McKinsey dark blue
       light: '#204775',
       dark: '#021d3b',
     },
     success: {
-      main: '#007a78', // Verde McKinsey
+      main: '#007a78', // McKinsey green
       light: '#34968e',
       dark: '#005452',
     },
@@ -37,12 +37,12 @@ export const theme = {
       900: '#212529',
     },
     background: {
-      default: '#ffffff', // Fondo blanco limpio como en McKinsey
+      default: '#ffffff', // Clean white background like McKinsey
       paper: '#ffffff',
       dark: '#f5f5f5',
     },
     text: {
-      primary: '#333333', // Texto principal oscuro
+      primary: '#333333', // Dark main text
       secondary: '#555555',
       disabled: '#adb5bd',
       light: '#f8f9fa',
@@ -50,20 +50,20 @@ export const theme = {
   },
   spacing: (factor: number) => `${factor * 8}px`,
   borderRadius: {
-    sm: '0px', // McKinsey usa bordes más rectos
+    sm: '0px', // McKinsey uses straighter edges
     md: '2px',
     lg: '4px',
     xl: '6px',
     pill: '9999px',
   },
   shadows: {
-    sm: 'none', // Reducir o eliminar sombras para un look más plano
+    sm: 'none', // Reduce or eliminate shadows for a flatter look
     md: '0 2px 4px rgba(0,0,0,0.05)',
     lg: '0 4px 6px rgba(0,0,0,0.05)',
     xl: '0 6px 8px rgba(0,0,0,0.05)',
   },
   typography: {
-    fontFamily: "'Poppins', 'Helvetica Neue', Arial, sans-serif", // McKinsey suele usar fuentes sans-serif limpias
+    fontFamily: "'Poppins', 'Helvetica Neue', Arial, sans-serif", // McKinsey typically uses clean sans-serif fonts
     headingFontFamily: "'Times New Roman', Times, serif", // Font for headings to match McKinsey style
     fontSizes: {
       xs: '0.75rem',

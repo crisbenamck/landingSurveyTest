@@ -92,28 +92,28 @@ const TagsContainer = styled.div`
 
 const Tag = styled.span`
   background-color: ${({ theme, color }: { theme: any; color: string }) => {
-    // Fondo más claro pero con suficiente contraste
-    if (color === 'primary') return '#cfe2ff'; // Azul claro 
-    if (color === 'secondary') return '#e2e3e5'; // Gris claro 
-    if (color === 'error') return '#f8d7da'; // Rojo claro
-    if (color === 'success') return '#d1e7dd'; // Verde claro
-    if (color === 'warning') return '#fff3cd'; // Amarillo claro
+    // Lighter background with sufficient contrast
+    if (color === 'primary') return '#cfe2ff'; // Light blue 
+    if (color === 'secondary') return '#e2e3e5'; // Light gray 
+    if (color === 'error') return '#f8d7da'; // Light red
+    if (color === 'success') return '#d1e7dd'; // Light green
+    if (color === 'warning') return '#fff3cd'; // Light yellow
     return theme.colors[color].light;
   }};
   color: ${({ theme, color }: { theme: any; color: string }) => {
-    // Texto oscuro para garantizar legibilidad
-    if (color === 'primary') return '#084298'; // Azul oscuro
-    if (color === 'secondary') return '#41464b'; // Gris oscuro
-    if (color === 'error') return '#842029'; // Rojo oscuro
-    if (color === 'success') return '#0f5132'; // Verde oscuro
-    if (color === 'warning') return '#664d03'; // Amarillo oscuro
+    // Dark text to ensure readability
+    if (color === 'primary') return '#084298'; // Dark blue
+    if (color === 'secondary') return '#41464b'; // Dark gray
+    if (color === 'error') return '#842029'; // Dark red
+    if (color === 'success') return '#0f5132'; // Dark green
+    if (color === 'warning') return '#664d03'; // Dark yellow
     return theme.colors[color].dark;
   }};
   padding: 0.25rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 500;
   border-left: 3px solid ${({ theme, color }: { theme: any; color: string }) => theme.colors[color].main};
-  border-radius: 2px; // Bordes ligeramente redondeados para mejorar apariencia
+  border-radius: 2px; // Slightly rounded corners to improve appearance
 `;
 
 const CodeTitle = styled.h2`
@@ -320,11 +320,11 @@ const CodeCorrectionPage: React.FC = () => {
     interviewInProgress
   } = useInterviewContext();
   
-  // Si no hay un fragmento de código actual pero estamos en la página, 
-  // iniciar el primer ejercicio de código
+  // If there's no current code snippet but we're on the page, 
+  // start the first code exercise
   React.useEffect(() => {
-    // Si estamos en la página de corrección de código pero no hay un fragmento activo,
-    // llamar a nextCodeSnippet para configurar el primer ejercicio
+    // If we're on the code correction page but there's no active snippet,
+    // call nextCodeSnippet to set up the first exercise
     if (codeSnippetIndex === -1 && settings.codeSnippetCount > 0) {
       nextCodeSnippet();
     }
@@ -391,7 +391,7 @@ const CodeCorrectionPage: React.FC = () => {
   
   // Handle next code snippet
   const handleNext = () => {
-    // Si estamos en el último ejercicio, navegar directamente a resultados
+    // If we're on the last exercise, navigate directly to results
     if (codeSnippetIndex === settings.codeSnippetCount - 1) {
       navigate('/results');
     } else {
@@ -408,11 +408,11 @@ const CodeCorrectionPage: React.FC = () => {
   
   // If no current code snippet, redirect to the proper page
   React.useEffect(() => {
-    // Solo navegar a resultados si:
-    // 1. El índice es -1 (no hay fragmento de código actual)
-    // 2. La cantidad de fragmentos de código está configurada (no es 0)
-    // 3. La entrevista está en progreso
-    // 4. Ya hemos cargado los fragmentos de código (los arrays no están vacíos)
+    // Only navigate to results if:
+    // 1. The index is -1 (no current code snippet)
+    // 2. The number of code snippets is configured (not 0)
+    // 3. The interview is in progress
+    // 4. We've already loaded the code snippets (arrays are not empty)
     if (codeSnippetIndex === -1 && 
         settings.codeSnippetCount > 0 && 
         interviewInProgress && 
@@ -523,7 +523,7 @@ const CodeCorrectionPage: React.FC = () => {
           $variant="cancel"
           onClick={() => {
             resetInterview();
-            // Usar setTimeout para asegurar que el reseteo se complete antes de navegar
+            // Use setTimeout to ensure reset completes before navigating
             setTimeout(() => {
               navigate('/');
             }, 0);
