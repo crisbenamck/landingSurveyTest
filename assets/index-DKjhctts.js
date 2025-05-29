@@ -909,15 +909,32 @@ exports.execute = function(params) {
   border-top: 1px solid ${({theme:e})=>e.colors.grey[200]};
   padding-top: 2rem;
 `,fd=D.button`
+  padding: 0.75rem 1.5rem;
   background-color: ${({$variant:e})=>e==="secondary"?"#f8f9fa":e==="cancel"?"#fff":"#2251ff"};
-  color: ${({$variant:e})=>e==="secondary"?"#333333":"#fff"};
-  border: ${({$variant:e})=>e==="secondary"?"1px solid #e9ecef":"none"};
+  color: ${({$variant:e})=>e==="secondary"?"#333333":e==="cancel"?"#2251ff":"#fff"};
+  border: ${({$variant:e})=>e==="secondary"?"1px solid #e9ecef":e==="cancel"?"1px solid #2251ff":"none"};
+  border-radius: 0;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: ${({$variant:e})=>e==="secondary"?"#333333":e==="cancel"?"#2251ff":"#fff"};
+    color: ${({$variant:e})=>e==="secondary"||e==="cancel"?"#fff":"#2251ff"};
+    border: ${({$variant:e})=>e==="secondary"?"1px solid #333333":"1px solid #2251ff"};
+  }
+  
+  &:focus {
+    outline: none;
+  }
+  
   &:disabled {
     background-color: #e9ecef;
     color: #adb5bd;
     border: none;
+    cursor: not-allowed;
   }
-`,pS=()=>{const e=ur(),[t,n]=b.useState(null),{currentQuestion:a,questionIndex:l,answers:r,answerQuestion:i,nextQuestion:o,timeRemaining:s,settings:u,resetInterview:c}=fr(),m=f=>{const p=Math.floor(f/60),v=f%60;return`${p}:${v<10?"0":""}${v}`},h=s<u.timeLimit*60*.2,g=l===-1?100:(l+1)/u.questionCount*100,S=f=>{n(f),a&&i(a.id,f)},x=()=>{n(null),o(),window.scrollTo(0,0),l===-1&&(u.role==="consultant"?e("/results"):e("/code-correction"))};if(ze.useEffect(()=>{l===-1&&(u.role==="consultant"?e("/results"):e("/code-correction"))},[l,e,u.role]),!a)return null;const T=a.id in r?r[a.id]:null,d=t!==null?t:T;return y.jsxs(eS,{children:[y.jsxs(tS,{children:[y.jsxs("div",{children:[y.jsx(nS,{children:"Technical Questions"}),y.jsx(aS,{children:ug(u.cloud)})]}),y.jsx(lS,{$timeRunningOut:h,children:m(s)})]}),y.jsxs(sS,{children:[y.jsxs(uS,{children:[y.jsxs("span",{children:["Question ",l+1," of ",u.questionCount]}),y.jsxs("span",{children:[Math.round(g),"% Complete"]})]}),y.jsx(cS,{children:y.jsx(fS,{$percent:g})})]}),y.jsxs(rS,{children:[y.jsxs(iS,{children:[y.jsx(cd,{color:a.difficulty==="easy"?"success":a.difficulty==="medium"?"warning":a.difficulty==="hard"?"error":"primary",children:a.difficulty==="easy"?"Easy":a.difficulty==="medium"?"Medium":a.difficulty==="hard"?"Hard":"Expert"}),y.jsx(cd,{color:"secondary",children:a.category==="marketing_cloud"?"Marketing Cloud":a.category==="ampscript"?"AMPscript":a.category==="ssjs"?"SSJS":a.category.charAt(0).toUpperCase()+a.category.slice(1)})]}),y.jsx(oS,{children:a.text}),y.jsx(dS,{children:a.possibleAnswers.map((f,p)=>y.jsx(mS,{$isSelected:d===p,onClick:()=>S(p),children:f.text},p))})]}),y.jsxs(hS,{children:[y.jsx(fd,{$variant:"cancel",onClick:()=>{c(),setTimeout(()=>{e("/")},0)},children:"Cancel Interview"}),y.jsx(fd,{onClick:x,disabled:d===null,children:l===u.questionCount-1?u.role==="consultant"?"View Results":"Go to Code Exercises":"Next Question"})]})]})},gS=D.div`
+`,pS=()=>{const e=ur(),[t,n]=b.useState(null),{currentQuestion:a,questionIndex:l,answers:r,answerQuestion:i,nextQuestion:o,timeRemaining:s,settings:u,resetInterview:c}=fr(),m=f=>{const p=Math.floor(f/60),v=f%60;return`${p}:${v<10?"0":""}${v}`},h=s<u.timeLimit*60*.2,g=l===-1?100:(l+1)/u.questionCount*100,S=f=>{n(f),a&&i(a.id,f)},x=()=>{n(null),o(),window.scrollTo(0,0),l===-1&&(u.role==="consultant"?e("/results"):e("/code-correction"))};if(ze.useEffect(()=>{l===-1&&(u.role==="consultant"?e("/results"):e("/code-correction"))},[l,e,u.role]),!a)return null;const T=a.id in r?r[a.id]:null,d=t!==null?t:T;return y.jsxs(eS,{children:[y.jsxs(tS,{children:[y.jsxs("div",{children:[y.jsx(nS,{children:"Technical Questions"}),y.jsx(aS,{children:ug(u.cloud)})]}),y.jsx(lS,{$timeRunningOut:h,children:m(s)})]}),y.jsxs(sS,{children:[y.jsxs(uS,{children:[y.jsxs("span",{children:["Question ",l+1," of ",u.questionCount]}),y.jsxs("span",{children:[Math.round(g),"% Complete"]})]}),y.jsx(cS,{children:y.jsx(fS,{$percent:g})})]}),y.jsxs(rS,{children:[y.jsxs(iS,{children:[y.jsx(cd,{color:a.difficulty==="easy"?"success":a.difficulty==="medium"?"warning":a.difficulty==="hard"?"error":"primary",children:a.difficulty==="easy"?"Easy":a.difficulty==="medium"?"Medium":a.difficulty==="hard"?"Hard":"Expert"}),y.jsx(cd,{color:"secondary",children:a.category==="marketing_cloud"?"Marketing Cloud":a.category==="ampscript"?"AMPscript":a.category==="ssjs"?"SSJS":a.category.charAt(0).toUpperCase()+a.category.slice(1)})]}),y.jsx(oS,{children:a.text}),y.jsx(dS,{children:a.possibleAnswers.map((f,p)=>y.jsx(mS,{$isSelected:d===p,onClick:()=>S(p),children:f.text},p))})]}),y.jsxs(hS,{children:[y.jsx(fd,{$variant:"cancel",onClick:()=>{c(),setTimeout(()=>{e("/")},0)},children:"Cancel Interview"}),y.jsx(fd,{$variant:"primary",onClick:x,disabled:d===null,children:l===u.questionCount-1?u.role==="consultant"?"View Results":"Go to Code Exercises":"Next Question"})]})]})},gS=D.div`
   max-width: 900px;
   margin: 0 auto;
 `,yS=D.div`
@@ -1097,16 +1114,33 @@ exports.execute = function(params) {
   border-top: 1px solid ${({theme:e})=>e.colors.grey[200]};
   padding-top: 2rem;
 `,md=D.button`
+  padding: 0.75rem 1.5rem;
   background-color: ${({$variant:e})=>e==="secondary"?"#f8f9fa":e==="cancel"?"#fff":"#2251ff"};
-  color: ${({$variant:e})=>e==="secondary"?"#333333":"#fff"};
-  border: ${({$variant:e})=>e==="secondary"?"1px solid #e9ecef":"none"};
+  color: ${({$variant:e})=>e==="secondary"?"#333333":e==="cancel"?"#2251ff":"#fff"};
+  border: ${({$variant:e})=>e==="secondary"?"1px solid #e9ecef":e==="cancel"?"1px solid #2251ff":"none"};
+  border-radius: 0;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: ${({$variant:e})=>e==="secondary"?"#333333":e==="cancel"?"#2251ff":"#fff"};
+    color: ${({$variant:e})=>e==="secondary"||e==="cancel"?"#fff":"#2251ff"};
+    border: ${({$variant:e})=>e==="secondary"?"1px solid #333333":"1px solid #2251ff"};
+  }
+  
+  &:focus {
+    outline: none;
+  }
+  
   &:disabled {
     background-color: #e9ecef;
     color: #adb5bd;
     border: none;
+    cursor: not-allowed;
   }
 `,$S=()=>{const e=ur(),[t,n]=b.useState({}),[a,l]=b.useState(!1),{currentCodeSnippet:r,codeSnippetIndex:i,settings:o,timeRemaining:s,codeAnswers:u,answerCodeIssue:c,nextCodeSnippet:m,resetInterview:h,interviewInProgress:g}=fr();ze.useEffect(()=>{i===-1&&o.codeSnippetCount>0&&m()},[i,m,o.codeSnippetCount]);const S=C=>{const w=Math.floor(C/60),E=C%60;return`${w}:${E<10?"0":""}${E}`},x=s<o.timeLimit*60*.2,T=i===-1?0:(i+1)/o.codeSnippetCount*100;b.useEffect(()=>{if(r){const C=u[r.id]||[],w={};C.forEach(R=>{w[R.issueId]=R.fixId}),n(w);const E=r.issues.every((R,q)=>q in w);l(E)}},[r,u]);const d=(C,w)=>{r&&c(r.id,C,w),n(E=>{const R={...E,[C]:w};return setTimeout(()=>{const q=(r==null?void 0:r.issues.every((_,ue)=>ue in R))||!1;l(q)},0),R})},f=()=>{i===o.codeSnippetCount-1?e("/results"):(m(),n({}),l(!1),window.scrollTo(0,0))};if(ze.useEffect(()=>{i===-1&&o.codeSnippetCount>0&&g&&u&&Object.keys(u).length>0&&e("/results")},[i,e,o.codeSnippetCount,g,u]),!r)return null;const p=r.code.split(`
-`),v=r.issues.map(C=>C.line);return y.jsxs(gS,{children:[y.jsxs(yS,{children:[y.jsx(vS,{children:"Code Correction"}),y.jsx(bS,{$timeRunningOut:x,children:S(s)})]}),y.jsxs(SS,{children:[y.jsxs(xS,{children:[y.jsxs("span",{children:["Exercise ",i+1," of ",o.codeSnippetCount]}),y.jsxs("span",{children:[Math.round(T),"% Complete"]})]}),y.jsx(CS,{children:y.jsx(ES,{$percent:T})})]}),y.jsxs(AS,{children:[y.jsxs(TS,{children:[y.jsxs(wS,{children:[y.jsxs(dd,{color:"primary",children:["Exercise ",i+1," of ",o.codeSnippetCount]}),y.jsx(dd,{color:"secondary",children:r.language==="javascript"?"JavaScript":r.language==="typescript"?"TypeScript":r.language==="ssjs"?"SSJS":r.language==="marketing_cloud"?"Marketing Cloud":r.language==="ampscript"?"AMPscript":r.language.charAt(0).toUpperCase()+r.language.slice(1)})]}),y.jsx(DS,{children:r.title}),y.jsx(MS,{children:r.description})]}),y.jsxs(RS,{children:[y.jsx(NS,{children:r.language==="javascript"?"JavaScript":r.language==="typescript"?"TypeScript":r.language==="ssjs"?"SSJS":r.language==="marketing_cloud"?"Marketing Cloud":r.language==="ampscript"?"AMPscript":r.language.charAt(0).toUpperCase()+r.language.slice(1)}),y.jsx(OS,{children:p.map((C,w)=>y.jsx(zS,{$isError:v.includes(w+1),children:C},w))})]}),y.jsxs(_S,{children:[y.jsx(jS,{children:"Issues to Fix"}),r.issues.map((C,w)=>y.jsxs(qS,{children:[y.jsx(US,{children:y.jsxs(kS,{children:["Issue at line ",C.line]})}),y.jsx(HS,{children:C.description}),y.jsxs(LS,{children:[y.jsx(BS,{children:"Select the appropriate fix:"}),C.possibleFixes.map((E,R)=>y.jsx(YS,{$isSelected:t[w]===R,onClick:()=>d(w,R),children:y.jsx(GS,{children:E.text})},R))]})]},w))]})]}),y.jsxs(QS,{children:[y.jsx(md,{$variant:"cancel",onClick:()=>{h(),setTimeout(()=>{e("/")},0)},children:"Cancel Interview"}),y.jsx(md,{onClick:f,disabled:!a,children:i===o.codeSnippetCount-1?"View Results":"Next Exercise"})]})]})},XS=D.div`
+`),v=r.issues.map(C=>C.line);return y.jsxs(gS,{children:[y.jsxs(yS,{children:[y.jsx(vS,{children:"Code Correction"}),y.jsx(bS,{$timeRunningOut:x,children:S(s)})]}),y.jsxs(SS,{children:[y.jsxs(xS,{children:[y.jsxs("span",{children:["Exercise ",i+1," of ",o.codeSnippetCount]}),y.jsxs("span",{children:[Math.round(T),"% Complete"]})]}),y.jsx(CS,{children:y.jsx(ES,{$percent:T})})]}),y.jsxs(AS,{children:[y.jsxs(TS,{children:[y.jsxs(wS,{children:[y.jsxs(dd,{color:"primary",children:["Exercise ",i+1," of ",o.codeSnippetCount]}),y.jsx(dd,{color:"secondary",children:r.language==="javascript"?"JavaScript":r.language==="typescript"?"TypeScript":r.language==="ssjs"?"SSJS":r.language==="marketing_cloud"?"Marketing Cloud":r.language==="ampscript"?"AMPscript":r.language.charAt(0).toUpperCase()+r.language.slice(1)})]}),y.jsx(DS,{children:r.title}),y.jsx(MS,{children:r.description})]}),y.jsxs(RS,{children:[y.jsx(NS,{children:r.language==="javascript"?"JavaScript":r.language==="typescript"?"TypeScript":r.language==="ssjs"?"SSJS":r.language==="marketing_cloud"?"Marketing Cloud":r.language==="ampscript"?"AMPscript":r.language.charAt(0).toUpperCase()+r.language.slice(1)}),y.jsx(OS,{children:p.map((C,w)=>y.jsx(zS,{$isError:v.includes(w+1),children:C},w))})]}),y.jsxs(_S,{children:[y.jsx(jS,{children:"Issues to Fix"}),r.issues.map((C,w)=>y.jsxs(qS,{children:[y.jsx(US,{children:y.jsxs(kS,{children:["Issue at line ",C.line]})}),y.jsx(HS,{children:C.description}),y.jsxs(LS,{children:[y.jsx(BS,{children:"Select the appropriate fix:"}),C.possibleFixes.map((E,R)=>y.jsx(YS,{$isSelected:t[w]===R,onClick:()=>d(w,R),children:y.jsx(GS,{children:E.text})},R))]})]},w))]})]}),y.jsxs(QS,{children:[y.jsx(md,{$variant:"cancel",onClick:()=>{h(),setTimeout(()=>{e("/")},0)},children:"Cancel Interview"}),y.jsx(md,{$variant:"primary",onClick:f,disabled:!a,children:i===o.codeSnippetCount-1?"View Results":"Next Exercise"})]})]})},XS=D.div`
   max-width: 900px;
   margin: 0 auto;
 `,VS=D.div`
@@ -1199,23 +1233,23 @@ exports.execute = function(params) {
 `,bd=D.button`
   padding: 0.75rem 1.5rem;
   background-color: ${({$variant:e})=>e==="secondary"?"#f8f9fa":e==="cancel"?"#fff":"#2251ff"};
-  color: ${({$variant:e})=>e==="secondary"?"#333333":"#fff"};
-  border: ${({$variant:e})=>e==="secondary"?"1px solid #e9ecef":"none"};
+  color: ${({$variant:e})=>e==="secondary"?"#333333":e==="cancel"?"#2251ff":"#fff"};
+  border: ${({$variant:e})=>e==="secondary"?"1px solid #e9ecef":e==="cancel"?"1px solid #2251ff":"none"};
   border-radius: 0;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
   
   &:hover {
-    background-color: ${({$variant:e})=>e==="secondary"?"#333333":e==="cancel"?"#2251ff":"white"};
-    color: ${({$variant:e})=>e==="secondary"||e==="cancel"?"white":"#2251ff"};
-    border-color: ${({$variant:e})=>e==="cancel"?"#2251ff":e==="secondary"?"#333333":"#2251ff"};
+    background-color: ${({$variant:e})=>e==="secondary"?"#333333":e==="cancel"?"#2251ff":"#fff"};
+    color: ${({$variant:e})=>e==="secondary"||e==="cancel"?"#fff":"#2251ff"};
+    border: ${({$variant:e})=>e==="secondary"?"1px solid #333333":"1px solid #2251ff"};
   }
   
   &:focus {
     outline: none;
   }
-`,lx=()=>{const e=ur(),{results:t,settings:n,finishInterview:a,resetInterview:l}=fr();b.useEffect(()=>{a()},[a]);const r=(c,m)=>Math.round(c/m*100),i=c=>{const m=Math.floor(c/60),h=c%60;return`${m} minutes and ${h} seconds`},o=c=>c>=90?"Excellent! You demonstrate exceptional knowledge in the evaluated topics.":c>=80?"Very good! You have a solid understanding of the evaluated concepts.":c>=70?"Good. You have shown good knowledge of the main topics.":c>=60?"Acceptable. You have basic knowledge but there are areas to improve.":c>=50?"Fair. You need to reinforce several important concepts.":"You need to significantly improve your knowledge in these topics.",u=r(t.totalScore,100);return y.jsxs(XS,{children:[y.jsxs(VS,{children:[y.jsx(ZS,{children:"Interview Results"}),y.jsxs(hd,{children:["Candidate: ",n.candidateName]}),y.jsxs(hd,{children:["Cloud: ",ug(n.cloud)]})]}),y.jsxs(KS,{children:[y.jsx(Wo,{children:"Results Summary"}),y.jsxs(JS,{$score:u,children:[y.jsxs(FS,{children:[y.jsx(IS,{children:"Overall Score"}),y.jsxs(PS,{children:[y.jsxs("svg",{xmlns:"http://www.w3.org/2000/svg",width:"20",height:"20",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2",strokeLinecap:"round",strokeLinejoin:"round",children:[y.jsx("circle",{cx:"12",cy:"12",r:"10"}),y.jsx("polyline",{points:"12 6 12 12 16 14"})]}),"Time used: ",i(t.timeSpent)]})]}),y.jsxs(WS,{$score:u,children:[u,"%"]})]}),y.jsx(Wo,{children:"Technical Questions Details"}),y.jsx(pd,{children:t.questionScores.map((c,m)=>y.jsxs(gd,{$score:c.score,children:[y.jsxs(yd,{children:["Question ",m+1]}),y.jsxs(vd,{$score:c.score,children:[c.score," points"]})]},m))}),n.role==="developer"&&t.codeScores.length>0&&y.jsxs(y.Fragment,{children:[y.jsx(Wo,{children:"Code Exercises Details"}),y.jsx(pd,{children:t.codeScores.map((c,m)=>y.jsxs(gd,{$score:c.score,children:[y.jsxs(yd,{children:["Exercise ",m+1]}),y.jsxs(vd,{$score:c.score,children:[c.score," points"]})]},m))})]}),y.jsxs(ex,{children:[y.jsx(tx,{children:"Final Evaluation"}),y.jsx(nx,{children:o(u)})]}),y.jsxs(ax,{children:[y.jsx(bd,{$variant:"cancel",onClick:()=>window.print(),children:"Print Results"}),y.jsx(bd,{onClick:()=>{l(),setTimeout(()=>{e("/")},0)},children:"New Interview"})]})]})]})},rx={colors:{primary:{main:"#003d7d",light:"#3366a5",dark:"#002c59"},secondary:{main:"#042f5b",light:"#204775",dark:"#021d3b"},success:{main:"#007a78",light:"#34968e",dark:"#005452"},error:{main:"#c82333",light:"#e74c3c",dark:"#a71d2a"},warning:{main:"#ffc107",light:"#ffcd39",dark:"#e0a800"},grey:{100:"#f8f9fa",200:"#e9ecef",300:"#dee2e6",400:"#ced4da",500:"#adb5bd",600:"#6c757d",700:"#495057",800:"#343a40",900:"#212529"},background:{default:"#ffffff",paper:"#ffffff",dark:"#f5f5f5"},text:{primary:"#333333",secondary:"#555555",disabled:"#adb5bd",light:"#f8f9fa"}},spacing:e=>`${e*8}px`,borderRadius:{sm:"0px",md:"2px",lg:"4px",xl:"6px",pill:"9999px"},shadows:{sm:"none",md:"0 2px 4px rgba(0,0,0,0.05)",lg:"0 4px 6px rgba(0,0,0,0.05)",xl:"0 6px 8px rgba(0,0,0,0.05)"},typography:{fontFamily:"'Poppins', 'Helvetica Neue', Arial, sans-serif",headingFontFamily:"'Times New Roman', Times, serif",fontSizes:{xs:"0.75rem",sm:"0.875rem",md:"1rem",lg:"1.125rem",xl:"1.25rem","2xl":"1.5rem","3xl":"1.875rem","4xl":"2.25rem","5xl":"3rem"},fontWeight:{light:300,regular:400,medium:500,semibold:600,bold:700}},breakpoints:{xs:"0px",sm:"576px",md:"768px",lg:"992px",xl:"1200px",xxl:"1400px"}},ix="/landingSurveyTest/assets/mckinsey-logo-B5GAESnJ.svg",ox=D.div`
+`,lx=()=>{const e=ur(),{results:t,settings:n,finishInterview:a,resetInterview:l}=fr();b.useEffect(()=>{a()},[a]);const r=(c,m)=>Math.round(c/m*100),i=c=>{const m=Math.floor(c/60),h=c%60;return`${m} minutes and ${h} seconds`},o=c=>c>=90?"Excellent! You demonstrate exceptional knowledge in the evaluated topics.":c>=80?"Very good! You have a solid understanding of the evaluated concepts.":c>=70?"Good. You have shown good knowledge of the main topics.":c>=60?"Acceptable. You have basic knowledge but there are areas to improve.":c>=50?"Fair. You need to reinforce several important concepts.":"You need to significantly improve your knowledge in these topics.",u=r(t.totalScore,100);return y.jsxs(XS,{children:[y.jsxs(VS,{children:[y.jsx(ZS,{children:"Interview Results"}),y.jsxs(hd,{children:["Candidate: ",n.candidateName]}),y.jsxs(hd,{children:["Cloud: ",ug(n.cloud)]})]}),y.jsxs(KS,{children:[y.jsx(Wo,{children:"Results Summary"}),y.jsxs(JS,{$score:u,children:[y.jsxs(FS,{children:[y.jsx(IS,{children:"Overall Score"}),y.jsxs(PS,{children:[y.jsxs("svg",{xmlns:"http://www.w3.org/2000/svg",width:"20",height:"20",viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2",strokeLinecap:"round",strokeLinejoin:"round",children:[y.jsx("circle",{cx:"12",cy:"12",r:"10"}),y.jsx("polyline",{points:"12 6 12 12 16 14"})]}),"Time used: ",i(t.timeSpent)]})]}),y.jsxs(WS,{$score:u,children:[u,"%"]})]}),y.jsx(Wo,{children:"Technical Questions Details"}),y.jsx(pd,{children:t.questionScores.map((c,m)=>y.jsxs(gd,{$score:c.score,children:[y.jsxs(yd,{children:["Question ",m+1]}),y.jsxs(vd,{$score:c.score,children:[c.score," points"]})]},m))}),n.role==="developer"&&t.codeScores.length>0&&y.jsxs(y.Fragment,{children:[y.jsx(Wo,{children:"Code Exercises Details"}),y.jsx(pd,{children:t.codeScores.map((c,m)=>y.jsxs(gd,{$score:c.score,children:[y.jsxs(yd,{children:["Exercise ",m+1]}),y.jsxs(vd,{$score:c.score,children:[c.score," points"]})]},m))})]}),y.jsxs(ex,{children:[y.jsx(tx,{children:"Final Evaluation"}),y.jsx(nx,{children:o(u)})]}),y.jsxs(ax,{children:[y.jsx(bd,{$variant:"cancel",onClick:()=>window.print(),children:"Print Results"}),y.jsx(bd,{$variant:"primary",onClick:()=>{l(),setTimeout(()=>{e("/")},0)},children:"New Interview"})]})]})]})},rx={colors:{primary:{main:"#003d7d",light:"#3366a5",dark:"#002c59"},secondary:{main:"#042f5b",light:"#204775",dark:"#021d3b"},success:{main:"#007a78",light:"#34968e",dark:"#005452"},error:{main:"#c82333",light:"#e74c3c",dark:"#a71d2a"},warning:{main:"#ffc107",light:"#ffcd39",dark:"#e0a800"},grey:{100:"#f8f9fa",200:"#e9ecef",300:"#dee2e6",400:"#ced4da",500:"#adb5bd",600:"#6c757d",700:"#495057",800:"#343a40",900:"#212529"},background:{default:"#ffffff",paper:"#ffffff",dark:"#f5f5f5"},text:{primary:"#333333",secondary:"#555555",disabled:"#adb5bd",light:"#f8f9fa"}},spacing:e=>`${e*8}px`,borderRadius:{sm:"0px",md:"2px",lg:"4px",xl:"6px",pill:"9999px"},shadows:{sm:"none",md:"0 2px 4px rgba(0,0,0,0.05)",lg:"0 4px 6px rgba(0,0,0,0.05)",xl:"0 6px 8px rgba(0,0,0,0.05)"},typography:{fontFamily:"'Poppins', 'Helvetica Neue', Arial, sans-serif",headingFontFamily:"'Times New Roman', Times, serif",fontSizes:{xs:"0.75rem",sm:"0.875rem",md:"1rem",lg:"1.125rem",xl:"1.25rem","2xl":"1.5rem","3xl":"1.875rem","4xl":"2.25rem","5xl":"3rem"},fontWeight:{light:300,regular:400,medium:500,semibold:600,bold:700}},breakpoints:{xs:"0px",sm:"576px",md:"768px",lg:"992px",xl:"1200px",xxl:"1400px"}},ix="/landingSurveyTest/assets/mckinsey-logo-B5GAESnJ.svg",ox=D.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
