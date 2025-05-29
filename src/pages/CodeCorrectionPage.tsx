@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useInterviewContext } from '@hooks/useInterviewContext';
+import { getCloudDisplayName } from '../utils/cloudUtils';
 
 // Styled components
 const PageContainer = styled.div`

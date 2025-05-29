@@ -6,6 +6,7 @@ interface Question {
   text: string;
   category: string;
   difficulty: 'easy' | 'medium' | 'hard' | 'expert';
+  cloud: 'marketing' | 'sales' | 'service' | 'commerce' | 'cpq' | 'pardot'; // Cloud property
   possibleAnswers: {
     text: string;
     score: number;
@@ -19,6 +20,7 @@ interface CodeSnippet {
   title: string;
   description: string;
   code: string;
+  cloud: 'marketing' | 'sales' | 'service' | 'commerce' | 'cpq' | 'pardot'; // Cloud property
   issues: {
     line: number;
     description: string;
@@ -38,6 +40,7 @@ interface InterviewSettings {
   codeSnippetCount: number;
   selectedCategories: string[];
   timeLimit: number; // in minutes
+  cloud: 'marketing' | 'sales' | 'service' | 'commerce' | 'cpq' | 'pardot'; // Different cloud options
 }
 
 interface InterviewResults {
@@ -76,6 +79,7 @@ const defaultSettings: InterviewSettings = {
   codeSnippetCount: 3,
   selectedCategories: ['ampscript', 'ssjs', 'marketing_cloud'],
   timeLimit: 30, // 30 minutes by default
+  cloud: 'marketing', // Default cloud is marketing cloud
 };
 
 const InterviewContext = createContext<InterviewContextType | undefined>(undefined);
@@ -104,13 +108,24 @@ export function InterviewProvider({ children }: { children: ReactNode }) {
     import('@data/questions.json').then((data) => {
       // Filter based on settings
       let filteredQuestions = data.default as Question[];
-      let originalQuestions = [...filteredQuestions]; // Keep a copy of all questions
       
-      // Filter by categories based on role
+      // Filter by cloud first
+      filteredQuestions = filteredQuestions.filter(q => q.cloud === settings.cloud);
+      
+      // Then filter by categories based on role
       if (settings.selectedCategories.length > 0) {
+        // Keep track of original filtered by cloud
+        const cloudFilteredQuestions = [...filteredQuestions];
+        
         filteredQuestions = filteredQuestions.filter(q => 
           settings.selectedCategories.includes(q.category)
         );
+        
+        // If no questions match the categories, fall back to using all questions for the cloud
+        if (filteredQuestions.length === 0) {
+          console.log(`Warning: No questions match the selected categories. Using all questions for ${settings.cloud} cloud.`);
+          filteredQuestions = cloudFilteredQuestions;
+        }
       }
       
       // Filter by difficulty based on seniority
@@ -126,62 +141,44 @@ export function InterviewProvider({ children }: { children: ReactNode }) {
       const validSeniority = ['Junior', 'Advanced', 'Senior', 'Specialist'].includes(seniority) 
         ? seniority 
         : 'Junior';
+      
+      // Keep track of pre-difficulty filtered questions
+      const preFilteredByDifficulty = [...filteredQuestions];
       
       filteredQuestions = filteredQuestions.filter(q => 
         allowedDifficulties[validSeniority].includes(q.difficulty)
       );
       
+      // If filtering by difficulty leaves us with no questions, fall back to all questions for this cloud
+      if (filteredQuestions.length === 0) {
+        console.log(`Warning: No questions match the selected difficulty level. Using all questions for ${settings.cloud} cloud.`);
+        filteredQuestions = preFilteredByDifficulty;
+      }
+      
       // Shuffle and limit based on questionCount
       let shuffled = [...filteredQuestions].sort(() => 0.5 - Math.random());
       
-      // If we don't have enough questions after filtering, use questions from the original list to fill the gap
+      // If we don't have enough questions after filtering, adjust the question count
       if (shuffled.length < settings.questionCount) {
-        console.log(`Warning: Only ${shuffled.length} questions match the current filters. Adding additional questions to reach the requested count of ${settings.questionCount}.`);
-        
-        // Get questions that weren't already selected
-        const remainingQuestions = originalQuestions.filter(
-          q => !shuffled.some(sq => sq.id === q.id)
-        );
-        
-        // Sort remaining questions by closest difficulty level to what was requested
-        const sortedRemaining = [...remainingQuestions].sort((a, b) => {
-          // Calculate difficulty priority (lower is better)
-          const difficultyPriority: Record<string, number> = {
-            'easy': 0,
-            'medium': 1,
-            'hard': 2,
-            'expert': 3
-          };
-          
-          // First prioritize by category match
-          const aCategoryMatch = settings.selectedCategories.includes(a.category) ? 0 : 1;
-          const bCategoryMatch = settings.selectedCategories.includes(b.category) ? 0 : 1;
-          
-          if (aCategoryMatch !== bCategoryMatch) {
-            return aCategoryMatch - bCategoryMatch;
-          }
-          
-          // Then by difficulty appropriate for the level
-          const aDiffIdx = difficultyPriority[a.difficulty];
-          const bDiffIdx = difficultyPriority[b.difficulty];
-          
-          return aDiffIdx - bDiffIdx;
-        });
-        
-        // Add needed questions to reach the count
-        const additionalNeeded = settings.questionCount - shuffled.length;
-        const additionalQuestions = sortedRemaining.slice(0, additionalNeeded);
-        
-        shuffled = [...shuffled, ...additionalQuestions];
+        console.log(`Warning: Only ${shuffled.length} questions match the current filters. Using available questions instead of the requested ${settings.questionCount}.`);
       }
       
-      // Ensure we only take the exact count requested
-      setQuestions(shuffled.slice(0, settings.questionCount));
+      // Ensure we only take the available count or the requested count, whichever is smaller
+      setQuestions(shuffled.slice(0, Math.min(shuffled.length, settings.questionCount)));
     });
     
     import('@data/codeSnippets.json').then((data) => {
       let filteredSnippets = data.default as CodeSnippet[];
-      let originalSnippets = [...filteredSnippets]; // Keep a copy of all snippets
+      
+      // Filter by cloud first
+      filteredSnippets = filteredSnippets.filter(snippet => snippet.cloud === settings.cloud);
+      
+      // If no code snippets for this cloud, just return an empty array
+      if (filteredSnippets.length === 0) {
+        console.log(`Warning: No code snippets available for ${settings.cloud} cloud.`);
+        setCodeSnippets([]);
+        return;
+      }
       
       // Filter by difficulty based on seniority
       const allowedDifficulties: Record<string, string[]> = {
@@ -196,6 +193,9 @@ export function InterviewProvider({ children }: { children: ReactNode }) {
       const validSeniority = ['Junior', 'Advanced', 'Senior', 'Specialist'].includes(seniority) 
         ? seniority 
         : 'Junior';
+      
+      // Keep track of pre-difficulty filtered snippets
+      const preFilteredByDifficulty = [...filteredSnippets];
       
       // Assuming code snippets also have a difficulty property
       filteredSnippets = filteredSnippets.filter(snippet => {
@@ -207,47 +207,23 @@ export function InterviewProvider({ children }: { children: ReactNode }) {
         return true;
       });
       
-      let shuffled = [...filteredSnippets].sort(() => 0.5 - Math.random());
-      
-      // If we don't have enough code snippets after filtering, use snippets from the original list to fill the gap
-      if (shuffled.length < settings.codeSnippetCount) {
-        console.log(`Warning: Only ${shuffled.length} code snippets match the current filters. Adding additional snippets to reach the requested count of ${settings.codeSnippetCount}.`);
-        
-        // Get snippets that weren't already selected
-        const remainingSnippets = originalSnippets.filter(
-          s => !shuffled.some(ss => ss.id === s.id)
-        );
-        
-        // Sort remaining snippets by closest difficulty level to what was requested (if applicable)
-        const sortedRemaining = [...remainingSnippets].sort((a, b) => {
-          // If snippets have difficulty property, sort by that
-          if ('difficulty' in a && 'difficulty' in b) {
-            const difficultyPriority: Record<string, number> = {
-              'easy': 0,
-              'medium': 1,
-              'hard': 2,
-              'expert': 3
-            };
-            
-            const aDiffIdx = difficultyPriority[(a as any).difficulty] || 0;
-            const bDiffIdx = difficultyPriority[(b as any).difficulty] || 0;
-            
-            return aDiffIdx - bDiffIdx;
-          }
-          
-          // Otherwise don't change order
-          return 0;
-        });
-        
-        // Add needed snippets to reach the count
-        const additionalNeeded = settings.codeSnippetCount - shuffled.length;
-        const additionalSnippets = sortedRemaining.slice(0, additionalNeeded);
-        
-        shuffled = [...shuffled, ...additionalSnippets];
+      // If filtering by difficulty leaves us with no snippets, fall back to all snippets for this cloud
+      if (filteredSnippets.length === 0) {
+        console.log(`Warning: No code snippets match the selected difficulty level. Using all snippets for ${settings.cloud} cloud.`);
+        filteredSnippets = preFilteredByDifficulty;
       }
       
-      // Ensure we only take the exact count requested
-      setCodeSnippets(shuffled.slice(0, settings.codeSnippetCount));
+      let shuffled = [...filteredSnippets].sort(() => 0.5 - Math.random());
+      
+      // If we don't have enough code snippets, adjust the count
+      const availableCount = Math.min(shuffled.length, settings.codeSnippetCount);
+      
+      if (availableCount < settings.codeSnippetCount) {
+        console.log(`Warning: Only ${availableCount} code snippets available for ${settings.cloud} cloud. Using all available snippets.`);
+      }
+      
+      // Set code snippets based on what's available
+      setCodeSnippets(shuffled.slice(0, availableCount));
     });
   };
   

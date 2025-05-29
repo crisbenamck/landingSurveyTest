@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useInterviewContext } from '@hooks/useInterviewContext';
+import { getCloudAvailability } from '@utils/questionUtils';
 
 // Components
 const PageContainer = styled.div`
@@ -124,9 +125,70 @@ const StartButton = styled.button`
   }
 `;
 
+// Helper function to get categories based on selected cloud
+const getCloudCategories = (cloud: string): string[] => {
+  switch (cloud) {
+    case 'marketing':
+      return ['ampscript', 'ssjs', 'marketing_cloud'];
+    case 'sales':
+      return ['apex', 'lwc', 'sales_cloud'];
+    case 'service':
+      return ['apex', 'lwc', 'service_cloud'];
+    case 'commerce':
+      return ['b2c', 'b2b', 'commerce_cloud'];
+    case 'cpq':
+      return ['cpq_admin', 'cpq_dev', 'cpq'];
+    case 'pardot':
+      return ['pardot_admin', 'pardot_dev', 'pardot'];
+    default:
+      return ['marketing_cloud'];
+  }
+};
+
 const ConfigPage: React.FC = () => {
   const navigate = useNavigate();
   const { settings, updateSettings, startInterview } = useInterviewContext();
+  const [cloudAvailability, setCloudAvailability] = useState(() => getCloudAvailability(settings.cloud));
+  
+  // Update cloud availability when cloud changes
+  useEffect(() => {
+    const availability = getCloudAvailability(settings.cloud);
+    console.log('Cloud Availability:', availability);
+    setCloudAvailability(availability);
+    
+    // Adjust settings based on availability
+    const updates: Partial<{
+      role: 'developer' | 'consultant';
+      seniority: 'Junior' | 'Advanced' | 'Senior' | 'Specialist';
+      questionCount: number;
+      codeSnippetCount: number;
+    }> = {};
+    
+    // Adjust role if current role is not available
+    if (!availability.availableRoles.includes(settings.role)) {
+      updates.role = availability.availableRoles[0];
+    }
+    
+    // Adjust seniority if current seniority is not available
+    if (!availability.availableSeniorities.includes(settings.seniority)) {
+      updates.seniority = availability.availableSeniorities[0];
+    }
+    
+    // Cap question count based on availability
+    if (settings.questionCount > availability.maxQuestions) {
+      updates.questionCount = availability.maxQuestions;
+    }
+    
+    // Cap code snippet count based on availability
+    if (settings.codeSnippetCount > availability.maxCodeSnippets) {
+      updates.codeSnippetCount = availability.maxCodeSnippets;
+    }
+    
+    // Apply updates if any
+    if (Object.keys(updates).length > 0) {
+      updateSettings(updates);
+    }
+  }, [settings.cloud]);
   
   const handleStartInterview = (e: React.FormEvent) => {
     e.preventDefault();
@@ -137,17 +199,18 @@ const ConfigPage: React.FC = () => {
       return;
     }
     
-    // Set appropriate categories based on role
+    // Set appropriate categories based on role and selected cloud
     if (settings.role === 'consultant') {
-      // Consultants only get marketing_cloud category
+      // Consultants only get general categories for the selected cloud
       updateSettings({ 
         codeSnippetCount: 0,
-        selectedCategories: ['marketing_cloud']
+        selectedCategories: [`${settings.cloud}_cloud`]
       });
     } else {
-      // Developers get all categories
+      // Developers get all categories for the selected cloud
+      const cloudCategories = getCloudCategories(settings.cloud);
       updateSettings({ 
-        selectedCategories: ['ampscript', 'ssjs', 'marketing_cloud']
+        selectedCategories: cloudCategories
       });
     }
     
@@ -159,7 +222,7 @@ const ConfigPage: React.FC = () => {
   return (
     <PageContainer>
       <PageHeader>
-        <Description>This tool assists interviewers during the selection process for Marketing Cloud roles in GToS. It provides a structured framework to evaluate candidate skills and knowledge across key Marketing Cloud technologies and practices.</Description>
+        <Description>This tool assists interviewers during the selection process for various Salesforce cloud roles in GToS. It provides a structured framework to evaluate candidate skills and knowledge across key Salesforce technologies and practices including Marketing Cloud, Sales Cloud, Service Cloud, Commerce Cloud, CPQ, and Pardot.</Description>
         <Title>Interview Configuration</Title>
         <Subtitle>Complete the following information to start a technical assessment</Subtitle>
       </PageHeader>
@@ -177,15 +240,40 @@ const ConfigPage: React.FC = () => {
         </FormGroup>
         
         <FormGroup>
+          <Label htmlFor="cloud">Salesforce Cloud</Label>
+          <Select
+            id="cloud"
+            value={settings.cloud}
+            onChange={(e) => updateSettings({ cloud: e.target.value as 'marketing' | 'sales' | 'service' | 'commerce' | 'cpq' | 'pardot' })}
+          >
+            <option value="marketing">Marketing Cloud</option>
+            <option value="sales">Sales Cloud</option>
+            <option value="service">Service Cloud</option>
+            <option value="commerce">Commerce Cloud</option>
+            <option value="cpq">CPQ</option>
+            <option value="pardot">Pardot</option>
+          </Select>
+        </FormGroup>
+        
+        <FormGroup>
           <Label htmlFor="role">Role</Label>
           <Select
             id="role"
             value={settings.role}
             onChange={(e) => updateSettings({ role: e.target.value as 'developer' | 'consultant' })}
           >
-            <option value="developer">Developer</option>
-            <option value="consultant">Consultant</option>
+            {cloudAvailability.availableRoles.includes('developer') && (
+              <option value="developer">Developer</option>
+            )}
+            {cloudAvailability.availableRoles.includes('consultant') && (
+              <option value="consultant">Consultant</option>
+            )}
           </Select>
+          {cloudAvailability.codeSnippets === 0 && settings.role === 'developer' && (
+            <div style={{ color: 'red', fontSize: '0.8rem', marginTop: '5px' }}>
+              Developer role is not available for {settings.cloud} Cloud due to lack of code snippets.
+            </div>
+          )}
         </FormGroup>
         
         <FormGroup>
@@ -195,36 +283,54 @@ const ConfigPage: React.FC = () => {
             value={settings.seniority}
             onChange={(e) => updateSettings({ seniority: e.target.value as 'Junior' | 'Advanced' | 'Senior' | 'Specialist' })}
           >
-            <option value="Junior">Junior</option>
-            <option value="Advanced">Advanced</option>
-            <option value="Senior">Senior</option>
-            <option value="Specialist">Specialist</option>
+            {cloudAvailability.availableSeniorities.includes('Junior') && (
+              <option value="Junior">Junior</option>
+            )}
+            {cloudAvailability.availableSeniorities.includes('Advanced') && (
+              <option value="Advanced">Advanced</option>
+            )}
+            {cloudAvailability.availableSeniorities.includes('Senior') && (
+              <option value="Senior">Senior</option>
+            )}
+            {cloudAvailability.availableSeniorities.includes('Specialist') && (
+              <option value="Specialist">Specialist</option>
+            )}
           </Select>
         </FormGroup>
         
         <FormGroup>
-          <Label htmlFor="questionCount">Number of Questions</Label>
+          <Label htmlFor="questionCount">Number of Questions (max: {cloudAvailability.maxQuestions})</Label>
           <Input
             id="questionCount"
             type="number"
             min="1"
-            max="15"
+            max={cloudAvailability.maxQuestions}
             value={isNaN(settings.questionCount) ? '' : settings.questionCount}
-            onChange={(e) => updateSettings({ questionCount: parseInt(e.target.value) || 0 })}
+            onChange={(e) => updateSettings({ questionCount: Math.min(parseInt(e.target.value) || 0, cloudAvailability.maxQuestions) })}
           />
+          {cloudAvailability.questions.total < 5 && (
+            <div style={{ color: 'orange', fontSize: '0.8rem', marginTop: '5px' }}>
+              Limited questions available for {settings.cloud} Cloud.
+            </div>
+          )}
         </FormGroup>
         
-        {settings.role === 'developer' && (
+        {settings.role === 'developer' && cloudAvailability.codeSnippets > 0 && (
           <FormGroup>
-            <Label htmlFor="codeSnippetCount">Number of Code Exercises</Label>
+            <Label htmlFor="codeSnippetCount">Number of Code Exercises (max: {cloudAvailability.maxCodeSnippets})</Label>
             <Input
               id="codeSnippetCount"
               type="number"
-              min="1"
-              max="5"
+              min="0"
+              max={cloudAvailability.maxCodeSnippets}
               value={isNaN(settings.codeSnippetCount) ? '' : settings.codeSnippetCount}
-              onChange={(e) => updateSettings({ codeSnippetCount: parseInt(e.target.value) || 0 })}
+              onChange={(e) => updateSettings({ codeSnippetCount: Math.min(parseInt(e.target.value) || 0, cloudAvailability.maxCodeSnippets) })}
             />
+            {cloudAvailability.codeSnippets < 3 && (
+              <div style={{ color: 'orange', fontSize: '0.8rem', marginTop: '5px' }}>
+                Limited code exercises available for {settings.cloud} Cloud.
+              </div>
+            )}
           </FormGroup>
         )}
         

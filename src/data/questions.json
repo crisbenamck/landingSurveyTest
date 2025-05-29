@@ -4,6 +4,7 @@
     "text": "What is AMPscript in Salesforce Marketing Cloud?",
     "category": "ampscript",
     "difficulty": "medium",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "A proprietary scripting language from Salesforce used to personalize content in emails, web pages, and SMS within Marketing Cloud.",
@@ -32,6 +33,7 @@
     "text": "What is the difference between AMPscript and SSJS in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "easy",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "There is no difference, they are two names for the same language.",
@@ -60,6 +62,7 @@
     "text": "What are Data Extensions in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "medium",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "Relational tables similar to SQL tables that store data for use in Marketing Cloud.",
@@ -88,6 +91,7 @@
     "text": "What is the function of the %%[ ]%% tag in AMPscript?",
     "category": "ampscript",
     "difficulty": "medium",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "Delimiting AMPscript code blocks in emails and web pages for processing.",
@@ -116,6 +120,7 @@
     "text": "What is Journey Builder in Salesforce Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "easy",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "A tool for designing email templates.",
@@ -144,6 +149,7 @@
     "text": "How do you access data from a Data Extension using AMPscript?",
     "category": "ampscript",
     "difficulty": "hard",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "Using only the DataExtension() function.",
@@ -172,6 +178,7 @@
     "text": "What is Content Builder in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "easy",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "A tool for managing CRM integrations.",
@@ -200,6 +207,7 @@
     "text": "How are variables handled in AMPscript?",
     "category": "ampscript",
     "difficulty": "hard",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "Using the $ sign as a prefix for all variables.",
@@ -228,6 +236,7 @@
     "text": "What is Automation Studio in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "hard",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "A tool for creating responsive design templates.",
@@ -256,6 +265,7 @@
     "text": "What is the ContentBlockByID() function in AMPscript?",
     "category": "ampscript",
     "difficulty": "medium",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "A function that only allows displaying images saved in Content Builder.",
@@ -284,6 +294,7 @@
     "text": "What is the main difference between Script.Util.HttpRequest in SSJS and using HTTPGet() in AMPscript?",
     "category": "ssjs",
     "difficulty": "medium",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "Script.Util.HttpRequest in SSJS offers more configuration options and greater flexibility for complex API calls, while HTTPGet() in AMPscript is simpler but more limited.",
@@ -312,6 +323,7 @@
     "text": "What are CloudPages in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "medium",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "Campaign report pages for clients.",
@@ -340,6 +352,7 @@
     "text": "What are Salesforce Data Extensions and how do they relate to Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "hard",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "They are generic data tables with no relation to Salesforce CRM.",
@@ -368,6 +381,7 @@
     "text": "How is the try-catch structure used in SSJS?",
     "category": "ssjs",
     "difficulty": "hard",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "SSJS does not support try-catch exception handling.",
@@ -396,6 +410,7 @@
     "text": "What advantages does using SSJS offer over AMPscript in Marketing Cloud?",
     "category": "ssjs",
     "difficulty": "medium",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "SSJS always executes faster than AMPscript.",
@@ -424,6 +439,7 @@
     "text": "What is the purpose of the Marketing Cloud SDK?",
     "category": "marketing_cloud",
     "difficulty": "easy",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "To create custom apps that integrate with Marketing Cloud.",
@@ -452,6 +468,7 @@
     "text": "What is a Landing Page in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "easy",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "A page shown only on mobile devices.",
@@ -480,6 +497,7 @@
     "text": "What is the v() function in AMPscript used for?",
     "category": "ampscript",
     "difficulty": "medium",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "It's used for validating email addresses.",
@@ -508,6 +526,7 @@
     "text": "What is the purpose of the CreateSendEvent() function in AMPscript?",
     "category": "ampscript",
     "difficulty": "hard",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "It's only used to create new email templates.",
@@ -536,6 +555,7 @@
     "text": "What is MobilePush in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "medium",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "A feature to optimize email rendering on mobile devices.",
@@ -564,6 +584,7 @@
     "text": "How do you debug SSJS code in Marketing Cloud?",
     "category": "ssjs",
     "difficulty": "hard",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "Using browser developer tools like in normal JavaScript.",
@@ -592,6 +613,7 @@
     "text": "What are Guide Template Language (GTL) and Content Blocks in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "medium",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "GTL is a proprietary language used for creating templates, and Content Blocks are reusable pieces of content stored in Content Builder.",
@@ -620,6 +642,7 @@
     "text": "What are event-driven triggers in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "expert",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "Triggers are used only for scheduling emails.",
@@ -648,6 +671,7 @@
     "text": "How does the Platform.Function.ParseJSON method work in SSJS?",
     "category": "ssjs",
     "difficulty": "expert",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "It only works for simple JSON structures.",
@@ -676,6 +700,7 @@
     "text": "What is the difference between Shared and Local Data Extensions?",
     "category": "marketing_cloud",
     "difficulty": "hard",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "There is no difference technically, only in their naming convention.",
@@ -704,6 +729,7 @@
     "text": "What is the purpose of the Upsert method in SSJS Data Extensions?",
     "category": "ssjs",
     "difficulty": "expert",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "It's only used for deleting rows in a Data Extension.",
@@ -732,6 +758,7 @@
     "text": "What is the ContentAreaByName() function in AMPscript used for?",
     "category": "ampscript",
     "difficulty": "medium",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "It's only used for retrieving images from Content Builder.",
@@ -760,6 +787,7 @@
     "text": "What are Behavioral Triggers in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "expert",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "They are only available in Journey Builder.",
@@ -788,6 +816,7 @@
     "text": "How do you implement complex decision logic in AMPscript?",
     "category": "ampscript",
     "difficulty": "expert",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "Complex logic isn't possible in AMPscript.",
@@ -816,6 +845,7 @@
     "text": "What is the purpose of the Platform.Request.GetFormField() method in SSJS?",
     "category": "ssjs",
     "difficulty": "expert",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "It is used exclusively for validating email formats.",
@@ -844,6 +874,7 @@
     "text": "What is Einstein in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "hard",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "A tool for creating email templates with AI.",
@@ -872,6 +903,7 @@
     "text": "What is the proper way to use ContentBlockByKey() in AMPscript?",
     "category": "ampscript",
     "difficulty": "expert",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "It can only be used in emails, not in CloudPages.",
@@ -900,6 +932,7 @@
     "text": "How do you handle asynchronous operations in SSJS?",
     "category": "ssjs",
     "difficulty": "expert",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "Using promises and async/await just like in modern JavaScript.",
@@ -928,6 +961,7 @@
     "text": "What is Interaction Studio in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "expert",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "A tool exclusively for email template design.",
@@ -956,6 +990,7 @@
     "text": "What is the purpose of the Transactional Messaging API in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "expert",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "It's used only for SMS messages.",
@@ -984,6 +1019,7 @@
     "text": "What is the purpose of Contact Builder in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "easy",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "A tool for creating contact forms on websites.",
@@ -1012,6 +1048,7 @@
     "text": "What is Subscriber Key in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "easy",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "A unique identifier for subscribers that allows for consistent identification across channels and solutions in Marketing Cloud.",
@@ -1040,6 +1077,7 @@
     "text": "What are Business Units in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "medium",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "Financial tracking categories for billing purposes only.",
@@ -1068,6 +1106,7 @@
     "text": "What is the Marketing Cloud Connect?",
     "category": "marketing_cloud",
     "difficulty": "medium",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "A tool for connecting Marketing Cloud to external databases only.",
@@ -1096,6 +1135,7 @@
     "text": "What is a Suppression List in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "easy",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "A list of email templates that are no longer in use.",
@@ -1124,6 +1164,7 @@
     "text": "What is a Publication List in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "easy",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "A list of all publications created in Content Builder.",
@@ -1152,6 +1193,7 @@
     "text": "What is the purpose of Audience Builder in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "medium",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "A tool exclusively for importing contacts from external systems.",
@@ -1180,6 +1222,7 @@
     "text": "What is the role of Sender Authentication Package (SAP) in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "hard",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "It's only used for account security within Marketing Cloud.",
@@ -1208,6 +1251,7 @@
     "text": "What is the importance of IP Warming in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "hard",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "It's a process to increase server performance during peak sending times.",
@@ -1236,6 +1280,7 @@
     "text": "What are Data Filters in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "medium",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "Tools used only for data validation during imports.",
@@ -1264,6 +1309,7 @@
     "text": "What is the purpose of Google Analytics 360 integration with Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "hard",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "It's only used for tracking email opens and clicks.",
@@ -1292,6 +1338,7 @@
     "text": "What is the purpose of the Query Activity in Automation Studio?",
     "category": "marketing_cloud",
     "difficulty": "hard",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "It's only used for report generation.",
@@ -1320,6 +1367,7 @@
     "text": "What are the key considerations for email deliverability in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "expert",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "Only email design and content matter for deliverability.",
@@ -1348,6 +1396,7 @@
     "text": "What is Distributed Marketing in Salesforce Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "expert",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "A feature for managing multiple Marketing Cloud instances.",
@@ -1376,6 +1425,7 @@
     "text": "What is the role of Data Designer in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "expert",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "A tool exclusively for creating data visualizations.",
@@ -1404,6 +1454,7 @@
     "text": "What is the significance of RFM (Recency, Frequency, Monetary) analysis in Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "expert",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "It's only used for technical performance monitoring.",
@@ -1432,6 +1483,7 @@
     "text": "What are Customer Data Platforms (CDPs) and how do they relate to Marketing Cloud?",
     "category": "marketing_cloud",
     "difficulty": "expert",
+    "cloud": "marketing",
     "possibleAnswers": [
       {
         "text": "CDPs are only relevant for non-Salesforce customers.",
@@ -1451,6 +1503,209 @@
       {
         "text": "CDPs are only focused on data collection, with no relation to marketing execution.",
         "score": 2,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q100",
+    "text": "What is the Lightning Component Framework in Salesforce?",
+    "category": "lwc",
+    "difficulty": "medium",
+    "cloud": "sales",
+    "possibleAnswers": [
+      {
+        "text": "A UI development framework that enables developers to build responsive web apps for Salesforce, using reusable components built using JavaScript, HTML, and CSS.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "A tool for importing external data into Salesforce.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "A component that automatically generates UI based on Salesforce objects.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "A system for designing custom dashboard templates.",
+        "score": 1,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q101",
+    "text": "What is the purpose of an Apex Trigger in Salesforce?",
+    "category": "apex",
+    "difficulty": "medium",
+    "cloud": "sales",
+    "possibleAnswers": [
+      {
+        "text": "To execute custom logic before or after specific data manipulation events, such as inserts, updates, or deletions of Salesforce records.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "To schedule automated emails to be sent to contacts.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "To create custom API endpoints for external systems.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "To manage user permissions and access rights.",
+        "score": 1,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q102",
+    "text": "What is the difference between a Master-Detail relationship and a Lookup relationship in Salesforce?",
+    "category": "sales_cloud",
+    "difficulty": "medium",
+    "cloud": "sales",
+    "possibleAnswers": [
+      {
+        "text": "In Master-Detail, the detail record can't exist without the master and inherits sharing and security. Lookup creates a relationship but doesn't enforce record dependency or inheritance.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "Master-Detail is for connecting standard objects, while Lookup is only for custom objects.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Master-Detail supports only one-to-many relationships, while Lookup supports many-to-many.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "There is no difference, they are just different names for the same functionality.",
+        "score": 0,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q103",
+    "text": "What is Service Cloud in Salesforce?",
+    "category": "service_cloud",
+    "difficulty": "easy",
+    "cloud": "service",
+    "possibleAnswers": [
+      {
+        "text": "A comprehensive customer service platform that helps businesses deliver personalized, connected customer service experiences across channels.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "A tool for managing internal IT service tickets only.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "A cloud storage solution for customer data.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "A service that automatically creates customer support teams.",
+        "score": 0,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q104",
+    "text": "What is the primary purpose of Salesforce CPQ?",
+    "category": "cpq",
+    "difficulty": "medium",
+    "cloud": "cpq",
+    "possibleAnswers": [
+      {
+        "text": "To streamline the Configure, Price, Quote process, allowing sales teams to quickly create accurate product configurations and quotes.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "To manage customer payment processing and invoicing.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "To automate the creation of contracts after a deal is closed.",
+        "score": 3,
+        "isCorrect": false
+      },
+      {
+        "text": "To handle customer support ticketing.",
+        "score": 0,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q105",
+    "text": "What is Pardot primarily used for in the Salesforce ecosystem?",
+    "category": "pardot_admin",
+    "difficulty": "medium",
+    "cloud": "pardot",
+    "possibleAnswers": [
+      {
+        "text": "B2B marketing automation, including lead generation, scoring, nurturing, and analytics.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "E-commerce website management and product catalog maintenance.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "Consumer-focused email marketing campaigns only.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "Social media management and customer engagement.",
+        "score": 1,
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": "q106",
+    "text": "What is B2C Commerce Cloud in Salesforce?",
+    "category": "b2c",
+    "difficulty": "medium",
+    "cloud": "commerce",
+    "possibleAnswers": [
+      {
+        "text": "A platform for building personalized, unified shopping experiences across web, mobile, social, and in-store for direct-to-consumer businesses.",
+        "score": 10,
+        "isCorrect": true
+      },
+      {
+        "text": "A tool for managing B2B sales pipelines only.",
+        "score": 0,
+        "isCorrect": false
+      },
+      {
+        "text": "A customer relationship management system specifically for retail employees.",
+        "score": 2,
+        "isCorrect": false
+      },
+      {
+        "text": "An inventory management system for physical stores.",
+        "score": 1,
         "isCorrect": false
       }
     ]

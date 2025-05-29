@@ -4,6 +4,7 @@
     "language": "ampscript",
     "title": "Basic Personalization with AMPscript",
     "description": "This code attempts to personalize a welcome email with AMPscript. Find and fix the issues.",
+    "cloud": "marketing",
     "code": "%%[\n/* Inicialización de variables para el email de bienvenida */\nVAR @firstName, @lastName, @fullName, @membershipLevel\n\n/* Error: asignación incorrecta de variables */\nSET @firstName = AttributeValue(\"FirstName\")\nSET @lastName = AttributeValue(\"LastName\")\n\n/* Error: concatenación incorrecta */\nSET @fullName = CONCAT(@firstName, ' ', @lastName)\n\n/* Determinación del nivel de membresía */\nIF AttributeValue(\"LoyaltyPoints\") > 100 THEN\n  SET @membershipLevel = \"Gold\"\nELIF AttributeValue(\"LoyaltyPoints\") > 50 THEN\n  SET @membershipLevel = \"Silver\"\nELSE\n  SET @membershipLevel = \"Bronze\"\nENDIF\n]%%\n\n<h1>Bienvenido, %%=v(@fullName)=%%!</h1>\n<p>Gracias por unirte a nuestro programa de fidelidad.</p>\n<p>Tu nivel actual es: %%=v(@membershipLevel)=%%</p>\n\n%%[\n/* Error: intenta usar una función que no existe */\nIF IsNull(@membershipLevel) THEN\n  /* Código a ejecutar si es nulo */\nENDIF\n]%%",
     "issues": [
       {
@@ -91,6 +92,7 @@
     "language": "ssjs",
     "title": "API Calls with Server-Side JavaScript",
     "description": "This code attempts to retrieve subscriber data using the Marketing Cloud REST API. Find and fix the issues.",
+    "cloud": "marketing",
     "code": "<script runat=\"server\">\n  /* Función para obtener suscriptores de una Data Extension */\n  function getSubscribersFromDE(deKey) {\n    var url = \"https://\" + Request.Host + \"/data/v1/customobjectdata/key/\" + deKey + \"/rowset\";\n    \n    /* Error: No configura headers de autenticación */\n    var request = new Script.Util.HttpRequest(url);\n    request.emptyContentHandling = 0;\n    request.retries = 2;\n    request.continueOnError = true;\n    request.method = \"GET\";\n    \n    /* Error: No maneja la respuesta correctamente */\n    var response = request.send();\n    \n    /* Error: No verifica el estado de la respuesta */\n    var resultObj = Platform.Function.ParseJSON(response.content);\n    return resultObj;\n  }\n  \n  /* Función para procesar suscriptores */\n  function processSubscribers() {\n    try {\n      /* Error: Falta el parámetro en la llamada a la función */\n      var subscribers = getSubscribersFromDE();\n      \n      /* Procesar suscriptores activos */\n      var activeSubscribers = [];\n      \n      /* Error: No verifica si subscribers es nulo o indefinido */\n      for (var i = 0; i < subscribers.items.length; i++) {\n        if (subscribers.items[i].values.Status == \"Active\") {\n          activeSubscribers.push(subscribers.items[i]);\n        }\n      }\n      \n      /* Actualizar otra Data Extension con los suscriptores activos */\n      saveToActiveDE(activeSubscribers);\n      return \"Proceso completado con éxito. Se procesaron \" + activeSubscribers.length + \" suscriptores activos.\";\n    } catch (error) {\n      /* Error: Mensaje de error no específico */\n      return \"Error\";\n    }\n  }\n  \n  /* Función para guardar en otra Data Extension */\n  function saveToActiveDE(subscribers) {\n    /* Implementación de guardado en Data Extension */\n    var de = DataExtension.Init(\"ActiveSubscribers\");\n    \n    for (var i = 0; i < subscribers.length; i++) {\n      var subscriber = subscribers[i].values;\n      de.Rows.Add({\"SubscriberKey\": subscriber.SubscriberKey, \n                   \"EmailAddress\": subscriber.EmailAddress,\n                   \"Status\": \"Active\",\n                   \"ProcessedDate\": Now()});\n    }\n  }\n  \n  /* Ejecutar el proceso principal */\n  var result = processSubscribers();\n  Write(result);\n</script>",
     "issues": [
       {
@@ -178,6 +180,7 @@
     "language": "html",
     "title": "CloudPage with AMPscript for Dynamic Form",
     "description": "This code implements a subscription form in a CloudPage with AMPscript. Find and fix the issues.",
+    "cloud": "marketing",
     "code": "%%[\n/* Definición de variables para el formulario */\nVAR @submitted, @email, @firstName, @lastName, @errorMessage, @successMessage\n\n/* Comprobar si el formulario ha sido enviado */\nSET @submitted = RequestParameter(\"submitted\")\n\nIF @submitted == \"true\" THEN\n  /* Obtener valores del formulario */\n  SET @email = RequestParameter(\"email\")\n  SET @firstName = RequestParameter(\"firstName\")\n  SET @lastName = RequestParameter(\"lastName\")\n  \n  /* Error: No valida si los campos están completos */\n  \n  /* Error: Intento de inserción en Data Extension sin verificar existencia */\n  SET @insertResult = InsertData(\"Newsletter_Subscribers\",\n    \"EmailAddress\", @email,\n    \"FirstName\", @firstName,\n    \"LastName\", @lastName,\n    \"SubscriptionDate\", NOW()\n  )\n  \n  /* Error: No maneja posibles errores de la inserción */\n  SET @successMessage = \"¡Gracias por suscribirte!\"\nENDIF\n]%%\n\n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <title>Formulario de Suscripción</title>\n    <style>\n        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }\n        .form-container { max-width: 500px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; }\n        .form-group { margin-bottom: 15px; }\n        label { display: block; margin-bottom: 5px; }\n        input { width: 100%; padding: 8px; box-sizing: border-box; }\n        .btn { background-color: #4CAF50; color: white; padding: 10px 15px; border: none; cursor: pointer; }\n        .error { color: red; }\n        .success { color: green; }\n    </style>\n</head>\n<body>\n    <div class=\"form-container\">\n        <h1>Suscríbete a nuestro newsletter</h1>\n        \n        %%[ IF @successMessage != \"\" THEN ]%%\n            <div class=\"success\">%%=v(@successMessage)=%%</div>\n        %%[ ELSE ]%%\n            %%[ IF @errorMessage != \"\" THEN ]%%\n                <div class=\"error\">%%=v(@errorMessage)=%%</div>\n            %%[ ENDIF ]%%\n            \n            <form method=\"post\" action=\"\">\n                <div class=\"form-group\">\n                    <label for=\"email\">Email:</label>\n                    <!-- Error: Falta el atributo name en el input -->\n                    <input type=\"email\" id=\"email\" required>\n                </div>\n                \n                <div class=\"form-group\">\n                    <label for=\"firstName\">Nombre:</label>\n                    <input type=\"text\" id=\"firstName\" name=\"firstName\" value=\"%%=v(@firstName)=%%\">\n                </div>\n                \n                <div class=\"form-group\">\n                    <label for=\"lastName\">Apellido:</label>\n                    <input type=\"text\" id=\"lastName\" name=\"lastName\" value=\"%%=v(@lastName)=%%\">\n                </div>\n                \n                <input type=\"hidden\" name=\"submitted\" value=\"true\">\n                <button type=\"submit\" class=\"btn\">Suscribirme</button>\n            </form>\n        %%[ ENDIF ]%%\n    </div>\n</body>\n</html>",
     "issues": [
       {
@@ -265,6 +268,7 @@
     "language": "ampscript",
     "title": "Dynamic Email with Conditional Content",
     "description": "This code implements a dynamic email with conditional content based on subscriber data. Find and fix the issues.",
+    "cloud": "marketing",
     "code": "%%[\n/* Configuración para un email dinámico basado en datos del suscriptor */\nVAR @subscriberKey, @emailAddress, @firstName, @accountStatus, @lastPurchaseDate\nVAR @currentDate, @daysSinceLastPurchase, @recommendedProducts, @productCount\n\n/* Obtener datos básicos del suscriptor */\nSET @subscriberKey = AttributeValue(\"SubscriberKey\")\nSET @emailAddress = AttributeValue(\"EmailAddress\")\nSET @firstName = AttributeValue(\"FirstName\")\n/* Error: No asigna un valor por defecto si FirstName está vacío */\n\n/* Obtener estado de la cuenta desde una Data Extension relacionada */\nSET @accountRow = LookupRows(\"CustomerAccounts\", \"SubscriberKey\", @subscriberKey)\n/* Error: No verifica si se encontraron registros */\nSET @accountStatus = Field(Row(@accountRow, 1), \"AccountStatus\")\n\n/* Calcular días desde la última compra */\nSET @lastPurchaseRow = LookupOrderedRows(\"Purchases\", 1, \"PurchaseDate DESC\", \"SubscriberKey\", @subscriberKey)\n/* Error: No verifica si existen compras previas */\nSET @lastPurchaseDate = Field(Row(@lastPurchaseRow, 1), \"PurchaseDate\")\nSET @currentDate = Now()\nSET @daysSinceLastPurchase = DateDiff(@lastPurchaseDate, @currentDate, \"D\")\n\n/* Obtener recomendaciones de productos basadas en el historial de compras */\nIF @daysSinceLastPurchase < 30 THEN\n  SET @recommendedProducts = LookupRows(\"RecommendedProducts\", \"CustomerSegment\", \"Recent\")\nELSEIF @daysSinceLastPurchase < 90 THEN\n  SET @recommendedProducts = LookupRows(\"RecommendedProducts\", \"CustomerSegment\", \"Active\")\nELSE\n  SET @recommendedProducts = LookupRows(\"RecommendedProducts\", \"CustomerSegment\", \"Inactive\")\nENDIF\n\n/* Contar productos recomendados */\nSET @productCount = RowCount(@recommendedProducts)\n]%%\n\n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\">\n    <title>Ofertas personalizadas para ti</title>\n</head>\n<body>\n    <h1>Hola %%=v(@firstName)=%%,</h1>\n    \n    %%[ IF @accountStatus == \"Active\" THEN ]%%\n        <p>Gracias por ser un cliente activo. Aquí tienes algunas recomendaciones especialmente para ti.</p>\n    %%[ ELSEIF @accountStatus == \"Inactive\" THEN ]%%\n        <p>Te extrañamos. Han pasado %%=v(@daysSinceLastPurchase)=%% días desde tu última compra.</p>\n    %%[ ELSE ]%%\n        <p>Bienvenido a nuestra tienda. Descubre nuestros productos destacados.</p>\n    %%[ ENDIF ]%%\n    \n    <h2>Productos recomendados</h2>\n    <ul>\n    %%[ IF @productCount > 0 THEN ]%%\n        %%[ FOR @i = 1 TO 3 DO ]%%\n            %%[ IF @i <= @productCount THEN ]%%\n                %%[\n                    /* Error: El índice de array debe ser un número entero, no una variable */\n                    SET @product = Row(@recommendedProducts, @i)\n                    SET @productName = Field(@product, \"ProductName\")\n                    SET @productPrice = Field(@product, \"Price\")\n                    SET @productImage = Field(@product, \"ImageURL\")\n                ]%%\n                <li>\n                    <img src=\"%%=v(@productImage)=%%\" alt=\"%%=v(@productName)=%%\" width=\"100\">\n                    <h3>%%=v(@productName)=%%</h3>\n                    <p>Precio: $%%=v(@productPrice)=%%</p>\n                    <!-- Error: URL incompleto para el botón de compra -->\n                    <a href=\"/product?id=%%=v(Field(@product,\"ProductID\"))=%%\">Comprar ahora</a>\n                </li>\n            %%[ ENDIF ]%%\n        %%[ NEXT @i ]%%\n    %%[ ELSE ]%%\n        <p>No hay recomendaciones disponibles en este momento.</p>\n    %%[ ENDIF ]%%\n    </ul>\n    \n    <footer>\n        <p>Si no deseas recibir más emails, <a href=\"%%=RedirectTo(CloudPagesURL(123))=%%\">haz clic aquí para darte de baja</a>.</p>\n    </footer>\n</body>\n</html>",
     "issues": [
       {
@@ -352,6 +356,7 @@
     "language": "ssjs",
     "title": "Subscriber Segmentation with SSJS in Automation Studio",
     "description": "This code implements subscriber segmentation using SSJS in an Automation Studio Script Activity. Find and fix the issues.",
+    "cloud": "marketing",
     "code": "<script runat=\"server\">\n  /* Configuración para ejecutar una segmentación de suscriptores */\n  var targetDE = \"TargetSubscribers\";\n  var sourceDE = \"AllSubscribers\";\n  var daysThreshold = 30;\n  \n  /* Error: No usa try-catch para manejo de errores */\n  \n  /* Obtener la fecha actual y calcular la fecha límite */\n  var currentDate = new Date();\n  var targetDate = new Date();\n  \n  /* Error: Método incorrecto para restar días de una fecha */\n  targetDate.setDate(currentDate.getDate - daysThreshold);\n  \n  /* Formatear fechas para la consulta */\n  var formattedDate = formatDateForDE(targetDate);\n  \n  /* Crear la consulta para extraer suscriptores */\n  var query = \"\";\n  query += \"SELECT s.SubscriberKey, s.EmailAddress, s.FirstName, s.LastName, \"; \n  query += \"s.CreatedDate, s.Status \"; \n  query += \"FROM \" + sourceDE + \" s \";\n  \n  /* Error: Condición de WHERE incompleta */\n  query += \"WHERE s.CreatedDate > '\" + formattedDate + \"' \";\n  query += \"AND s.Status = Active\";\n  \n  /* Ejecutar la consulta y procesar los resultados */\n  var results = executeQuery(query);\n  \n  /* Procesar resultados y guardar en la Data Extension target */\n  var processedCount = 0;\n  var targetDataExtension = DataExtension.Init(targetDE);\n  \n  /* Error: No verifica que results sea un array antes de iterar */\n  for (var i = 0; i < results.length; i++) {\n    var subscriber = results[i];\n    \n    try {\n      /* Añadir a la Data Extension destino */\n      targetDataExtension.Rows.Add({\n        SubscriberKey: subscriber.SubscriberKey,\n        EmailAddress: subscriber.EmailAddress,\n        FirstName: subscriber.FirstName,\n        LastName: subscriber.LastName,\n        SegmentationDate: currentDate\n      });\n      processedCount++;\n    } catch (e) {\n      /* Error: No registra información específica del error */\n      Write(\"Error al procesar un suscriptor.\\n\");\n    }\n  }\n  \n  Write(\"Proceso completado. Suscriptores procesados: \" + processedCount);\n  \n  /* Función auxiliar para formatear fechas */\n  function formatDateForDE(date) {\n    return date.getFullYear() + \"-\" + \n           padNumber(date.getMonth() + 1) + \"-\" + \n           padNumber(date.getDate());\n  }\n  \n  function padNumber(number) {\n    return number < 10 ? \"0\" + number : number;\n  }\n  \n  /* Función para ejecutar queries */\n  function executeQuery(queryStr) {\n    /* Error: No utiliza la API correcta de Marketing Cloud para ejecutar consultas */\n    var query = queryStr;\n    var results = Platform.Function.QueryDE(sourceDE, queryStr);\n    return results;\n  }\n</script>",
     "issues": [
       {
@@ -429,6 +434,270 @@
             "text": "/* Change the complete query */\nquery = \"SELECT s.SubscriberKey, s.EmailAddress, s.FirstName, s.LastName, \" +\n       \"s.CreatedDate, s.Status FROM \" + sourceDE + \" s \" +\n       \"WHERE s.CreatedDate > '\" + formattedDate + \"' \" +\n       \"AND s.Status = 'Active'\";",
             "score": 7,
             "isCorrect": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cs6",
+    "language": "apex",
+    "title": "Apex Trigger for Opportunity Updates",
+    "description": "This Apex trigger should update related accounts when opportunities are updated. Find and fix the issues.",
+    "cloud": "sales",
+    "code": "trigger OpportunityTrigger on Opportunity (after update) {\n    \n    // Error: Missing collection to hold Account IDs\n    \n    // Loop through updated opportunities\n    for (Opportunity opp : Trigger.new) {\n        // Error: Missing comparison with old values\n        \n        // Error: No null check before adding to collection\n        accountIds.add(opp.AccountId);\n    }\n    \n    // Error: No check if collection is empty before query\n    List<Account> accountsToUpdate = [SELECT Id, Total_Opportunity_Amount__c FROM Account WHERE Id IN :accountIds];\n    \n    // Error: Missing null check for the related opportunities query\n    for (Account acc : accountsToUpdate) {\n        // Calculate total amount for this account\n        Decimal totalAmount = 0;\n        \n        // Error: Inefficient query inside loop\n        List<Opportunity> relatedOpps = [SELECT Id, Amount FROM Opportunity WHERE AccountId = :acc.Id AND StageName != 'Closed Lost'];\n        \n        for (Opportunity opp : relatedOpps) {\n            // Error: No null check for Amount\n            totalAmount += opp.Amount;\n        }\n        \n        acc.Total_Opportunity_Amount__c = totalAmount;\n    }\n    \n    // Error: No check if there are accounts to update\n    update accountsToUpdate;\n}",
+    "issues": [
+      {
+        "line": 3,
+        "description": "Missing collection to hold Account IDs",
+        "possibleFixes": [
+          {
+            "text": "// Error: Missing collection to hold Account IDs",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "// Collection to hold unique Account IDs\nSet<Id> accountIds = new Set<Id>();",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "List<Id> accountIds = new List<Id>();",
+            "score": 5,
+            "isCorrect": false
+          },
+          {
+            "text": "Map<Id, Account> accountMap = new Map<Id, Account>();",
+            "score": 3,
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "line": 7,
+        "description": "Missing comparison with old values to detect changes",
+        "possibleFixes": [
+          {
+            "text": "// Error: Missing comparison with old values",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "// Check if amount or stage changed\nOpportunity oldOpp = Trigger.oldMap.get(opp.Id);\nif (opp.Amount != oldOpp.Amount || opp.StageName != oldOpp.StageName) {",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "// Check if amount changed\nif (opp.Amount != Trigger.oldMap.get(opp.Id).Amount) {",
+            "score": 8,
+            "isCorrect": true
+          },
+          {
+            "text": "if (opp.isChanged('Amount') || opp.isChanged('StageName')) {",
+            "score": 0,
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "line": 10,
+        "description": "No null check before adding AccountId to collection",
+        "possibleFixes": [
+          {
+            "text": "accountIds.add(opp.AccountId);",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "// Only add non-null Account IDs\nif (opp.AccountId != null) {\n    accountIds.add(opp.AccountId);\n}",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "accountIds.add(String.valueOf(opp.AccountId));",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "try { accountIds.add(opp.AccountId); } catch(Exception e) { }",
+            "score": 2,
+            "isCorrect": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cs7",
+    "language": "javascript",
+    "title": "Lightning Web Component for Service Cloud Case Management",
+    "description": "This LWC JavaScript file manages case display and updates. Find and fix the issues.",
+    "cloud": "service",
+    "code": "import { LightningElement, api, wire, track } from 'lwc';\nimport { refreshApex } from '@salesforce/apex';\nimport { ShowToastEvent } from 'lightning/platformShowToastEvent';\nimport getCaseDetails from '@salesforce/apex/CaseController.getCaseDetails';\nimport updateCasePriority from '@salesforce/apex/CaseController.updateCasePriority';\n\nexport default class CaseManager extends LightningElement {\n    // Error: @api decorator missing for recordId\n    recordId;\n    \n    // Error: @track decorator not needed in recent LWC versions\n    @track caseDetails;\n    @track error;\n    @track isLoading = false;\n    \n    // Error: Missing private property for wired result for refreshApex\n    \n    // Error: Missing parameter in wire service\n    @wire(getCaseDetails)\n    wiredCase({ error, data }) {\n        if (data) {\n            this.caseDetails = data;\n            this.error = undefined;\n        } else if (error) {\n            this.error = error;\n            this.caseDetails = undefined;\n            \n            // Error: Incorrect toast notification implementation\n            this.showToast('Error', error.body.message, 'error');\n        }\n    }\n    \n    // Handle priority change\n    handlePriorityChange(event) {\n        const selectedPriority = event.detail.value;\n        \n        // Error: Missing loading state management\n        \n        // Update the case priority\n        updateCasePriority({\n            // Error: Missing parameters\n        })\n        .then(() => {\n            // Show success message\n            this.dispatchEvent(\n                new ShowToastEvent({\n                    title: 'Success',\n                    message: 'Case priority updated',\n                    variant: 'success'\n                })\n            );\n            \n            // Error: Incorrect refreshApex usage\n            refreshApex();\n        })\n        .catch(error => {\n            // Show error message\n            this.dispatchEvent(\n                new ShowToastEvent({\n                    title: 'Error',\n                    message: error.body.message,\n                    variant: 'error'\n                })\n            );\n        });\n    }\n    \n    // Error: Missing method to format date fields\n    \n    get hasCaseDetails() {\n        return this.caseDetails != null;\n    }\n}",
+    "issues": [
+      {
+        "line": 8,
+        "description": "Missing @api decorator for recordId",
+        "possibleFixes": [
+          {
+            "text": "// Error: @api decorator missing for recordId\n    recordId;",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "// Property to receive record ID from parent\n    @api recordId;",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "@wire recordId;",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "static recordId;",
+            "score": 0,
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "line": 18,
+        "description": "Missing parameter in wire service",
+        "possibleFixes": [
+          {
+            "text": "@wire(getCaseDetails)\n    wiredCase({ error, data }) {",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "@wire(getCaseDetails, { caseId: '$recordId' })\n    wiredCase({ error, data }) {",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "@wire(getCaseDetails, { recordId: '$recordId' })\n    wiredCase({ error, data }) {",
+            "score": 8,
+            "isCorrect": true
+          },
+          {
+            "text": "@wire(getCaseDetails, recordId)\n    wiredCase({ error, data }) {",
+            "score": 0,
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "line": 15,
+        "description": "Missing private property for wired result for refreshApex",
+        "possibleFixes": [
+          {
+            "text": "// Error: Missing private property for wired result for refreshApex",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "// Private property to track wire service for refreshApex\n    wiredCaseResult;",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "// Tracking property\n    _wiredCaseResult;",
+            "score": 8,
+            "isCorrect": true
+          },
+          {
+            "text": "@track wireResult;",
+            "score": 3,
+            "isCorrect": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cs8",
+    "language": "javascript",
+    "title": "B2C Commerce CloudScript for Product Pricing",
+    "description": "This script calculates product prices with promotions in B2C Commerce. Find and fix the issues.",
+    "cloud": "commerce",
+    "code": "/**\n * Script to calculate product prices with active promotions\n */\n\nvar Status = require('dw/system/Status');\nvar Transaction = require('dw/system/Transaction');\nvar ProductMgr = require('dw/catalog/ProductMgr');\nvar PromotionMgr = require('dw/campaign/PromotionMgr');\n\n/**\n * Execute the price calculation\n * @param {Object} params - Script parameters\n */\nexports.execute = function(params) {\n    // Error: Missing try-catch structure\n    \n    var productId = params.productId;\n    \n    // Error: No validation for required params\n    \n    var product = ProductMgr.getProduct(productId);\n    \n    // Error: No null check before using the product\n    \n    // Get all active promotions for this product\n    var promotions = PromotionMgr.getActivePromotions();\n    var applicablePromotions = [];\n    \n    // Error: Inefficient promotion filtering\n    for (var i = 0; i < promotions.length; i++) {\n        var promo = promotions[i];\n        applicablePromotions.push(promo);\n    }\n    \n    // Calculate the final price\n    var basePrice = product.getPriceModel().getPrice();\n    var finalPrice = basePrice;\n    \n    // Apply promotions\n    for (var j = 0; j < applicablePromotions.length; j++) {\n        var promotion = applicablePromotions[j];\n        \n        // Error: Missing check for promotion type\n        \n        // Apply discount\n        var discountAmount = promotion.getDiscount();\n        finalPrice -= discountAmount;\n    }\n    \n    // Error: No minimum price check\n    \n    // Update the product's sale price\n    // Error: Missing transaction\n    product.setPriceInfo({\n        salePrice: finalPrice,\n        onSale: finalPrice < basePrice\n    });\n    \n    return new Status(Status.OK, 'Success');\n};",
+    "issues": [
+      {
+        "line": 15,
+        "description": "Missing try-catch structure for error handling",
+        "possibleFixes": [
+          {
+            "text": "// Error: Missing try-catch structure",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "// Implement try-catch for error handling\n    try {",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "// Begin error handling\n    try {\n        var logger = require('dw/system/Logger').getLogger('pricingScript');",
+            "score": 8,
+            "isCorrect": true
+          },
+          {
+            "text": "function handleErrors() {",
+            "score": 0,
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "line": 19,
+        "description": "No validation for required parameters",
+        "possibleFixes": [
+          {
+            "text": "// Error: No validation for required params",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "// Validate required parameters\n    if (!productId) {\n        return new Status(Status.ERROR, 'Missing required parameter: productId');\n    }",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "// Check params\n    if (empty(productId)) {\n        throw new Error('Product ID is required');\n    }",
+            "score": 8,
+            "isCorrect": true
+          },
+          {
+            "text": "var productId = params.productId || '';",
+            "score": 3,
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "line": 23,
+        "description": "No null check before using the product",
+        "possibleFixes": [
+          {
+            "text": "// Error: No null check before using the product",
+            "score": 0,
+            "isCorrect": false
+          },
+          {
+            "text": "// Check if product exists\n    if (!product) {\n        return new Status(Status.ERROR, 'Product not found: ' + productId);\n    }",
+            "score": 10,
+            "isCorrect": true
+          },
+          {
+            "text": "if (product === null) {\n        return new Status(Status.ERROR, 'Invalid product ID');\n    }",
+            "score": 8,
+            "isCorrect": true
+          },
+          {
+            "text": "// Use optional chaining\n    var basePrice = product?.getPriceModel()?.getPrice() || 0;",
+            "score": 3,
+            "isCorrect": false
           }
         ]
       }

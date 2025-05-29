@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useInterviewContext } from '@hooks/useInterviewContext';
+import { getCloudDisplayName } from '../utils/cloudUtils';
 
 // Styled components
 const PageContainer = styled.div`
@@ -21,6 +22,12 @@ const Title = styled.h1`
   margin: 0;
   font-weight: 500;
   font-family: 'Bower', 'Times New Roman', Times, serif;
+`;
+
+const SubTitle = styled.div`
+  color: ${({ theme }) => theme.colors.text.secondary};
+  font-size: 1rem;
+  margin-top: 0.25rem;
 `;
 
 const Timer = styled.div<{ $timeRunningOut: boolean }>`
@@ -272,7 +279,12 @@ const QuestionsPage: React.FC = () => {
   return (
     <PageContainer>
       <Header>
-        <Title>Technical Questions</Title>
+        <div>
+          <Title>Technical Questions</Title>
+          <SubTitle>
+            {getCloudDisplayName(settings.cloud)}
+          </SubTitle>
+        </div>
         <Timer $timeRunningOut={isTimeRunningOut}>
           {formatTime(timeRemaining)}
         </Timer>

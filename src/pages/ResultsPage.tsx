@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useInterviewContext } from '@hooks/useInterviewContext';
+import { getCloudDisplayName } from '../utils/cloudUtils';
 
 // Styled components
 const PageContainer = styled.div`
@@ -239,6 +240,7 @@ const ResultsPage: React.FC = () => {
       <Header>
         <Title>Interview Results</Title>
         <Subtitle>Candidate: {settings.candidateName}</Subtitle>
+        <Subtitle>Cloud: {getCloudDisplayName(settings.cloud)}</Subtitle>
       </Header>
 
       <ResultsContainer>
