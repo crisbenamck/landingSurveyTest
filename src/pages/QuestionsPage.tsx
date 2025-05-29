@@ -164,18 +164,40 @@ const ButtonsContainer = styled.div`
   padding-top: 2rem;
 `;
 
-// Corrige el uso de theme y $variant en los botones
+// Botones con estilos consistentes
 const VariantButton = styled.button<{ $variant?: 'primary' | 'secondary' | 'cancel' }>`
+  padding: 0.75rem 1.5rem;
   background-color: ${({ $variant }) =>
     $variant === 'secondary' ? '#f8f9fa' : $variant === 'cancel' ? '#fff' : '#2251ff'};
   color: ${({ $variant }) =>
-    $variant === 'secondary' ? '#333333' : '#fff'};
+    $variant === 'secondary' ? '#333333' : $variant === 'cancel' ? '#2251ff' : '#fff'};
   border: ${({ $variant }) =>
-    $variant === 'secondary' ? '1px solid #e9ecef' : 'none'};
+    $variant === 'secondary' ? '1px solid #e9ecef' : $variant === 'cancel' ? '1px solid #2251ff' : 'none'};
+  border-radius: 0;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: ${({ $variant }) => 
+      $variant === 'secondary' ? '#333333' : 
+      $variant === 'cancel' ? '#2251ff' : '#fff'};
+    color: ${({ $variant }) => 
+      $variant === 'secondary' ? '#fff' : 
+      $variant === 'cancel' ? '#fff' : '#2251ff'};
+    border: ${({ $variant }) => 
+      $variant === 'secondary' ? '1px solid #333333' : '1px solid #2251ff'};
+  }
+  
+  &:focus {
+    outline: none;
+  }
+  
   &:disabled {
     background-color: #e9ecef;
     color: #adb5bd;
     border: none;
+    cursor: not-allowed;
   }
 `;
 
@@ -335,6 +357,7 @@ const QuestionsPage: React.FC = () => {
         </VariantButton>
         
         <VariantButton
+          $variant="primary"
           onClick={handleNextQuestion}
           disabled={effectiveSelectedAnswer === null}
         >

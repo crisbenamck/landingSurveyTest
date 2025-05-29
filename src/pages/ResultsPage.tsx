@@ -144,9 +144,9 @@ const Button = styled.button<{ $variant?: 'primary' | 'secondary' | 'cancel' }>`
   background-color: ${({ $variant }) => 
     $variant === 'secondary' ? '#f8f9fa' : $variant === 'cancel' ? '#fff' : '#2251ff'};
   color: ${({ $variant }) => 
-    $variant === 'secondary' ? '#333333' : '#fff'};
+    $variant === 'secondary' ? '#333333' : $variant === 'cancel' ? '#2251ff' : '#fff'};
   border: ${({ $variant }) => 
-    $variant === 'secondary' ? '1px solid #e9ecef' : 'none'};
+    $variant === 'secondary' ? '1px solid #e9ecef' : $variant === 'cancel' ? '1px solid #2251ff' : 'none'};
   border-radius: 0;
   font-weight: 500;
   cursor: pointer;
@@ -155,13 +155,12 @@ const Button = styled.button<{ $variant?: 'primary' | 'secondary' | 'cancel' }>`
   &:hover {
     background-color: ${({ $variant }) => 
       $variant === 'secondary' ? '#333333' : 
-      $variant === 'cancel' ? '#2251ff' : 'white'};
+      $variant === 'cancel' ? '#2251ff' : '#fff'};
     color: ${({ $variant }) => 
-      $variant === 'secondary' ? 'white' : 
-      $variant === 'cancel' ? 'white' : '#2251ff'};
-    border-color: ${({ $variant }) => 
-      $variant === 'cancel' ? '#2251ff' : 
-      $variant === 'secondary' ? '#333333' : '#2251ff'};
+      $variant === 'secondary' ? '#fff' : 
+      $variant === 'cancel' ? '#fff' : '#2251ff'};
+    border: ${({ $variant }) => 
+      $variant === 'secondary' ? '1px solid #333333' : '1px solid #2251ff'};
   }
   
   &:focus {
@@ -262,7 +261,7 @@ const ResultsPage: React.FC = () => {
           <Button $variant="cancel" onClick={() => window.print()}>
             Print Results
           </Button>
-          <Button onClick={() => {
+          <Button $variant="primary" onClick={() => {
             resetInterview();
             // Use setTimeout to ensure that reset completes before navigation
             setTimeout(() => {
