@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useInterviewContext } from '@hooks/useInterviewContext';
 import { getCloudDisplayName } from '../utils/cloudUtils';
+import { Button } from '@components/Button';
 
 // Styled components
 const PageContainer = styled.div`
@@ -137,35 +138,6 @@ const ButtonsContainer = styled.div`
   justify-content: flex-start;
   gap: 1rem;
   margin-top: 3rem;
-`;
-
-const Button = styled.button<{ $variant?: 'primary' | 'secondary' | 'cancel' }>`
-  padding: 0.75rem 1.5rem;
-  background-color: ${({ $variant }) => 
-    $variant === 'secondary' ? '#f8f9fa' : $variant === 'cancel' ? '#fff' : '#2251ff'};
-  color: ${({ $variant }) => 
-    $variant === 'secondary' ? '#333333' : $variant === 'cancel' ? '#2251ff' : '#fff'};
-  border: ${({ $variant }) => 
-    $variant === 'secondary' ? '1px solid #e9ecef' : $variant === 'cancel' ? '1px solid #2251ff' : 'none'};
-  border-radius: 0;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  
-  &:hover {
-    background-color: ${({ $variant }) => 
-      $variant === 'secondary' ? '#333333' : 
-      $variant === 'cancel' ? '#2251ff' : '#fff'};
-    color: ${({ $variant }) => 
-      $variant === 'secondary' ? '#fff' : 
-      $variant === 'cancel' ? '#fff' : '#2251ff'};
-    border: ${({ $variant }) => 
-      $variant === 'secondary' ? '1px solid #333333' : '1px solid #2251ff'};
-  }
-  
-  &:focus {
-    outline: none;
-  }
 `;
 
 const ResultsPage: React.FC = () => {

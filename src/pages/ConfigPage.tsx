@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useInterviewContext } from '@hooks/useInterviewContext';
 import { getCloudAvailability } from '@utils/questionUtils';
+import { Button } from '@components/Button';
 
 // Components
 const PageContainer = styled.div`
@@ -94,28 +95,11 @@ const Select = styled.select`
   }
 `;
 
-const StartButton = styled.button`
-  padding: 1rem 2rem;
-  background-color: #2251ff;
-  color: white;
-  border: 1px solid transparent;
-  border-radius: 0;
-  font-size: 1.125rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
+const StartButton = styled(Button)`
   margin-top: 1rem;
   align-self: flex-start;
-  
-  &:hover {
-    background-color: white;
-    color: #2251ff;
-    border-color: #2251ff;
-  }
-  
-  &:focus {
-    outline: none;
-  }
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
 `;
 
 // Helper function to get categories based on selected cloud
@@ -339,7 +323,9 @@ const ConfigPage: React.FC = () => {
           />
         </FormGroup>
         
-        <StartButton type="submit">Start Interview</StartButton>
+        <StartButton type="submit" $variant="primary">
+          Start Interview
+        </StartButton>
       </Form>
     </PageContainer>
   );

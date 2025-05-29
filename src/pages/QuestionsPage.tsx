@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useInterviewContext } from '@hooks/useInterviewContext';
 import { getCloudDisplayName } from '../utils/cloudUtils';
+import { Button } from '@components/Button';
 
 // Styled components
 const PageContainer = styled.div`
@@ -164,43 +165,6 @@ const ButtonsContainer = styled.div`
   padding-top: 2rem;
 `;
 
-// Botones con estilos consistentes
-const VariantButton = styled.button<{ $variant?: 'primary' | 'secondary' | 'cancel' }>`
-  padding: 0.75rem 1.5rem;
-  background-color: ${({ $variant }) =>
-    $variant === 'secondary' ? '#f8f9fa' : $variant === 'cancel' ? '#fff' : '#2251ff'};
-  color: ${({ $variant }) =>
-    $variant === 'secondary' ? '#333333' : $variant === 'cancel' ? '#2251ff' : '#fff'};
-  border: ${({ $variant }) =>
-    $variant === 'secondary' ? '1px solid #e9ecef' : $variant === 'cancel' ? '1px solid #2251ff' : 'none'};
-  border-radius: 0;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  
-  &:hover {
-    background-color: ${({ $variant }) => 
-      $variant === 'secondary' ? '#333333' : 
-      $variant === 'cancel' ? '#2251ff' : '#fff'};
-    color: ${({ $variant }) => 
-      $variant === 'secondary' ? '#fff' : 
-      $variant === 'cancel' ? '#fff' : '#2251ff'};
-    border: ${({ $variant }) => 
-      $variant === 'secondary' ? '1px solid #333333' : '1px solid #2251ff'};
-  }
-  
-  &:focus {
-    outline: none;
-  }
-  
-  &:disabled {
-    background-color: #e9ecef;
-    color: #adb5bd;
-    border: none;
-    cursor: not-allowed;
-  }
-`;
-
 const QuestionsPage: React.FC = () => {
   const navigate = useNavigate();
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
@@ -343,7 +307,7 @@ const QuestionsPage: React.FC = () => {
       </QuestionContainer>
       
       <ButtonsContainer>
-        <VariantButton 
+        <Button 
           $variant="cancel"
           onClick={() => {
             resetInterview();
@@ -354,9 +318,9 @@ const QuestionsPage: React.FC = () => {
           }}
         >
           Cancel Interview
-        </VariantButton>
+        </Button>
         
-        <VariantButton
+        <Button
           $variant="primary"
           onClick={handleNextQuestion}
           disabled={effectiveSelectedAnswer === null}
@@ -364,7 +328,7 @@ const QuestionsPage: React.FC = () => {
           {questionIndex === settings.questionCount - 1 
             ? (settings.role === 'consultant' ? 'View Results' : 'Go to Code Exercises') 
             : 'Next Question'}
-        </VariantButton>
+        </Button>
       </ButtonsContainer>
     </PageContainer>
   );
