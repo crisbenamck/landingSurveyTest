@@ -94,13 +94,6 @@ const Select = styled.select`
   }
 `;
 
-const Separator = styled.div`
-  height: 1px;
-  width: 100%;
-  background-color: ${({ theme }) => theme.colors.grey[200]};
-  margin: 1.5rem 0;
-`;
-
 const StartButton = styled.button`
   padding: 1rem 2rem;
   background-color: #2251ff;

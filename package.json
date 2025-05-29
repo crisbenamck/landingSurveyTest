@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
-  "homepage": "https://[tu-usuario-github].github.io/landingSurveyTest",
+  "homepage": "https://crisbenamck.github.io/landingSurveyTest",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build-prod": "tsc --project tsconfig.prod.json && vite build",
     "preview": "vite preview",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "predeploy": "npm run build",
+    "predeploy": "npm run build-prod",
     "deploy": "gh-pages -d dist"
   },
   "keywords": [],

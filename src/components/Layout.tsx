@@ -310,7 +310,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
   const { interviewInProgress, settings } = useInterviewContext();
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const [isFooterVisible, setIsFooterVisible] = useState(false);
   const footerRef = useRef<HTMLElement>(null);
 
   const toggleMenu = () => setMenuOpen(!isMenuOpen);
@@ -319,26 +318,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   useEffect(() => {
     setMenuOpen(false);
   }, [location.pathname]);
-  
-  // Detect when the footer is visible
-  useEffect(() => {
-    if (!footerRef.current) return;
-    
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsFooterVisible(entry.isIntersecting);
-      },
-      { threshold: 0 }
-    );
-    
-    observer.observe(footerRef.current);
-    
-    return () => {
-      if (footerRef.current) {
-        observer.unobserve(footerRef.current);
-      }
-    };
-  }, [footerRef.current]);
   
   // Close the menu when clicking outside the menu on mobile devices
   useEffect(() => {

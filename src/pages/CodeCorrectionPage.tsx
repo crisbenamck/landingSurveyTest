@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useInterviewContext } from '@hooks/useInterviewContext';
-import { getCloudDisplayName } from '../utils/cloudUtils';
 
 // Styled components
 const PageContainer = styled.div`
@@ -91,30 +90,35 @@ const TagsContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-const Tag = styled.span`
-  background-color: ${({ theme, color }: { theme: any; color: string }) => {
-    // Lighter background with sufficient contrast
-    if (color === 'primary') return '#cfe2ff'; // Light blue 
-    if (color === 'secondary') return '#e2e3e5'; // Light gray 
-    if (color === 'error') return '#f8d7da'; // Light red
-    if (color === 'success') return '#d1e7dd'; // Light green
-    if (color === 'warning') return '#fff3cd'; // Light yellow
-    return theme.colors[color].light;
+const Tag = styled.span<{ color: string }>`
+  background-color: ${({ color }) => {
+    if (color === 'primary') return '#cfe2ff';
+    if (color === 'secondary') return '#e2e3e5';
+    if (color === 'error') return '#f8d7da';
+    if (color === 'success') return '#d1e7dd';
+    if (color === 'warning') return '#fff3cd';
+    return '#cfe2ff';
   }};
-  color: ${({ theme, color }: { theme: any; color: string }) => {
-    // Dark text to ensure readability
-    if (color === 'primary') return '#084298'; // Dark blue
-    if (color === 'secondary') return '#41464b'; // Dark gray
-    if (color === 'error') return '#842029'; // Dark red
-    if (color === 'success') return '#0f5132'; // Dark green
-    if (color === 'warning') return '#664d03'; // Dark yellow
-    return theme.colors[color].dark;
+  color: ${({ color }) => {
+    if (color === 'primary') return '#084298';
+    if (color === 'secondary') return '#41464b';
+    if (color === 'error') return '#842029';
+    if (color === 'success') return '#0f5132';
+    if (color === 'warning') return '#664d03';
+    return '#084298';
   }};
   padding: 0.25rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 500;
-  border-left: 3px solid ${({ theme, color }: { theme: any; color: string }) => theme.colors[color].main};
-  border-radius: 2px; // Slightly rounded corners to improve appearance
+  border-left: 3px solid ${({ color }) => {
+    if (color === 'primary') return '#0d6efd';
+    if (color === 'secondary') return '#6c757d';
+    if (color === 'error') return '#dc3545';
+    if (color === 'success') return '#198754';
+    if (color === 'warning') return '#ffc107';
+    return '#0d6efd';
+  }};
+  border-radius: 2px;
 `;
 
 const CodeTitle = styled.h2`
@@ -266,41 +270,17 @@ const ButtonsContainer = styled.div`
   padding-top: 2rem;
 `;
 
-const Button = styled.button<{ $variant?: 'primary' | 'secondary' | 'cancel' }>`
-  padding: 0.75rem 1.5rem;
-  background-color: ${({ theme, $variant }) => 
-    $variant === 'secondary' ? 'transparent' : 
-    $variant === 'cancel' ? 'white' : '#2251ff'};
-  color: ${({ theme, $variant }) => 
-    $variant === 'secondary' ? theme.colors.text.primary : 
-    $variant === 'cancel' ? '#2251ff' : 'white'};
-  border: ${({ theme, $variant }) => 
-    $variant === 'secondary' ? `1px solid ${theme.colors.grey[300]}` :
-    $variant === 'cancel' ? '1px solid #2251ff' : '1px solid #2251ff'};
-  border-radius: 0;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  
-  &:hover {
-    background-color: ${({ theme, $variant }) => 
-      $variant === 'secondary' ? theme.colors.text.primary : 
-      $variant === 'cancel' ? '#2251ff' : 'white'};
-    color: ${({ theme, $variant }) => 
-      $variant === 'secondary' ? 'white' : 
-      $variant === 'cancel' ? 'white' : '#2251ff'};
-    border-color: ${({ $variant }) => 
-      $variant === 'cancel' ? '#2251ff' : 
-      $variant === 'secondary' ? theme.colors.text.primary : '#2251ff'};
-  }
-  
-  &:focus {
-    outline: none;
-  }
-  
+const VariantButton = styled.button<{ $variant?: 'primary' | 'secondary' | 'cancel' }>`
+  background-color: ${({ $variant }) =>
+    $variant === 'secondary' ? '#f8f9fa' : $variant === 'cancel' ? '#fff' : '#2251ff'};
+  color: ${({ $variant }) =>
+    $variant === 'secondary' ? '#333333' : '#fff'};
+  border: ${({ $variant }) =>
+    $variant === 'secondary' ? '1px solid #e9ecef' : 'none'};
   &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+    background-color: #e9ecef;
+    color: #adb5bd;
+    border: none;
   }
 `;
 
@@ -520,7 +500,7 @@ const CodeCorrectionPage: React.FC = () => {
       </CodeExerciseContainer>
       
       <ButtonsContainer>
-        <Button 
+        <VariantButton 
           $variant="cancel"
           onClick={() => {
             resetInterview();
@@ -531,14 +511,14 @@ const CodeCorrectionPage: React.FC = () => {
           }}
         >
           Cancel Interview
-        </Button>
+        </VariantButton>
         
-        <Button
+        <VariantButton
           onClick={handleNext}
           disabled={!allIssuesFixed}
         >
           {codeSnippetIndex === settings.codeSnippetCount - 1 ? 'View Results' : 'Next Exercise'}
-        </Button>
+        </VariantButton>
       </ButtonsContainer>
     </PageContainer>
   );

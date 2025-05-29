@@ -32,25 +32,22 @@ const Subtitle = styled.h2`
 const ResultsContainer = styled.div``;
 
 const SectionTitle = styled.h3`
-  color: ${({ theme }) => theme.colors.text.primary};
+  color: #333333;
   margin: 2rem 0 1rem 0;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.grey[200]};
+  border-bottom: 1px solid #e9ecef;
   font-weight: 500;
 `;
 
-const ScoreSummary = styled.div`
+const ScoreSummary = styled.div<{ $score: number }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 2rem 0;
-  border-left: 4px solid ${({ theme, $score }: { theme: any; $score: number }) => 
-    $score >= 80 ? theme.colors.success.main :
-    $score >= 60 ? theme.colors.warning.main :
-    theme.colors.error.main
-  };
+  border-left: 4px solid ${({ $score }) =>
+    $score >= 80 ? '#198754' : $score >= 60 ? '#ffc107' : '#dc3545'};
   padding: 1.5rem;
-  background-color: ${({ theme }) => theme.colors.grey[100]};
+  background-color: #f8f9fa;
 `;
 
 const ScoreText = styled.div`
@@ -68,21 +65,12 @@ const ScoreBadge = styled.div<{ $score: number }>`
   padding: 0.75rem 1.5rem;
   font-size: 1.5rem;
   font-weight: 600;
-  color: ${({ theme, $score }) => 
-    $score >= 80 ? '#0f5132' :  // Dark green for better contrast
-    $score >= 60 ? '#664d03' :  // Dark yellow for better contrast
-    '#842029'                  // Dark red for better contrast
-  };
-  border-left: 4px solid ${({ theme, $score }) => 
-    $score >= 80 ? theme.colors.success.main :
-    $score >= 60 ? theme.colors.warning.main :
-    theme.colors.error.main
-  };
-  background-color: ${({ theme, $score }) => 
-    $score >= 80 ? '#d1e7dd' :  // Light green for better contrast
-    $score >= 60 ? '#fff3cd' :  // Light yellow for better contrast
-    '#f8d7da'                  // Light red for better contrast
-  };
+  color: ${({ $score }) =>
+    $score >= 80 ? '#0f5132' : $score >= 60 ? '#664d03' : '#842029'};
+  border-left: 4px solid ${({ $score }) =>
+    $score >= 80 ? '#198754' : $score >= 60 ? '#ffc107' : '#dc3545'};
+  background-color: ${({ $score }) =>
+    $score >= 80 ? '#d1e7dd' : $score >= 60 ? '#fff3cd' : '#f8d7da'};
   border-radius: 2px;
 `;
 
@@ -106,39 +94,23 @@ const ScoreBreakdown = styled.div`
   margin-bottom: 2rem;
 `;
 
-const ScoreItem = styled.div`
-  border-left: 4px solid ${({ theme, $score }: { theme: any; $score: number }) => 
-    $score >= 8 ? theme.colors.success.main :
-    $score >= 5 ? theme.colors.warning.main :
-    theme.colors.error.main
-  };
+const ScoreItem = styled.div<{ $score: number }>`
+  border-left: 4px solid ${({ $score }) =>
+    $score >= 8 ? '#198754' : $score >= 5 ? '#ffc107' : '#dc3545'};
   padding: 1rem 1.5rem;
-  background-color: ${({ theme }) => theme.colors.grey[100]};
+  background-color: #f8f9fa;
 `;
 
 const ScoreItemTitle = styled.h4`
   margin: 0 0 0.75rem 0;
   font-size: 1rem;
-  color: ${({ theme }) => theme.colors.text.primary};
+  color: #333333;
   font-weight: 500;
 `;
 
 const ScoreValue = styled.div<{ $score: number }>`
-  font-weight: 600;
-  font-size: 1.125rem;
-  color: ${({ $score }) => 
-    $score >= 8 ? '#0f5132' :  // Dark green for better contrast
-    $score >= 5 ? '#664d03' :  // Dark yellow for better contrast
-    '#842029'                  // Dark red for better contrast
-  };
-  padding: 0.25rem 0.5rem;
-  display: inline-block;
-  background-color: ${({ $score }) => 
-    $score >= 8 ? '#d1e7dd' :  // Light green for better contrast
-    $score >= 5 ? '#fff3cd' :  // Light yellow for better contrast
-    '#f8d7da'                  // Light red for better contrast
-  };
-  border-radius: 2px;
+  color: ${({ $score }) =>
+    $score >= 8 ? '#198754' : $score >= 5 ? '#ffc107' : '#dc3545'};
 `;
 
 const SummarySection = styled.div`
@@ -169,30 +141,27 @@ const ButtonsContainer = styled.div`
 
 const Button = styled.button<{ $variant?: 'primary' | 'secondary' | 'cancel' }>`
   padding: 0.75rem 1.5rem;
-  background-color: ${({ theme, $variant }) => 
-    $variant === 'secondary' ? 'transparent' : 
-    $variant === 'cancel' ? 'white' : '#2251ff'};
-  color: ${({ theme, $variant }) => 
-    $variant === 'secondary' ? theme.colors.text.primary : 
-    $variant === 'cancel' ? '#2251ff' : 'white'};
-  border: ${({ theme, $variant }) => 
-    $variant === 'secondary' ? `1px solid ${theme.colors.grey[300]}` :
-    $variant === 'cancel' ? '1px solid #2251ff' : '1px solid #2251ff'};
+  background-color: ${({ $variant }) => 
+    $variant === 'secondary' ? '#f8f9fa' : $variant === 'cancel' ? '#fff' : '#2251ff'};
+  color: ${({ $variant }) => 
+    $variant === 'secondary' ? '#333333' : '#fff'};
+  border: ${({ $variant }) => 
+    $variant === 'secondary' ? '1px solid #e9ecef' : 'none'};
   border-radius: 0;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
   
   &:hover {
-    background-color: ${({ theme, $variant }) => 
-      $variant === 'secondary' ? theme.colors.text.primary : 
+    background-color: ${({ $variant }) => 
+      $variant === 'secondary' ? '#333333' : 
       $variant === 'cancel' ? '#2251ff' : 'white'};
-    color: ${({ theme, $variant }) => 
+    color: ${({ $variant }) => 
       $variant === 'secondary' ? 'white' : 
       $variant === 'cancel' ? 'white' : '#2251ff'};
     border-color: ${({ $variant }) => 
       $variant === 'cancel' ? '#2251ff' : 
-      $variant === 'secondary' ? theme.colors.text.primary : '#2251ff'};
+      $variant === 'secondary' ? '#333333' : '#2251ff'};
   }
   
   &:focus {
