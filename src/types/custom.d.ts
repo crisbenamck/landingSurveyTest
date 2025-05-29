@@ -4,5 +4,5 @@ declare module '*.svg' {
 }
 
 interface Window {
-  interviewTimer: number | undefined;
+  interviewTimer: ReturnType<typeof setInterval> | undefined;
 }
